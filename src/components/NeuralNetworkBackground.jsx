@@ -9,9 +9,9 @@ const NeuralNetworkBackground = () => {
     let animationFrameId;
 
     let particles = [];
-    const particleCount = 60;
-    const connectionDistance = 150;
-    const mouse = { x: null, y: null, radius: 150 };
+    const particleCount = 120;
+    const connectionDistance = 200;
+    const mouse = { x: null, y: null, radius: 180 };
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -32,9 +32,9 @@ const NeuralNetworkBackground = () => {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.radius = 2;
+        this.vx = (Math.random() - 0.5) * 0.8;
+        this.vy = (Math.random() - 0.5) * 0.8;
+        this.radius = Math.random() * 1.5 + 2;
       }
 
       update() {
@@ -62,7 +62,12 @@ const NeuralNetworkBackground = () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.85)';
+        ctx.fill();
+        // Soft glow
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.08)';
         ctx.fill();
       }
     }
@@ -91,8 +96,8 @@ const NeuralNetworkBackground = () => {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${opacity * 0.2})`;
-            ctx.lineWidth = 1;
+            ctx.strokeStyle = `rgba(56, 189, 248, ${opacity * 0.5})`;
+            ctx.lineWidth = opacity * 1.2;
             ctx.stroke();
           }
         }
