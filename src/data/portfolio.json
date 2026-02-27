@@ -1,0 +1,104 @@
+{
+  "name": "Athira PT",
+  "title": "AI Engineer | Deep Learning | CV | LLM | Agentic AI",
+  "tagline": "Building scalable AI systems for real-world intelligence.",
+  "about": "I am an AI Engineer and M.Tech graduate from IIT Madras with a strong foundation in deep learning, machine learning, and scalable AI systems.\n\nI am deeply interested in Deep Learning and Generative AI, and passionate about building and deploying production-grade AI solutions across Computer Vision, Large Language Models (LLMs), and Agentic AI systems.\n\nMy long-term goal is to pursue a PhD and contribute to research in advanced AI systems that bridge theory and real-world deployment.",
+  "experience": [
+    {
+      "company": "Zeldin.ai",
+      "role": "AI Engineer - Intern",
+      "period": "Nov 2024 - Present",
+      "highlights": [
+        "Developed a prompt-driven LLM backend using FastAPI and Gemma-3-4B-IT.",
+        "Designed a natural-language property search query parser and custom LLM generation engine with context and KV cache management.",
+        "Built a multimodal similarity search system using Google Vertex AI and pgvector.",
+        "Implemented Edge Functions (Supabase) for asynchronous embedding workflows."
+      ]
+    },
+    {
+      "company": "Texas Instruments",
+      "role": "Software Engineer",
+      "period": "Jul 2022 - Nov 2023",
+      "highlights": [
+        "Provided SPI driver support for MSPM0 devices (A/B/C silicon bring-up).",
+        "Handled N1 silicon bring-up, clocks, and power domains.",
+        "Developed C-based HAL functions for peripherals like PMIC and GPIO."
+      ]
+    },
+    {
+      "company": "Siemens",
+      "role": "Deep Learning - Research Intern",
+      "period": "Jul 2020 - Aug 2022",
+      "highlights": [
+        "Built a knowledge base construction model with multi-task learning from PDF documents (F1 score: 0.77)."
+      ]
+    },
+    {
+      "company": "Tata Consultancy Services (TCS)",
+      "role": "Computer Vision - Intern",
+      "period": "May 2018 - Aug 2018",
+      "highlights": [
+        "Developed a Real-time Occupancy Monitoring System using centroid tracking and background subtraction."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "M.Tech in CSE",
+      "institution": "IIT Madras",
+      "period": "2020 - 2022",
+      "score": "CGPA: 9.25"
+    },
+    {
+      "degree": "B.Tech (Honours) in CSE",
+      "institution": "APJ Abdul Kalam Technological University (KTU)",
+      "period": "2015 - 2019",
+      "score": "CGPA: 9.46 (Rank 6)"
+    }
+  ],
+  "projects": [
+    {
+      "name": "GANformer",
+      "description": "Hybrid GAN-Transformer architecture for image generation (PyTorch).",
+      "tags": ["DL", "PyTorch", "Gensys"]
+    },
+    {
+      "name": "Backpropagation from Scratch",
+      "description": "Implementation of Adam/RMSProp/etc. with 86.35% accuracy on MNIST.",
+      "tags": ["DL", "From Scratch", "Optimization"]
+    },
+    {
+      "name": "Flight Force - Drones for Rescue",
+      "description": "Human detection/tracking on aerial imagery (Won 1st place in TEKON Expo).",
+      "tags": ["CV", "Drones", "Rescue"]
+    },
+    {
+      "name": "Concurrent B+ Tree",
+      "description": "Data-race free CUDA implementation on GPU for parallel search.",
+      "tags": ["GPU", "CUDA", "Data Structures"]
+    },
+    {
+      "name": "Parallel GD Optimization",
+      "description": "Achieved 5.14x speedup on GPU compared to CPU implementation.",
+      "tags": ["GPU", "PyCUDA", "Optimization"]
+    }
+  ],
+  "skills": {
+    "Languages": ["C/C++ (STL)", "Python", "R", "FastAPI", "Julia", "Dart"],
+    "AI/ML/DL": ["TensorFlow", "PyTorch", "Keras", "OpenCV", "Vertex AI", "LLMs (Gemma)", "Generative AI"],
+    "Tools": ["pgvector", "Supabase", "PostgreSQL", "MongoDB", "Git", "Weights & Biases"],
+    "Infrastructure": ["CUDA", "PyCUDA", "GPU Programming", "Silicon Bring-up"],
+    "Theoretical": ["Linear Algebra", "Probability & Statistics", "Algorithms", "Pattern Recognition"]
+  },
+  "achievements": [
+    "GATE 2020: All India Rank 53 (Score 880)",
+    "TIFR GS 2020: Shortlisted in Top 46 for Computer & Systems Sciences",
+    "TEKON Project Expo 2019: 1st Place Winner (State level)",
+    "All Kerala Rank 6: B.Tech CSE Honours (University Rank)"
+  ],
+  "contact": {
+    "email": "athirapt998@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/athirapt998/",
+    "github": "https://github.com/a-pt"
+  }
+}
