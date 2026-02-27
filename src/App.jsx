@@ -61,7 +61,7 @@ function App() {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
 
-          {/* Home — Hero + About combined */}
+          {/* Home — Hero only */}
           <Route path="/" element={
             <motion.div
               variants={pageVariants}
@@ -80,6 +80,7 @@ function App() {
           } />
 
           <Route path="/about" element={<PageWrapper><About data={portfolioData} /></PageWrapper>} />
+
 
           <Route path="/experience"   element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Experience   data={portfolioData} /></section></PageWrapper>} />
           <Route path="/projects"     element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Projects     data={portfolioData} /></section></PageWrapper>} />
