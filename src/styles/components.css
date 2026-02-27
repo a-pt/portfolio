@@ -195,6 +195,13 @@ section {
   padding: 0.75rem;
   color: white;
   transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+.form-group input::placeholder, .form-group textarea::placeholder {
+  font-family: inherit;
+  color: var(--text-secondary);
+  opacity: 0.7;
 }
 
 .form-group input:focus, .form-group textarea:focus {
