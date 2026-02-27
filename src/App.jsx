@@ -1,80 +1,106 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import NeuralNetworkBackground from './components/NeuralNetworkBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
-import Achievements from './components/Achievements';
 import Skills from './components/Skills';
 import Blog from './components/Blog';
-import Contact from './components/Contact';
 import BlogPostTemplate from './components/BlogPostTemplate';
+import Contact from './components/Contact';
 import portfolioData from './data/portfolio.json';
 
-function App() {
-  const [selectedPost, setSelectedPost] = React.useState(null);
+const pageVariants = {
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
+  exit:    { opacity: 0, y: -16, transition: { duration: 0.3, ease: 'easeIn' } },
+};
 
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  };
+function PageWrapper({ children }) {
+  return (
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      style={{ minHeight: 'calc(100vh - 70px)', paddingTop: '70px' }}
+    >
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+        {children}
+      </main>
+      <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.5, fontSize: '0.8rem' }}>
+        <p>© {new Date().getFullYear()} Athira PT. Built with React &amp; AI Focus.</p>
+      </footer>
+    </motion.div>
+  );
+}
+
+function BlogPage() {
+  const [selectedPost, setSelectedPost] = React.useState(null);
+  return (
+    <PageWrapper>
+      {selectedPost ? (
+        <BlogPostTemplate post={selectedPost} onBack={() => setSelectedPost(null)} />
+      ) : (
+        <Blog onSelectPost={setSelectedPost} />
+      )}
+    </PageWrapper>
+  );
+}
+
+function App() {
+  const location = useLocation();
 
   return (
     <div className="app">
       <NeuralNetworkBackground />
       <Navbar />
-      <main>
-        <Hero data={portfolioData} />
-        
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}>
-          <About data={portfolioData} />
-        </motion.div>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
 
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}>
-          <Experience data={portfolioData} />
-        </motion.div>
+          {/* Home — Hero + About combined */}
+          <Route path="/" element={
+            <motion.div
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              style={{ minHeight: 'calc(100vh - 70px)', paddingTop: '70px' }}
+            >
+              <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+                <Hero data={portfolioData} />
+              </main>
+              <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.5, fontSize: '0.8rem' }}>
+                <p>© {new Date().getFullYear()} Athira PT. Built with React &amp; AI Focus.</p>
+              </footer>
+            </motion.div>
+          } />
 
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}>
-          <Projects data={portfolioData} />
-        </motion.div>
+          <Route path="/about" element={<PageWrapper><About data={portfolioData} /></PageWrapper>} />
 
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}>
-          <Achievements data={portfolioData} />
-        </motion.div>
+          <Route path="/experience"   element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Experience   data={portfolioData} /></section></PageWrapper>} />
+          <Route path="/projects"     element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Projects     data={portfolioData} /></section></PageWrapper>} />
+          <Route path="/skills"       element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Skills       data={portfolioData} /></section></PageWrapper>} />
+          <Route path="/blog"         element={<BlogPage />} />
+          <Route path="/contact"      element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Contact      data={portfolioData} /></section></PageWrapper>} />
 
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}>
-          <Skills data={portfolioData} />
-        </motion.div>
+          {/* 404 */}
+          <Route path="*" element={
+            <PageWrapper>
+              <div style={{ textAlign: 'center', paddingTop: '8rem' }}>
+                <h1 style={{ fontSize: '3rem' }}>404</h1>
+                <p style={{ color: 'var(--text-secondary)' }}>Page not found.</p>
+              </div>
+            </PageWrapper>
+          } />
+        </Routes>
+      </AnimatePresence>
 
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}>
-          {selectedPost ? (
-            <BlogPostTemplate post={selectedPost} onBack={() => setSelectedPost(null)} />
-          ) : (
-            <Blog onSelectPost={setSelectedPost} />
-          )}
-        </motion.div>
-
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}>
-          <Contact data={portfolioData} />
-        </motion.div>
-      </main>
-      
-      <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.5, fontSize: '0.8rem' }}>
-        <p>© {new Date().getFullYear()} Athira PT. Built with React & AI Focus.</p>
-      </footer>
-
-      <style jsx>{`
-        .app {
-          min-height: 100vh;
-          position: relative;
-        }
-        main {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 1.5rem;
-        }
+      <style>{`
+        .app { min-height: 100vh; position: relative; }
       `}</style>
     </div>
   );
