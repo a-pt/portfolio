@@ -7,10 +7,10 @@ const NeuralNetworkBackground = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     let animationFrameId;
-
     let particles = [];
-    let particleCount;
-    let connectionDistance;
+    let particleCount = 120;
+    let connectionDistance = 200;
+    const mouse = { x: null, y: null, radius: 180 };
 
     const getSettings = () => {
       const w = window.innerWidth;
@@ -19,27 +19,6 @@ const NeuralNetworkBackground = () => {
       if (w < 1200) return { count: 80, dist: 160 };
       return { count: 120, dist: 200 };
     };
-
-    const mouse = { x: null, y: null, radius: 180 };
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const s = getSettings();
-      particleCount = s.count;
-      connectionDistance = s.dist;
-      init();
-    };
-
-    window.addEventListener('resize', resize);
-    resize();
-
-    const handleMouseMove = (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
 
     class Particle {
       constructor() {
@@ -51,15 +30,12 @@ const NeuralNetworkBackground = () => {
       }
 
       update() {
-        // Normal movement
         this.x += this.vx;
         this.y += this.vy;
 
-        // Bounce off walls
         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
 
-        // Mouse interaction (subtle push)
         if (mouse.x != null && mouse.y != null) {
           const dx = this.x - mouse.x;
           const dy = this.y - mouse.y;
@@ -92,9 +68,23 @@ const NeuralNetworkBackground = () => {
       }
     };
 
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const s = getSettings();
+      particleCount = s.count;
+      connectionDistance = s.dist;
+      init();
+    };
+
+    const handleMouseMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
@@ -119,7 +109,10 @@ const NeuralNetworkBackground = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    resize();   // sets particleCount, connectionDistance, and calls init()
+    // All functions defined — safe to init and start
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', handleMouseMove);
+    resize();   // sets canvas size, particleCount, connectionDistance, and calls init()
     animate();
 
     return () => {
