@@ -82,7 +82,7 @@ function App() {
           <Route path="/about" element={<PageWrapper><About data={portfolioData} /></PageWrapper>} />
 
 
-          <Route path="/experience"   element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Experience   data={portfolioData} /></section></PageWrapper>} />
+          <Route path="/experience"   element={<PageWrapper><Experience /></PageWrapper>} />
           <Route path="/projects"     element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Projects     data={portfolioData} /></section></PageWrapper>} />
           <Route path="/skills"       element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Skills       data={portfolioData} /></section></PageWrapper>} />
           <Route path="/blog"         element={<BlogPage />} />
