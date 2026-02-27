@@ -36,22 +36,6 @@ const Contact = ({ data }) => {
     <section id="contact">
       <h2 className="section-title text-gradient">Get In Touch</h2>
       <div className="contact-container">
-        <div className="glass-card" style={{ marginBottom: '2rem' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <a href={`mailto:${data.contact.email}`} className="social-icon" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <Mail size={20} />
-              <span>{data.contact.email}</span>
-            </a>
-            <a href={data.contact.linkedin} target="_blank" rel="noopener noreferrer" className="social-icon" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <Linkedin size={20} />
-              <span>LinkedIn Profile</span>
-            </a>
-            <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className="social-icon" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <Github size={20} />
-              <span>GitHub Repository</span>
-            </a>
-          </div>
-        </div>
 
         <div className="glass-card">
           <iframe name="hidden_iframe" style={{ display: 'none' }} onLoad={handleIframeLoad}></iframe>
