@@ -9,13 +9,26 @@ const NeuralNetworkBackground = () => {
     let animationFrameId;
 
     let particles = [];
-    const particleCount = 120;
-    const connectionDistance = 200;
+    let particleCount;
+    let connectionDistance;
+
+    const getSettings = () => {
+      const w = window.innerWidth;
+      if (w < 480) return { count: 30, dist: 100 };
+      if (w < 768) return { count: 50, dist: 120 };
+      if (w < 1200) return { count: 80, dist: 160 };
+      return { count: 120, dist: 200 };
+    };
+
     const mouse = { x: null, y: null, radius: 180 };
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      const s = getSettings();
+      particleCount = s.count;
+      connectionDistance = s.dist;
+      init();
     };
 
     window.addEventListener('resize', resize);
@@ -106,7 +119,7 @@ const NeuralNetworkBackground = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    init();
+    resize();   // sets particleCount, connectionDistance, and calls init()
     animate();
 
     return () => {
