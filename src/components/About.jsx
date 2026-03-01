@@ -142,9 +142,12 @@ const About = ({ data }) => {
           margin-bottom: 1.75rem;
         }
         .about-text {
-          font-size: 1.05rem;
-          line-height: 1.85;
+          font-family: 'Merriweather', Georgia, serif;
+          font-size: 1rem;
+          font-weight: 300;
+          line-height: 2;
           color: var(--text-secondary);
+          letter-spacing: 0.015em;
         }
 
         /* Stats */

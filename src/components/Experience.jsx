@@ -114,10 +114,12 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
         <div className="exp-meta">
           <span className="exp-company">{exp.company}</span>
           <span className="exp-role" style={{ color: exp.color }}>{exp.role}</span>
+          {/* Period shown only on mobile, inside meta so it wraps below role */}
+          <span className="exp-period exp-period--inline">{exp.period}</span>
         </div>
 
-        {/* Period */}
-        <span className="exp-period">{exp.period}</span>
+        {/* Period — shown on desktop, hidden on mobile */}
+        <span className="exp-period exp-period--desktop">{exp.period}</span>
 
         {/* Chevron */}
         <motion.div
@@ -344,6 +346,10 @@ const Experience = () => {
           white-space: nowrap;
           flex-shrink: 0;
         }
+        /* Mobile-only inline period hidden by default on desktop */
+        .exp-period--inline {
+          display: none;
+        }
 
         /* Chevron */
         .exp-chevron {
@@ -422,8 +428,14 @@ const Experience = () => {
         }
 
         @media (max-width: 600px) {
-          .exp-period {
+          .exp-period--desktop {
             display: none;
+          }
+          .exp-period--inline {
+            display: inline;
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
           }
           .exp-header {
             padding: 0.9rem 1rem;
