@@ -200,7 +200,7 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
 };
 
 const Experience = () => {
-  const [openIndex, setOpenIndex] = useState(0); // First one open by default
+  const [openIndex, setOpenIndex] = useState(null); // All closed by default
 
   const toggle = (i) => setOpenIndex(openIndex === i ? null : i);
 
