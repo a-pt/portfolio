@@ -9,7 +9,6 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Blog from './components/Blog';
-import BlogPostTemplate from './components/BlogPostTemplate';
 import Contact from './components/Contact';
 import portfolioData from './data/portfolio.json';
 
@@ -39,14 +38,9 @@ function PageWrapper({ children }) {
 }
 
 function BlogPage() {
-  const [selectedPost, setSelectedPost] = React.useState(null);
   return (
     <PageWrapper>
-      {selectedPost ? (
-        <BlogPostTemplate post={selectedPost} onBack={() => setSelectedPost(null)} />
-      ) : (
-        <Blog onSelectPost={setSelectedPost} />
-      )}
+      <Blog />
     </PageWrapper>
   );
 }

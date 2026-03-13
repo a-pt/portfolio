@@ -58,29 +58,10 @@
   ],
   "projects": [
     {
-      "name": "GANformer",
-      "description": "Hybrid GAN-Transformer architecture for image generation (PyTorch).",
-      "tags": ["DL", "PyTorch", "Gensys"]
-    },
-    {
-      "name": "Backpropagation from Scratch",
-      "description": "Implementation of Adam/RMSProp/etc. with 86.35% accuracy on MNIST.",
-      "tags": ["DL", "From Scratch", "Optimization"]
-    },
-    {
-      "name": "Flight Force - Drones for Rescue",
-      "description": "Human detection/tracking on aerial imagery (Won 1st place in TEKON Expo).",
-      "tags": ["CV", "Drones", "Rescue"]
-    },
-    {
-      "name": "Concurrent B+ Tree",
-      "description": "Data-race free CUDA implementation on GPU for parallel search.",
-      "tags": ["GPU", "CUDA", "Data Structures"]
-    },
-    {
-      "name": "Parallel GD Optimization",
-      "description": "Achieved 5.14x speedup on GPU compared to CPU implementation.",
-      "tags": ["GPU", "PyCUDA", "Optimization"]
+      "name": "CPU vs GPU Performance Analysis",
+      "description": "A benchmarking study comparing CPU and GPU performance for training a from scratch Feed-Forward Neural Network (FNN) on the MNIST handwritten digit classification dataset. Six gradient-descent optimization algorithms are implemented from scratch—each with a CPU-only and a CUDA GPU-accelerated version—and evaluated across two network sizes.",
+      "tags": ["GPU", "CUDA", "MNIST", "Optimization"],
+      "github": "https://github.com/a-pt/CPU-vs-GPU-Performance-Analysis"
     }
   ],
   "skills": {
