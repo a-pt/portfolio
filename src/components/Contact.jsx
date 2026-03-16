@@ -55,7 +55,7 @@ const Contact = ({ data }) => {
           viewport={{ once: true, margin: '-50px' }}
         >
           <div className="info-text">
-            I'm currently looking for new opportunities in AI/ML engineering and research. My inbox is always open whether you have a question or just want to say hi!
+            My inbox is always open whether you have a question or just want to say hi!
           </div>
 
           <div className="contact-methods">
