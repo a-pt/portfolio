@@ -41,7 +41,7 @@ const Hero = ({ data }) => {
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
             AI Engineer <br />
-            <span style={{ fontSize: '0.85em', opacity: 0.9 }}>Deep Learning | CV | LLM | Agentic AI</span>
+            <span className="hero-specialties">Deep Learning | CV | LLM | Agentic AI</span>
           </motion.h2>
 
           <motion.p 
@@ -116,11 +116,23 @@ const Hero = ({ data }) => {
         }
 
         .hero-title {
-          font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-          font-weight: 500;
-          letter-spacing: -0.01em;
+          font-size: clamp(1.2rem, 2.5vw, 2rem);
+          font-weight: 600;
+          letter-spacing: -0.02em;
           margin-bottom: 2rem;
-          font-family: var(--font-body);
+          font-family: var(--font-heading);
+          line-height: 1.4;
+        }
+
+        .hero-specialties {
+          font-family: var(--font-mono);
+          font-size: 0.75em;
+          font-weight: 400;
+          opacity: 0.8;
+          display: block;
+          margin-top: 0.5rem;
+          letter-spacing: 0;
+          color: var(--text-primary);
         }
 
         .hero-summary {
@@ -129,7 +141,8 @@ const Hero = ({ data }) => {
           max-width: 600px;
           line-height: 1.6;
           margin-bottom: 3rem;
-          font-weight: 400;
+          font-weight: 300;
+          font-family: var(--font-body);
         }
 
         .hero-actions {
