@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import NeuralNetworkBackground from './components/NeuralNetworkBackground';
@@ -11,6 +11,15 @@ import Skills from './components/Skills';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import portfolioData from './data/portfolio.json';
+
+// Helper to reset scroll position on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -61,6 +70,7 @@ function App() {
 
   return (
     <div className="app">
+      <ScrollToTop />
       <Navbar />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
