@@ -25,12 +25,12 @@ function PageWrapper({ children }) {
       initial="initial"
       animate="animate"
       exit="exit"
-      style={{ minHeight: 'calc(100vh - 70px)', paddingTop: '70px' }}
+      style={{ minHeight: 'calc(100vh - 80px)', paddingTop: '80px' }}
     >
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
         {children}
       </main>
-      <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.5, fontSize: '0.8rem' }}>
+      <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.4, fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
         <p>© {new Date().getFullYear()} Athira PT. Built with React &amp; AI Focus.</p>
       </footer>
     </motion.div>
@@ -62,31 +62,29 @@ function App() {
               initial="initial"
               animate="animate"
               exit="exit"
-              style={{ minHeight: 'calc(100vh - 70px)', paddingTop: '70px' }}
+              style={{ minHeight: 'calc(100vh - 80px)', paddingTop: '80px' }}
             >
               <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
                 <Hero data={portfolioData} />
               </main>
-              <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.5, fontSize: '0.8rem' }}>
+              <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.4, fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
                 <p>© {new Date().getFullYear()} Athira PT. Built with React &amp; AI Focus.</p>
               </footer>
             </motion.div>
           } />
 
           <Route path="/about" element={<PageWrapper><About data={portfolioData} /></PageWrapper>} />
-
-
-          <Route path="/experience"   element={<PageWrapper><Experience /></PageWrapper>} />
-          <Route path="/projects"     element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Projects     data={portfolioData} /></section></PageWrapper>} />
-          <Route path="/skills"       element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Skills       data={portfolioData} /></section></PageWrapper>} />
-          <Route path="/blog"         element={<BlogPage />} />
-          <Route path="/contact"      element={<PageWrapper><section style={{ paddingTop: '3rem' }}><Contact      data={portfolioData} /></section></PageWrapper>} />
+          <Route path="/experience" element={<PageWrapper><Experience /></PageWrapper>} />
+          <Route path="/projects" element={<PageWrapper><Projects data={portfolioData} /></PageWrapper>} />
+          <Route path="/skills" element={<PageWrapper><Skills data={portfolioData} /></PageWrapper>} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/contact" element={<PageWrapper><Contact data={portfolioData} /></PageWrapper>} />
 
           {/* 404 */}
           <Route path="*" element={
             <PageWrapper>
               <div style={{ textAlign: 'center', paddingTop: '8rem' }}>
-                <h1 style={{ fontSize: '3rem' }}>404</h1>
+                <h1 style={{ fontSize: '3rem', fontFamily: 'var(--font-heading)' }}>404</h1>
                 <p style={{ color: 'var(--text-secondary)' }}>Page not found.</p>
               </div>
             </PageWrapper>

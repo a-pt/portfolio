@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { Award, Briefcase, Brain, MapPin, Trophy } from 'lucide-react';
 
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 28 },
-  whileInView: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: 'easeOut' } },
-  viewport: { once: true },
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] } },
+  viewport: { once: true, margin: '-50px' },
 });
 
 const stats = [
@@ -17,50 +17,48 @@ const stats = [
 
 const About = ({ data }) => {
   return (
-    <section className="about-page">
+    <section className="about-page" id="about">
 
-      {/* Header */}
       <motion.div className="about-header" {...fadeUp(0)}>
-        <h2 className="section-title text-gradient">About Me</h2>
+        <span className="section-eyebrow">Discover</span>
+        <h2 className="section-title">About Me</h2>
       </motion.div>
 
-      {/* Bio card */}
       <motion.div className="glass-card about-bio-card" {...fadeUp(0.1)}>
         {data.about.split('\n\n').map((para, i, arr) => (
-          <p key={i} className="about-text" style={{ marginBottom: i < arr.length - 1 ? '1.25rem' : 0 }}>
+          <p key={i} className="about-text" style={{ marginBottom: i < arr.length - 1 ? '1.5rem' : 0 }}>
             {para}
           </p>
         ))}
       </motion.div>
 
-      {/* Stats row */}
       <div className="stats-grid">
         {stats.map(({ icon, label, value, sub }, i) => (
           <motion.div
             key={label}
-            className="glass-card stat-card"
+            className="stat-card"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
+            transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
-            whileHover={{ y: -4, borderColor: 'rgba(56,189,248,0.4)' }}
           >
-            <div className="stat-icon">{icon}</div>
-            <div className="stat-label">{label}</div>
-            <div className="stat-value">{value}</div>
-            <div className="stat-sub">{sub}</div>
+            <div className="stat-icon-wrap">{icon}</div>
+            <div className="stat-content">
+              <span className="stat-label">{label}</span>
+              <span className="stat-value">{value}</span>
+              <span className="stat-sub">{sub}</span>
+            </div>
           </motion.div>
         ))}
       </div>
 
-      {/* Education card */}
       <motion.div className="glass-card edu-card" {...fadeUp(0.2)}>
-        <p className="section-eyebrow" style={{ marginBottom: '1.25rem' }}>Education</p>
+        <h3 className="card-heading">Education</h3>
         <div className="edu-grid">
           {data.education.map((edu, i) => (
             <div key={i} className="edu-item">
-              <div className="edu-dot" />
-              <div>
+              <div className="edu-indicator" />
+              <div className="edu-content">
                 <div className="edu-degree">{edu.degree}</div>
                 <div className="edu-institution">{edu.institution}</div>
                 <div className="edu-meta">{edu.period} &nbsp;·&nbsp; {edu.score}</div>
@@ -70,207 +68,239 @@ const About = ({ data }) => {
         </div>
       </motion.div>
 
-      {/* Highlights */}
-      <motion.div {...fadeUp(0.25)} style={{ marginTop: '1.75rem' }}>
-        <p className="section-eyebrow" style={{ marginBottom: '1rem' }}>Highlights</p>
+      <motion.div className="highlights-section" {...fadeUp(0.3)}>
+        <h3 className="card-heading">Key Highlights</h3>
         <div className="highlights-grid">
-
-          <motion.div
-            className="glass-card highlight-card"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.55, delay: 0.1 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -4, borderColor: 'rgba(129,140,248,0.4)' }}
-          >
+          <div className="glass-card highlight-card">
             <div className="highlight-icon-wrap">
-              <Trophy size={22} />
+              <Trophy size={20} />
             </div>
-            <div>
-              <div className="highlight-title">TIFR GS 2020</div>
-              <div className="highlight-desc">
-                Shortlisted in the <strong>Top 46</strong> nationally for Computer &amp; Systems Sciences — one of India's most competitive research aptitude exams.
-              </div>
+            <div className="highlight-content">
+              <h4 className="highlight-title">TIFR GS 2020</h4>
+              <p className="highlight-desc">
+                Shortlisted in the <span className="highlight-accent">Top 46</span> nationally for Computer & Systems Sciences — one of India's most competitive research aptitude exams.
+              </p>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="glass-card highlight-card"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.55, delay: 0.2 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -4, borderColor: 'rgba(129,140,248,0.4)' }}
-          >
+          <div className="glass-card highlight-card">
             <div className="highlight-icon-wrap">
-              <Trophy size={22} />
+              <Trophy size={20} />
             </div>
-            <div>
-              <div className="highlight-title">TEKON Project Expo 2019</div>
-              <div className="highlight-desc">
-                <strong>1st Place Winner</strong> at state-level expo for the "Flight Force" drone project — a real-time human detection &amp; tracking system for aerial rescue operations.
-              </div>
+            <div className="highlight-content">
+              <h4 className="highlight-title">TEKON Project Expo 2019</h4>
+              <p className="highlight-desc">
+                <span className="highlight-accent">1st Place Winner</span> at state-level expo for the "Flight Force" drone project — a real-time human detection & tracking system for aerial rescue operations.
+              </p>
             </div>
-          </motion.div>
-
+          </div>
         </div>
       </motion.div>
 
       <style>{`
         .about-page {
-          padding: 3rem 0 2rem;
+          padding: 8rem 0;
+          max-width: 900px;
+          margin: 0 auto;
         }
+
         .about-header {
-          text-align: center;
-          margin-bottom: 2.5rem;
+          margin-bottom: 4rem;
         }
+
         .section-eyebrow {
-          font-size: 0.78rem;
-          font-weight: 600;
-          letter-spacing: 0.15em;
+          font-family: var(--font-mono);
+          font-size: 0.85rem;
+          color: var(--text-tertiary);
           text-transform: uppercase;
-          color: var(--accent-primary);
-          margin-bottom: 0.5rem;
-        }
-        .section-title {
-          font-size: clamp(1.8rem, 4vw, 2.5rem);
-          margin-bottom: 0;
+          letter-spacing: 0.1em;
+          display: block;
+          margin-bottom: 1rem;
         }
 
-        /* Bio */
         .about-bio-card {
-          margin-bottom: 1.75rem;
-        }
-        .about-text {
-          font-family: 'Merriweather', Georgia, serif;
-          font-size: 1rem;
-          font-weight: 300;
-          line-height: 2;
-          color: var(--text-secondary);
-          letter-spacing: 0.015em;
+          padding: 3rem;
+          margin-bottom: 3rem;
+          background: rgba(255, 255, 255, 0.015);
         }
 
-        /* Stats */
+        .about-text {
+          font-family: var(--font-body);
+          font-size: 1.05rem;
+          color: var(--text-secondary);
+          line-height: 1.8;
+          font-weight: 300;
+        }
+
         .stats-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 1.25rem;
-          margin-bottom: 1.75rem;
+          gap: 1.5rem;
+          margin-bottom: 3rem;
         }
+
         .stat-card {
           display: flex;
           flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding: 1.5rem 1rem;
-          transition: transform 0.3s, border-color 0.3s;
-          cursor: default;
-        }
-        .stat-icon {
-          color: var(--accent-primary);
-          margin-bottom: 0.6rem;
-        }
-        .stat-label {
-          font-size: 0.7rem;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: var(--text-secondary);
-          margin-bottom: 0.35rem;
-        }
-        .stat-value {
-          font-size: 1rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          margin-bottom: 0.2rem;
-        }
-        .stat-sub {
-          font-size: 0.75rem;
-          color: var(--text-secondary);
-          opacity: 0.75;
+          padding: 2rem 1.5rem;
+          background: rgba(255, 255, 255, 0.015);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 12px;
+          transition: all 0.3s ease;
         }
 
-        /* Education */
-        .edu-card {
-          padding: 2rem 2.25rem;
+        .stat-card:hover {
+          background: rgba(255, 255, 255, 0.03);
+          border-color: rgba(255, 255, 255, 0.1);
+          transform: translateY(-2px);
         }
+
+        .stat-icon-wrap {
+          color: var(--accent-primary);
+          margin-bottom: 1.5rem;
+        }
+
+        .stat-content {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .stat-label {
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: var(--text-tertiary);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+          font-family: var(--font-heading);
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: var(--text-primary);
+          margin-bottom: 0.25rem;
+          line-height: 1.2;
+        }
+
+        .stat-sub {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+        }
+
+        .edu-card {
+          padding: 3rem;
+          margin-bottom: 4rem;
+          background: rgba(255, 255, 255, 0.015);
+        }
+
+        .card-heading {
+          font-family: var(--font-heading);
+          font-size: 1.5rem;
+          color: var(--text-primary);
+          margin-bottom: 2rem;
+          font-weight: 500;
+        }
+
         .edu-grid {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
-        }
-        .edu-item {
-          display: flex;
-          gap: 1rem;
-          align-items: flex-start;
-        }
-        .edu-dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          background: var(--accent-primary);
-          flex-shrink: 0;
-          margin-top: 5px;
-          box-shadow: 0 0 8px var(--accent-primary);
-        }
-        .edu-degree {
-          font-size: 1rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          margin-bottom: 0.15rem;
-        }
-        .edu-institution {
-          font-size: 0.9rem;
-          color: var(--accent-secondary);
-          margin-bottom: 0.15rem;
-        }
-        .edu-meta {
-          font-size: 0.8rem;
-          color: var(--text-secondary);
-          opacity: 0.8;
+          gap: 2rem;
         }
 
-        /* Highlights */
+        .edu-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 1.5rem;
+        }
+
+        .edu-indicator {
+          width: 8px;
+          height: 8px;
+          background: var(--text-tertiary);
+          border-radius: 50%;
+          margin-top: 0.45rem;
+          flex-shrink: 0;
+          transition: background 0.3s;
+        }
+
+        .edu-item:hover .edu-indicator {
+          background: var(--accent-primary);
+        }
+
+        .edu-content {
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+        }
+
+        .edu-degree {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--text-primary);
+        }
+
+        .edu-institution {
+          font-size: 1rem;
+          color: var(--accent-primary);
+        }
+
+        .edu-meta {
+          font-family: var(--font-mono);
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          margin-top: 0.25rem;
+        }
+
+        .highlights-section {
+          margin-top: 2rem;
+        }
+
         .highlights-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 1.25rem;
+          gap: 1.5rem;
         }
+
         .highlight-card {
+          padding: 2.5rem;
           display: flex;
-          gap: 1.1rem;
-          align-items: flex-start;
-          padding: 1.5rem;
-          transition: transform 0.3s, border-color 0.3s;
+          flex-direction: column;
+          gap: 1.5rem;
+          background: rgba(255, 255, 255, 0.015);
         }
+
         .highlight-icon-wrap {
-          width: 42px;
-          height: 42px;
-          flex-shrink: 0;
-          border-radius: 10px;
-          background: rgba(129, 140, 248, 0.12);
-          border: 1px solid rgba(129, 140, 248, 0.25);
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
           display: flex;
           align-items: center;
           justify-content: center;
           color: var(--accent-secondary);
         }
+
         .highlight-title {
-          font-size: 0.95rem;
-          font-weight: 700;
+          font-family: var(--font-heading);
+          font-size: 1.25rem;
           color: var(--text-primary);
-          margin-bottom: 0.4rem;
-        }
-        .highlight-desc {
-          font-size: 0.875rem;
-          line-height: 1.65;
-          color: var(--text-secondary);
-        }
-        .highlight-desc strong {
-          color: var(--accent-secondary);
-          font-weight: 600;
+          margin-bottom: 0.75rem;
+          font-weight: 500;
         }
 
-        /* Responsive */
+        .highlight-desc {
+          font-size: 0.95rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
+        }
+
+        .highlight-accent {
+          color: var(--text-primary);
+          font-weight: 500;
+        }
+
         @media (max-width: 768px) {
           .stats-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -278,10 +308,14 @@ const About = ({ data }) => {
           .highlights-grid {
             grid-template-columns: 1fr;
           }
+          .about-bio-card, .edu-card, .highlight-card {
+            padding: 2rem;
+          }
         }
+
         @media (max-width: 480px) {
           .stats-grid {
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
           }
         }
       `}</style>

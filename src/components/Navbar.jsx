@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <Link to="/" className="nav-logo text-gradient" style={{ textDecoration: 'none' }}>APT</Link>
+        <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>APT</Link>
 
         {/* Desktop links */}
         <div className="nav-links">
@@ -75,66 +75,59 @@ const Navbar = () => {
           top: 0;
           left: 0;
           right: 0;
-          background: rgba(2, 6, 23, 0.85);
-          backdrop-filter: blur(12px);
+          background: rgba(3, 5, 10, 0.7);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
           z-index: 1000;
-          border-bottom: 1px solid var(--glass-border);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         .nav-container {
-          height: 70px;
+          height: 80px;
           max-width: 1200px;
           margin: 0 auto;
           width: 100%;
-          padding: 0 1.5rem;
+          padding: 0 2rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
         .nav-logo {
-          font-size: 1.5rem;
-          font-weight: 800;
-          letter-spacing: 2px;
+          font-family: var(--font-heading);
+          font-size: 1.4rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          color: var(--text-primary);
         }
         .nav-links {
           display: flex;
-          gap: 0.25rem;
+          gap: 0.5rem;
           align-items: center;
         }
         .nav-link {
-          font-size: 0.875rem;
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
           font-weight: 500;
           color: var(--text-secondary);
-          padding: 0.4rem 0.75rem;
-          border-radius: 6px;
-          transition: color 0.25s ease, background 0.25s ease;
+          padding: 0.5rem 1rem;
+          border-radius: 8px;
+          transition: all 0.3s ease;
           text-decoration: none;
-          position: relative;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
         .nav-link:hover {
-          color: var(--accent-primary);
-          background: rgba(56, 189, 248, 0.07);
+          color: var(--text-primary);
+          background: rgba(255, 255, 255, 0.03);
         }
         .nav-link--active {
-          color: var(--accent-primary) !important;
-          background: rgba(56, 189, 248, 0.12);
-          font-weight: 600;
-        }
-        .nav-link--active::after {
-          content: '';
-          position: absolute;
-          bottom: -1px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 60%;
-          height: 2px;
-          background: var(--accent-primary);
-          border-radius: 2px;
+          color: var(--text-primary) !important;
+          background: rgba(255, 255, 255, 0.05);
         }
         /* Hamburger */
         .nav-hamburger {
           display: none;
           flex-direction: column;
-          gap: 5px;
+          gap: 6px;
           background: none;
           border: none;
           cursor: pointer;
@@ -142,9 +135,9 @@ const Navbar = () => {
         }
         .nav-hamburger span {
           display: block;
-          width: 24px;
+          width: 26px;
           height: 2px;
-          background: var(--text-secondary);
+          background: var(--text-primary);
           border-radius: 2px;
           transition: background 0.3s;
         }
@@ -155,20 +148,25 @@ const Navbar = () => {
         .nav-mobile-drawer {
           display: flex;
           flex-direction: column;
-          padding: 0.75rem 1.5rem 1rem;
-          gap: 0.25rem;
-          border-top: 1px solid var(--glass-border);
-          background: rgba(2, 6, 23, 0.95);
+          padding: 1rem 2rem 1.5rem;
+          gap: 0.5rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          background: rgba(3, 5, 10, 0.98);
         }
         .nav-mobile-drawer .nav-link {
-          padding: 0.6rem 0.75rem;
+          padding: 0.8rem 1rem;
+          font-size: 0.9rem;
         }
-        @media (max-width: 820px) {
+        @media (max-width: 850px) {
           .nav-links {
             display: none;
           }
           .nav-hamburger {
             display: flex;
+          }
+          .nav-container {
+            padding: 0 1.5rem;
+            height: 70px;
           }
         }
       `}</style>
