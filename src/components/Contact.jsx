@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Linkedin, Github, Send, CheckCircle, XCircle } from 'lucide-react';
+import { Send, CheckCircle, XCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Contact = ({ data }) => {
@@ -56,32 +56,6 @@ const Contact = ({ data }) => {
         >
           <div className="info-text">
             My inbox is always open whether you have a question or just want to say hi!
-          </div>
-
-          <div className="contact-methods">
-            <a href={`mailto:${data.contact.email}`} className="contact-method-card glass-card">
-              <Mail className="contact-icon" />
-              <div>
-                <span className="contact-label">Email</span>
-                <span className="contact-value">{data.contact.email}</span>
-              </div>
-            </a>
-            
-            <a href={data.contact.linkedin} target="_blank" rel="noopener noreferrer" className="contact-method-card glass-card">
-              <Linkedin className="contact-icon" />
-              <div>
-                <span className="contact-label">LinkedIn</span>
-                <span className="contact-value">Connect with me</span>
-              </div>
-            </a>
-
-            <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className="contact-method-card glass-card">
-              <Github className="contact-icon" />
-              <div>
-                <span className="contact-label">GitHub</span>
-                <span className="contact-value">Explore my repos</span>
-              </div>
-            </a>
           </div>
         </motion.div>
 
