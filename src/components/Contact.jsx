@@ -46,26 +46,18 @@ const Contact = ({ data }) => {
         <h2 className="section-title">Get In Touch</h2>
       </motion.div>
 
-      <div className="contact-grid">
+      <div className="contact-center-layout">
         <motion.div 
-          className="contact-info"
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="contact-form-wrap glass-card"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true, margin: '-50px' }}
         >
           <div className="info-text">
             My inbox is always open whether you have a question or just want to say hi!
           </div>
-        </motion.div>
 
-        <motion.div 
-          className="contact-form-wrap glass-card"
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: '-50px' }}
-        >
           <iframe name="hidden_iframe" style={{ display: 'none' }} onLoad={handleIframeLoad}></iframe>
           <form className="minimal-form" action={formUrl} method="POST" target="hidden_iframe" onSubmit={handleSubmit}>
             <div className="form-group">
@@ -105,7 +97,7 @@ const Contact = ({ data }) => {
       <style>{`
         .contact-section {
           padding: 8rem 0;
-          max-width: 1000px;
+          max-width: 1200px;
           margin: 0 auto;
         }
 
@@ -123,59 +115,17 @@ const Contact = ({ data }) => {
           margin-bottom: 1rem;
         }
 
-        .contact-grid {
-          display: grid;
-          grid-template-columns: 1fr 1.2fr;
-          gap: 4rem;
+        .contact-center-layout {
+          width: 100%;
+          margin: 0 auto;
         }
 
         .info-text {
           font-size: 1.05rem;
           color: var(--text-secondary);
           line-height: 1.7;
-          margin-bottom: 3rem;
-        }
-
-        .contact-methods {
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
-        }
-
-        .contact-method-card {
-          display: flex;
-          align-items: center;
-          gap: 1.25rem;
-          padding: 1.25rem;
-          background: rgba(255, 255, 255, 0.015);
-          transition: all 0.3s ease;
-        }
-
-        .contact-method-card:hover {
-          background: rgba(255, 255, 255, 0.04);
-          transform: translateX(5px);
-          border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .contact-icon {
-          color: var(--accent-primary);
-        }
-
-        .contact-label {
-          display: block;
-          font-family: var(--font-mono);
-          font-size: 0.75rem;
-          color: var(--text-tertiary);
-          text-transform: uppercase;
-          margin-bottom: 0.2rem;
-        }
-
-        .contact-value {
-          display: block;
-          font-family: var(--font-heading);
-          font-size: 1.05rem;
-          color: var(--text-primary);
-          font-weight: 500;
+          margin-bottom: 2.5rem;
+          text-align: left;
         }
 
         .contact-form-wrap {
