@@ -13,9 +13,20 @@ import Contact from './components/Contact';
 import portfolioData from './data/portfolio.json';
 
 const pageVariants = {
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-  exit:    { opacity: 0, y: -16, transition: { duration: 0.3, ease: 'easeIn' } },
+  initial: { opacity: 0, y: 20 },
+  animate: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      duration: 0.6, 
+      ease: [0.16, 1, 0.3, 1]
+    } 
+  },
+  exit: { 
+    opacity: 0, 
+    y: -15, 
+    transition: { duration: 0.3, ease: 'easeIn' } 
+  },
 };
 
 function PageWrapper({ children }) {
@@ -56,21 +67,23 @@ function App() {
 
           {/* Home — Hero only */}
           <Route path="/" element={
-            <motion.div
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              style={{ minHeight: 'calc(100vh - 80px)', paddingTop: '80px' }}
-            >
-              <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 1 }}>
-                <NeuralNetworkBackground />
-                <Hero data={portfolioData} />
-              </main>
-              <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.4, fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
-                <p>© {new Date().getFullYear()} Athira PT. Built with React &amp; AI Focus.</p>
-              </footer>
-            </motion.div>
+            <div className="home-container" style={{ position: 'relative' }}>
+              <NeuralNetworkBackground />
+              <motion.div
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                style={{ paddingTop: '80px' }}
+              >
+                <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 1 }}>
+                  <Hero data={portfolioData} />
+                </main>
+                <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.4, fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
+                  <p>© {new Date().getFullYear()} Athira PT. Built with React &amp; AI Focus.</p>
+                </footer>
+              </motion.div>
+            </div>
           } />
 
           <Route path="/about" element={<PageWrapper><About data={portfolioData} /></PageWrapper>} />

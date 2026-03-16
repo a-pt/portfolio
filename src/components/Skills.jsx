@@ -29,7 +29,7 @@ const Skills = ({ data }) => {
             className="skill-pillar glass-card"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.9, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, margin: '-50px' }}
           >
             <div className="pillar-top-glow"></div>
