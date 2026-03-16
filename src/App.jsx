@@ -50,7 +50,6 @@ function App() {
 
   return (
     <div className="app">
-      <NeuralNetworkBackground />
       <Navbar />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
@@ -64,7 +63,8 @@ function App() {
               exit="exit"
               style={{ minHeight: 'calc(100vh - 80px)', paddingTop: '80px' }}
             >
-              <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+              <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 1 }}>
+                <NeuralNetworkBackground />
                 <Hero data={portfolioData} />
               </main>
               <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.4, fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>

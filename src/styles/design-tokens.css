@@ -1,4 +1,5 @@
 :root {
+    /* Dark Theme (Default) */
     --bg-base: #03050a;
     --bg-gradient: radial-gradient(circle at top center, #0a1128 0%, #03050a 100%);
     
@@ -15,6 +16,18 @@
     --glass-border: rgba(255, 255, 255, 0.06);
     --glass-border-hover: rgba(255, 255, 255, 0.15);
     
+    --btn-primary-bg: #ffffff;
+    --btn-primary-text: #000000;
+    --btn-primary-hover: rgba(255, 255, 255, 0.9);
+    
+    --btn-outline-bg: rgba(255, 255, 255, 0.03);
+    --btn-outline-border: rgba(255, 255, 255, 0.1);
+    --btn-outline-hover-bg: rgba(255, 255, 255, 0.08);
+    --btn-outline-hover-border: rgba(255, 255, 255, 0.2);
+
+    --nav-bg: rgba(3, 5, 10, 0.7);
+    --nav-border: rgba(255, 255, 255, 0.05);
+
     --card-blur: 16px;
     
     --font-heading: 'Space Grotesk', sans-serif;
@@ -42,6 +55,7 @@ body {
     min-height: 100vh;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 h1, h2, h3, h4, h5 {
@@ -73,8 +87,8 @@ h1, h2, h3, h4, h5 {
 .text-gradient {
     background: linear-gradient(
         135deg,
-        #f8fafc 0%,
-        var(--text-secondary) 100%
+        var(--text-primary) 0%,
+        var(--text-tertiary) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -100,13 +114,14 @@ h1, h2, h3, h4, h5 {
     border-radius: 12px;
     padding: 2rem;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
 .glass-card:hover {
     background: var(--glass-bg-hover);
     border-color: var(--glass-border-hover);
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.2);
 }
 
 a {
@@ -125,55 +140,29 @@ button {
 }
 
 .btn-primary {
-    background: #ffffff;
-    color: #000000;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
     padding: 0.8rem 1.6rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px var(--accent-glow);
 }
 
 .btn-primary:hover {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--btn-primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px var(--accent-glow);
 }
 
 .btn-outline {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--btn-outline-bg);
+    border: 1px solid var(--btn-outline-border);
     color: var(--text-primary);
     padding: 0.8rem 1.6rem;
 }
 
 .btn-outline:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: var(--btn-outline-hover-bg);
+    border-color: var(--btn-outline-hover-border);
     transform: translateY(-2px);
-}
-
-/* Tag Styles */
-.tag-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.tag {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: var(--text-secondary);
-    padding: 0.35rem 0.8rem;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-family: var(--font-body);
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    transition: all 0.2s ease;
-}
-
-.tag:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--text-primary);
-    border-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Base structural fixes */

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
@@ -13,7 +13,7 @@ const navItems = [
 
 const Navbar = () => {
   const location = useLocation();
-  const [menuOpen, setMenuOpen] = React.useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav className="navbar">
@@ -38,14 +38,17 @@ const Navbar = () => {
           })}
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="nav-hamburger"
-          onClick={() => setMenuOpen(o => !o)}
-          aria-label="Toggle menu"
-        >
-          <span /><span /><span />
-        </button>
+        <div className="nav-actions">
+
+          {/* Mobile hamburger */}
+          <button
+            className="nav-hamburger"
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label="Toggle menu"
+          >
+            <span /><span /><span />
+          </button>
+        </div>
       </div>
 
       {/* Mobile drawer */}
@@ -75,11 +78,12 @@ const Navbar = () => {
           top: 0;
           left: 0;
           right: 0;
-          background: rgba(3, 5, 10, 0.7);
+          background: var(--nav-bg);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           z-index: 1000;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid var(--nav-border);
+          transition: background 0.4s ease, border-color 0.4s ease;
         }
         .nav-container {
           height: 80px;
@@ -117,12 +121,19 @@ const Navbar = () => {
         }
         .nav-link:hover {
           color: var(--text-primary);
-          background: rgba(255, 255, 255, 0.03);
+          background: rgba(125, 125, 125, 0.08);
         }
         .nav-link--active {
           color: var(--text-primary) !important;
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(125, 125, 125, 0.12);
         }
+        
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+        }
+
         /* Hamburger */
         .nav-hamburger {
           display: none;
@@ -150,8 +161,9 @@ const Navbar = () => {
           flex-direction: column;
           padding: 1rem 2rem 1.5rem;
           gap: 0.5rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-          background: rgba(3, 5, 10, 0.98);
+          border-top: 1px solid var(--nav-border);
+          background: var(--nav-bg);
+          backdrop-filter: blur(20px);
         }
         .nav-mobile-drawer .nav-link {
           padding: 0.8rem 1rem;
