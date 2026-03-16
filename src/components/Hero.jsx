@@ -11,44 +11,49 @@ const fadeUp = (delay = 0) => ({
 const Hero = ({ data }) => {
   return (
     <section className="hero-section">
-      <div className="hero-content">
-        <motion.div className="hero-badge" {...fadeUp(0.1)}>
-          <span className="badge-dot"></span>
-          AI Engineer & Deep Learning Researcher
-        </motion.div>
+      <div className="hero-grid">
+        <div className="hero-content">
+          <motion.h1 className="hero-name" {...fadeUp(0.1)}>
+            {data.name}
+          </motion.h1>
 
-        <motion.h1 className="hero-name" {...fadeUp(0.2)}>
-          {data.name}
-        </motion.h1>
+          <motion.h2 className="hero-title text-gradient-accent" {...fadeUp(0.2)}>
+            {data.title}
+          </motion.h2>
 
-        <motion.h2 className="hero-title text-gradient-accent" {...fadeUp(0.3)}>
-          {data.title}
-        </motion.h2>
+          <motion.p className="hero-summary" {...fadeUp(0.3)}>
+            {data.tagline}
+          </motion.p>
 
-        <motion.p className="hero-summary" {...fadeUp(0.4)}>
-          {data.tagline}
-        </motion.p>
+          <motion.div className="hero-actions" {...fadeUp(0.4)}>
+            <Link to="/contact">
+              <button className="btn-primary hero-cta">
+                Get In Touch <ArrowRight size={18} />
+              </button>
+            </Link>
+            <Link to="/projects">
+              <button className="btn-outline hero-cta">
+                View My Work
+              </button>
+            </Link>
+          </motion.div>
 
-        <motion.div className="hero-actions" {...fadeUp(0.5)}>
-          <Link to="/contact">
-            <button className="btn-primary hero-cta">
-              Get In Touch <ArrowRight size={18} />
-            </button>
-          </Link>
-          <Link to="/projects">
-            <button className="btn-outline hero-cta">
-              View My Work
-            </button>
-          </Link>
-        </motion.div>
+          <motion.div className="social-links" {...fadeUp(0.5)}>
+            <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="GitHub">
+              <Github size={24} />
+            </a>
+            <a href={data.contact.linkedin} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">
+              <Linkedin size={24} />
+            </a>
+          </motion.div>
+        </div>
 
-        <motion.div className="social-links" {...fadeUp(0.6)}>
-          <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="GitHub">
-            <Github size={24} />
-          </a>
-          <a href={data.contact.linkedin} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">
-            <Linkedin size={24} />
-          </a>
+        <motion.div className="hero-image-container" {...fadeUp(0.3)}>
+          <div className="hero-image-wrapper">
+            <img src="/athira.jpeg" alt="Athira PT" className="hero-image" />
+            <div className="hero-image-glow"></div>
+            <div className="hero-image-ring"></div>
+          </div>
         </motion.div>
       </div>
 
@@ -58,14 +63,21 @@ const Hero = ({ data }) => {
           min-height: calc(100vh - 80px);
           display: flex;
           align-items: center;
-          justify-content: flex-start;
-          padding: 8rem 0 4rem;
+          justify-content: center;
+          padding: 6rem 0 4rem;
           position: relative;
           z-index: 10;
         }
 
+        .hero-grid {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: center;
+        }
+
         .hero-content {
-          max-width: 800px;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -73,30 +85,8 @@ const Hero = ({ data }) => {
         }
 
         /* ── Typography & Elements ─ */
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.4rem 1rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 100px;
-          font-family: var(--font-mono);
-          font-size: 0.85rem;
-          color: var(--text-secondary);
-          margin-bottom: 2rem;
-        }
-
-        .badge-dot {
-          width: 8px;
-          height: 8px;
-          background-color: var(--accent-primary);
-          border-radius: 50%;
-          box-shadow: 0 0 10px var(--accent-primary);
-        }
-
         .hero-name {
-          font-size: clamp(3rem, 8vw, 6rem);
+          font-size: clamp(3rem, 7vw, 5.5rem);
           font-weight: 700;
           letter-spacing: -0.04em;
           line-height: 1;
@@ -152,15 +142,92 @@ const Hero = ({ data }) => {
           transform: translateY(-2px);
         }
 
+        /* ── Image ───────────────── */
+        .hero-image-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .hero-image-wrapper {
+          position: relative;
+          width: clamp(200px, 25vw, 320px);
+          aspect-ratio: 1 / 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+          position: relative;
+          z-index: 2;
+          border: 4px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-image-glow {
+          position: absolute;
+          inset: -20px;
+          background: radial-gradient(circle at center, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
+          border-radius: 50%;
+          z-index: 1;
+          filter: blur(20px);
+          animation: pulseGlow 4s ease-in-out infinite alternate;
+        }
+
+        .hero-image-ring {
+          position: absolute;
+          inset: -10px;
+          border-radius: 50%;
+          border: 2px solid transparent;
+          background: linear-gradient(135deg, rgba(6, 182, 212, 0.8), transparent 70%) border-box;
+          -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          z-index: 3;
+          animation: rotateRing 15s linear infinite;
+        }
+
+        @keyframes pulseGlow {
+          0% {
+            opacity: 0.6;
+            transform: scale(0.95);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1.05);
+          }
+        }
+
+        @keyframes rotateRing {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
         /* ── Responsive ───────────── */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           .hero-section {
             padding-top: 6rem;
             align-items: flex-start;
           }
+          .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 4rem;
+          }
           .hero-content {
             align-items: center;
             text-align: center;
+            order: 2;
+          }
+          .hero-image-container {
+            order: 1;
           }
           .hero-summary {
             max-width: 100%;
