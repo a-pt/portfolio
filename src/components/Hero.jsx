@@ -4,24 +4,52 @@ import { Github, Linkedin, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] } },
+  initial: { opacity: 0, y: 30 },
+  animate: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 1, delay, ease: [0.16, 1, 0.3, 1] } 
+  },
 });
 
 const Hero = ({ data }) => {
   return (
     <section className="hero-section">
       <div className="hero-grid">
+        <motion.div className="hero-image-container" {...fadeUp(0.3)}>
+          <div className="hero-image-wrapper">
+            <img src="/athira.jpeg" alt="Athira PT" className="hero-image" />
+            <div className="hero-image-glow"></div>
+            <div className="hero-image-ring"></div>
+          </div>
+        </motion.div>
+
         <div className="hero-content">
-          <motion.h1 className="hero-name" {...fadeUp(0.1)}>
+          <motion.h1 
+            className="hero-name" 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
             {data.name}
           </motion.h1>
 
-          <motion.h2 className="hero-title text-gradient-accent" {...fadeUp(0.2)}>
-            {data.title}
+          <motion.h2 
+            className="hero-title text-gradient-accent" 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          >
+            AI Engineer <br />
+            <span style={{ fontSize: '0.85em', opacity: 0.9 }}>Deep Learning | CV | LLM | Agentic AI</span>
           </motion.h2>
 
-          <motion.p className="hero-summary" {...fadeUp(0.3)}>
+          <motion.p 
+            className="hero-summary" 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
             {data.tagline}
           </motion.p>
 
@@ -47,14 +75,6 @@ const Hero = ({ data }) => {
             </a>
           </motion.div>
         </div>
-
-        <motion.div className="hero-image-container" {...fadeUp(0.3)}>
-          <div className="hero-image-wrapper">
-            <img src="/athira.jpeg" alt="Athira PT" className="hero-image" />
-            <div className="hero-image-glow"></div>
-            <div className="hero-image-ring"></div>
-          </div>
-        </motion.div>
       </div>
 
       <style>{`
@@ -92,6 +112,7 @@ const Hero = ({ data }) => {
           line-height: 1;
           color: #ffffff;
           margin-bottom: 0.5rem;
+          text-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
         }
 
         .hero-title {
