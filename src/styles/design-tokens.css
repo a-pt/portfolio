@@ -1,34 +1,35 @@
 :root {
     /* Dark Theme (Default) */
-    --bg-base: #03050a;
-    --bg-gradient: radial-gradient(circle at top center, #0a1128 0%, #03050a 100%);
+    --bg-base: #020408;
+    --bg-gradient: radial-gradient(circle at top center, #0a1128 0%, #060913 50%, #020408 100%);
     
     --accent-primary: #38bdf8; /* Soft Cyan */
     --accent-secondary: #a78bfa; /* Violet */
-    --accent-glow: rgba(56, 189, 248, 0.4);
+    --accent-tertiary: #4f46e5; /* Indigo */
+    --accent-glow: rgba(56, 189, 248, 0.25);
     
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     --text-tertiary: #64748b;
     
-    --glass-bg: rgba(255, 255, 255, 0.02);
-    --glass-bg-hover: rgba(255, 255, 255, 0.04);
-    --glass-border: rgba(255, 255, 255, 0.06);
-    --glass-border-hover: rgba(255, 255, 255, 0.15);
+    --glass-bg: rgba(255, 255, 255, 0.015);
+    --glass-bg-hover: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --glass-border-hover: rgba(56, 189, 248, 0.3);
     
     --btn-primary-bg: #ffffff;
     --btn-primary-text: #000000;
-    --btn-primary-hover: rgba(255, 255, 255, 0.9);
+    --btn-primary-hover: #e2e8f0;
     
-    --btn-outline-bg: rgba(255, 255, 255, 0.03);
+    --btn-outline-bg: rgba(255, 255, 255, 0.02);
     --btn-outline-border: rgba(255, 255, 255, 0.1);
-    --btn-outline-hover-bg: rgba(255, 255, 255, 0.08);
+    --btn-outline-hover-bg: rgba(255, 255, 255, 0.06);
     --btn-outline-hover-border: rgba(255, 255, 255, 0.2);
 
-    --nav-bg: rgba(3, 5, 10, 0.7);
+    --nav-bg: rgba(2, 4, 8, 0.65);
     --nav-border: rgba(255, 255, 255, 0.05);
 
-    --card-blur: 16px;
+    --card-blur: 24px;
     
     --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', -apple-system, sans-serif;
@@ -58,6 +59,21 @@ body {
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
 h1, h2, h3, h4, h5 {
     font-family: var(--font-heading);
     font-weight: 600;
@@ -79,9 +95,10 @@ h1, h2, h3, h4, h5 {
     bottom: 0;
     left: 0;
     width: 3rem;
-    height: 2px;
-    background: var(--accent-primary);
-    border-radius: 2px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: 3px;
+    box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .text-gradient {
@@ -97,13 +114,22 @@ h1, h2, h3, h4, h5 {
 
 .text-gradient-accent {
     background: linear-gradient(
-        135deg,
+        270deg,
         var(--accent-primary) 0%,
-        var(--accent-secondary) 100%
+        var(--accent-secondary) 50%,
+        var(--accent-tertiary) 100%
     );
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    animation: gradientFlow 6s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .glass-card {
@@ -111,17 +137,17 @@ h1, h2, h3, h4, h5 {
     backdrop-filter: blur(var(--card-blur));
     -webkit-backdrop-filter: blur(var(--card-blur));
     border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 2rem;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border-radius: 16px;
+    padding: 2.5rem;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .glass-card:hover {
     background: var(--glass-bg-hover);
     border-color: var(--glass-border-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
 }
 
 a {
@@ -149,7 +175,7 @@ button {
 .btn-primary:hover {
     background: var(--btn-primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px var(--accent-glow);
+    box-shadow: 0 4px 20px var(--accent-glow);
 }
 
 .btn-outline {

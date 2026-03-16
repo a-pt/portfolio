@@ -251,17 +251,22 @@ const Experience = () => {
         }
 
         .exp-item {
-          background: rgba(255, 255, 255, 0.015);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 12px;
+          background: var(--glass-bg);
+          backdrop-filter: blur(var(--card-blur));
+          -webkit-backdrop-filter: blur(var(--card-blur));
+          border: 1px solid var(--glass-border);
+          border-radius: 16px;
           position: relative;
           z-index: 1;
-          transition: all 0.3s ease;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .exp-item:hover {
-          background: rgba(255, 255, 255, 0.03);
-          border-color: rgba(255, 255, 255, 0.1);
+          background: var(--glass-bg-hover);
+          border-color: var(--glass-border-hover);
+          transform: translateY(-2px);
+          box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-glow);
         }
 
         .exp-header {
@@ -294,6 +299,7 @@ const Experience = () => {
         .exp-item:hover .exp-icon-wrap {
           background: rgba(255, 255, 255, 0.06);
           transform: scale(1.05);
+          box-shadow: 0 0 15px currentColor;
         }
 
         .exp-meta {
@@ -388,7 +394,7 @@ const Experience = () => {
         .exp-tech {
           display: flex;
           flex-wrap: wrap;
-          gap: 0.5rem;
+          gap: 0.6rem;
           margin-top: 2rem;
           padding-top: 1.5rem;
           border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -397,17 +403,20 @@ const Experience = () => {
         .exp-tag {
           font-family: var(--font-mono);
           font-size: 0.75rem;
-          color: var(--text-secondary);
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          padding: 0.25rem 0.75rem;
-          border-radius: 4px;
-          transition: all 0.2s;
+          color: var(--accent-secondary);
+          background: rgba(167, 139, 250, 0.05);
+          border: 1px solid rgba(167, 139, 250, 0.15);
+          padding: 0.3rem 0.8rem;
+          border-radius: 8px;
+          transition: all 0.3s ease;
         }
 
         .exp-tag:hover {
-          color: var(--text-primary);
-          border-color: rgba(255, 255, 255, 0.2);
+          color: var(--accent-primary);
+          background: rgba(56, 189, 248, 0.08);
+          border-color: rgba(56, 189, 248, 0.3);
+          box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+          transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {

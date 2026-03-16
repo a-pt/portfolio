@@ -113,14 +113,15 @@ const Skills = ({ data }) => {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.06);
           padding: 0.4rem 0.85rem;
-          border-radius: 6px;
-          transition: all 0.2s ease;
+          border-radius: 8px;
+          transition: all 0.3s ease;
         }
 
         .skill-tag:hover {
-          color: var(--text-primary);
-          background: rgba(255, 255, 255, 0.05);
-          border-color: rgba(255, 255, 255, 0.15);
+          color: var(--accent-primary);
+          background: rgba(56, 189, 248, 0.05);
+          border-color: rgba(56, 189, 248, 0.3);
+          box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
           transform: translateY(-2px);
         }
 

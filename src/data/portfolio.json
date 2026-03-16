@@ -67,7 +67,7 @@
   "skills": {
     "Languages": ["C/C++", "Python", "R", "Julia", "Dart", "SQL","CUDA", "PyCUDA"],
     "Tools & Frameworks": ["Tensorflow", "PyTorch", "OpenCV", "FastAPI", "Streamlit", "PostgreSQL", "MongoDB", "Supabase", "Drift", "Git", "STL"],
-    "Theoretical": ["Deep Learning", "Machine Learning", "Probability", "Statistics", "Data Structures", "Algorithms", "Linear Algebra", "GPU Programming"]
+    "Theoretical": ["Deep Learning", "Machine Learning", "Data Structures", "Algorithms", "Linear Algebra", "GPU Programming"]
   },
   "achievements": [
     "GATE 2020: All India Rank 53 (Score 880)",

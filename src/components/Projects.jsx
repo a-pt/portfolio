@@ -141,13 +141,27 @@ const Projects = ({ data }) => {
           border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
+        .tag-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+
         .project-tag {
           font-family: var(--font-mono);
-          font-size: 0.7rem;
-          color: var(--text-tertiary);
-          padding: 0.2rem 0.6rem;
-          border-radius: 4px;
-          border: 1px dashed rgba(255, 255, 255, 0.1);
+          font-size: 0.75rem;
+          color: var(--accent-primary);
+          background: rgba(56, 189, 248, 0.08);
+          padding: 0.25rem 0.75rem;
+          border-radius: 100px;
+          border: 1px solid rgba(56, 189, 248, 0.15);
+          transition: all 0.3s ease;
+        }
+        
+        .project-tag:hover {
+          background: rgba(56, 189, 248, 0.15);
+          box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+          transform: translateY(-1px);
         }
 
         @media (max-width: 768px) {
