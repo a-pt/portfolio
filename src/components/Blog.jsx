@@ -11,7 +11,7 @@ const Blog = () => {
   ];
 
   return (
-    <section id="blog">
+    <div className="blog-content">
       <h2 className="section-title text-gradient">Blog & Research Notes</h2>
       
       <div className="blog-grid" style={{ marginTop: '2rem' }}>
@@ -36,7 +36,7 @@ const Blog = () => {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

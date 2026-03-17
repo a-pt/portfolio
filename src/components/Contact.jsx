@@ -34,7 +34,7 @@ const Contact = ({ data }) => {
   const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdaoC9EzeiDERqdktsX44rWnslHwq-ouxriuGLlG9yZC-tq6A/formResponse';
 
   return (
-    <section id="contact" className="contact-section">
+    <div className="contact-content">
       <motion.div
         className="contact-header"
         initial={{ opacity: 0, y: 20 }}
@@ -42,7 +42,6 @@ const Contact = ({ data }) => {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <span className="section-eyebrow">Connect</span>
         <h2 className="section-title">Get In Touch</h2>
       </motion.div>
 
@@ -95,8 +94,7 @@ const Contact = ({ data }) => {
       </div>
 
       <style>{`
-        .contact-section {
-          padding: 8rem 0;
+        .contact-content {
           max-width: 1200px;
           margin: 0 auto;
         }
@@ -234,7 +232,7 @@ const Contact = ({ data }) => {
           }
         }
       `}</style>
-    </section>
+    </div>
   );
 };
 

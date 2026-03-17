@@ -186,7 +186,7 @@ const Experience = () => {
   const toggle = (i) => setOpenIndex(openIndex === i ? null : i);
 
   return (
-    <section className="experience-page" id="experience">
+    <div className="experience-content">
       <motion.div
         className="exp-page-header"
         initial={{ opacity: 0, y: 20 }}
@@ -194,7 +194,6 @@ const Experience = () => {
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
       >
-        <span className="section-eyebrow">Career Timeline</span>
         <h2 className="section-title">Professional Experience</h2>
       </motion.div>
 
@@ -211,8 +210,7 @@ const Experience = () => {
       </div>
 
       <style>{`
-        .experience-page {
-          padding: 8rem 0;
+        .experience-content {
           max-width: 900px;
           margin: 0 auto;
         }
@@ -448,7 +446,7 @@ const Experience = () => {
           }
         }
       `}</style>
-    </section>
+    </div>
   );
 };
 

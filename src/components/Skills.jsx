@@ -10,7 +10,7 @@ const categoryIcons = {
 
 const Skills = ({ data }) => {
   return (
-    <section id="skills" className="skills-section">
+    <div className="skills-content">
       <motion.div
         className="skills-header"
         initial={{ opacity: 0, y: 20 }}
@@ -18,7 +18,6 @@ const Skills = ({ data }) => {
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
       >
-        <span className="section-eyebrow">Expertise</span>
         <h2 className="section-title">Technical Stack</h2>
       </motion.div>
 
@@ -53,8 +52,7 @@ const Skills = ({ data }) => {
       </div>
 
       <style>{`
-        .skills-section {
-          padding: 8rem 0;
+        .skills-content {
           max-width: 1200px;
           margin: 0 auto;
         }
@@ -188,7 +186,7 @@ const Skills = ({ data }) => {
           }
         }
       `}</style>
-    </section>
+    </div>
   );
 };
 

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const Projects = ({ data }) => {
   return (
-    <section id="projects" className="projects-section">
+    <div className="projects-content">
       <motion.div
         className="projects-header"
         initial={{ opacity: 0, y: 20 }}
@@ -12,7 +12,6 @@ const Projects = ({ data }) => {
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
       >
-        <span className="section-eyebrow">Case Studies</span>
         <h2 className="section-title">Selected Projects</h2>
       </motion.div>
 
@@ -58,8 +57,7 @@ const Projects = ({ data }) => {
       </div>
 
       <style>{`
-        .projects-section {
-          padding: 8rem 0;
+        .projects-content {
           max-width: 1000px;
           margin: 0 auto;
         }
@@ -173,7 +171,7 @@ const Projects = ({ data }) => {
           }
         }
       `}</style>
-    </section>
+    </div>
   );
 };
 

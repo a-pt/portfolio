@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Github, Linkedin, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -14,7 +13,7 @@ const fadeUp = (delay = 0) => ({
 
 const Hero = ({ data }) => {
   return (
-    <section className="hero-section">
+    <div className="hero-content-inner">
       <div className="hero-grid">
         <motion.div className="hero-image-container" {...fadeUp(0.3)}>
           <div className="hero-image-wrapper">
@@ -54,16 +53,16 @@ const Hero = ({ data }) => {
           </motion.p>
 
           <motion.div className="hero-actions" {...fadeUp(0.4)}>
-            <Link to="/contact">
+            <a href="#contact">
               <button className="btn-primary hero-cta">
                 Get In Touch <ArrowRight size={18} />
               </button>
-            </Link>
-            <Link to="/projects">
+            </a>
+            <a href="#projects">
               <button className="btn-outline hero-cta">
                 View My Work
               </button>
-            </Link>
+            </a>
           </motion.div>
 
           <motion.div className="social-links" {...fadeUp(0.5)}>
@@ -79,12 +78,11 @@ const Hero = ({ data }) => {
 
       <style>{`
         /* ── Layout ──────────────── */
-        .hero-section {
-          min-height: calc(100vh - 80px);
+        .hero-content-inner {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 6rem 0 4rem;
+          padding: 2rem 0;
           position: relative;
           z-index: 10;
         }
@@ -247,13 +245,13 @@ const Hero = ({ data }) => {
 
         /* ── Responsive ───────────── */
         @media (max-width: 900px) {
-          .hero-section {
-            padding-top: 6rem;
-            align-items: flex-start;
+          .hero-content-inner {
+            padding-top: 5rem;
+            align-items: center;
           }
           .hero-grid {
             grid-template-columns: 1fr;
-            gap: 4rem;
+            gap: 3rem;
           }
           .hero-content {
             align-items: center;
@@ -271,7 +269,7 @@ const Hero = ({ data }) => {
           }
         }
       `}</style>
-    </section>
+    </div>
   );
 };
 

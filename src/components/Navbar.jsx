@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const navItems = [
-  { label: 'Home',       path: '/' },
-  { label: 'About',      path: '/about' },
-  { label: 'Experience', path: '/experience' },
-  { label: 'Projects',   path: '/projects' },
-  { label: 'Skills',     path: '/skills' },
-  { label: 'Blog',       path: '/blog' },
-  { label: 'Contact',    path: '/contact' },
+  { label: 'Home',       path: '#home' },
+  { label: 'About',      path: '#about' },
+  { label: 'Experience', path: '#experience' },
+  { label: 'Projects',   path: '#projects' },
+  { label: 'Skills',     path: '#skills' },
+  { label: 'Blog',       path: '#blog' },
+  { label: 'Contact',    path: '#contact' },
 ];
 
 const Navbar = () => {
@@ -18,22 +18,25 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>APT</Link>
+        <a href="#home" className="nav-logo" style={{ textDecoration: 'none' }}>APT</a>
 
         {/* Desktop links */}
         <div className="nav-links">
           {navItems.map(({ label, path }) => {
-            const isActive = path === '/'
-              ? location.pathname === '/'
-              : location.pathname.startsWith(path);
+            const isActive = location.hash === path || (location.hash === '' && path === '#home');
             return (
-              <Link
+              <a
                 key={path}
-                to={path}
+                href={path}
                 className={`nav-link${isActive ? ' nav-link--active' : ''}`}
+                onClick={(e) => {
+                  if (path.startsWith('#')) {
+                    // Smooth scroll is handled in App.jsx ScrollToHashElement
+                  }
+                }}
               >
                 {label}
-              </Link>
+              </a>
             );
           })}
         </div>
@@ -55,18 +58,18 @@ const Navbar = () => {
       {menuOpen && (
         <div className="nav-mobile-drawer">
           {navItems.map(({ label, path }) => {
-            const isActive = path === '/'
-              ? location.pathname === '/'
-              : location.pathname.startsWith(path);
+            const isActive = location.hash === path || (location.hash === '' && path === '#home');
             return (
-              <Link
+              <a
                 key={path}
-                to={path}
+                href={path}
                 className={`nav-link${isActive ? ' nav-link--active' : ''}`}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => {
+                  setMenuOpen(false);
+                }}
               >
                 {label}
-              </Link>
+              </a>
             );
           })}
         </div>

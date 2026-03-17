@@ -21,10 +21,9 @@ const stats = [
 
 const About = ({ data }) => {
   return (
-    <section className="about-page" id="about">
+    <div className="about-content">
 
       <motion.div className="about-header" {...fadeUp(0)}>
-        <span className="section-eyebrow">Discover</span>
         <h2 className="section-title">About Me</h2>
       </motion.div>
 
@@ -102,8 +101,7 @@ const About = ({ data }) => {
       </motion.div>
 
       <style>{`
-        .about-page {
-          padding: 8rem 0;
+        .about-content {
           max-width: 900px;
           margin: 0 auto;
         }
@@ -129,11 +127,13 @@ const About = ({ data }) => {
         }
 
         .about-text {
-          font-family: var(--font-body);
-          font-size: 1.05rem;
-          color: var(--text-secondary);
+          font-family: var(--font-mono);
+          font-size: 0.9rem;
+          color: #ffffff;
           line-height: 1.8;
-          font-weight: 300;
+          font-weight: 400;
+          opacity: 0.9;
+          letter-spacing: -0.01em;
         }
 
         .stats-grid {
@@ -308,22 +308,36 @@ const About = ({ data }) => {
         @media (max-width: 768px) {
           .stats-grid {
             grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
           }
           .highlights-grid {
             grid-template-columns: 1fr;
           }
           .about-bio-card, .edu-card, .highlight-card {
-            padding: 2rem;
+            padding: 1.5rem;
+          }
+          .stat-card {
+            padding: 1.25rem 1rem;
+          }
+          .stat-value {
+            font-size: 1.2rem;
           }
         }
 
         @media (max-width: 480px) {
           .stats-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+          }
+          .stat-card {
+            padding: 1rem 0.75rem;
+          }
+          .stat-value {
+            font-size: 1.1rem;
           }
         }
       `}</style>
-    </section>
+    </div>
   );
 };
 

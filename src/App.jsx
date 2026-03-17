@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import NeuralNetworkBackground from './components/NeuralNetworkBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -12,111 +12,123 @@ import Blog from './components/Blog';
 import Contact from './components/Contact';
 import portfolioData from './data/portfolio.json';
 
-// Helper to reset scroll position on route change
-function ScrollToTop() {
-  const { pathname } = useLocation();
+// Helper to handle smooth scrolling to hash links
+function ScrollToHashElement() {
+  const { hash } = useLocation();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      const element = document.getElementById(hash.slice(1));
+      if (element) {
+        const yOffset = -80; // Navbar height
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [hash]);
+
   return null;
 }
 
-const pageVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { 
+const sectionVariants = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { 
     opacity: 1, 
     y: 0, 
     transition: { 
-      duration: 0.6, 
+      duration: 0.8, 
       ease: [0.16, 1, 0.3, 1]
     } 
   },
-  exit: { 
-    opacity: 0, 
-    y: -15, 
-    transition: { duration: 0.3, ease: 'easeIn' } 
-  },
+  viewport: { once: true, amount: 0.2 }
 };
 
-function PageWrapper({ children }) {
+function Section({ id, children, className = "" }) {
+  const isHome = id === 'home';
   return (
-    <motion.div
-      variants={pageVariants}
+    <motion.section
+      id={id}
+      className={`page-section ${className}`}
+      variants={sectionVariants}
       initial="initial"
-      animate="animate"
-      exit="exit"
-      style={{ minHeight: 'calc(100vh - 80px)', paddingTop: '80px' }}
+      whileInView="whileInView"
+      viewport={{ once: true, amount: 0.1 }}
+      style={{ 
+        minHeight: isHome ? '100vh' : 'auto',
+        display: isHome ? 'flex' : 'block',
+        alignItems: 'center',
+        padding: isHome ? '0' : '6rem 0',
+        position: 'relative',
+        width: '100%'
+      }}
     >
-      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', width: '100%' }}>
         {children}
-      </main>
-      <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.4, fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
-        <p>© {new Date().getFullYear()} Athira PT. Built with React &amp; AI Focus.</p>
-      </footer>
-    </motion.div>
-  );
-}
-
-function BlogPage() {
-  return (
-    <PageWrapper>
-      <Blog />
-    </PageWrapper>
+      </div>
+    </motion.section>
   );
 }
 
 function App() {
-  const location = useLocation();
-
   return (
     <div className="app">
-      <ScrollToTop />
+      <ScrollToHashElement />
       <Navbar />
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
+      
+      <div className="main-content">
+        <div className="hero-wrapper" style={{ position: 'relative' }}>
+          <NeuralNetworkBackground />
+          <Section id="home">
+            <Hero data={portfolioData} />
+          </Section>
+        </div>
 
-          {/* Home — Hero only */}
-          <Route path="/" element={
-            <div className="home-container" style={{ position: 'relative' }}>
-              <NeuralNetworkBackground />
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                style={{ paddingTop: '80px' }}
-              >
-                <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 1 }}>
-                  <Hero data={portfolioData} />
-                </main>
-                <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.4, fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
-                  <p>© {new Date().getFullYear()} Athira PT. Built with React &amp; AI Focus.</p>
-                </footer>
-              </motion.div>
-            </div>
-          } />
+        <Section id="about">
+          <About data={portfolioData} />
+        </Section>
 
-          <Route path="/about" element={<PageWrapper><About data={portfolioData} /></PageWrapper>} />
-          <Route path="/experience" element={<PageWrapper><Experience /></PageWrapper>} />
-          <Route path="/projects" element={<PageWrapper><Projects data={portfolioData} /></PageWrapper>} />
-          <Route path="/skills" element={<PageWrapper><Skills data={portfolioData} /></PageWrapper>} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/contact" element={<PageWrapper><Contact data={portfolioData} /></PageWrapper>} />
+        <Section id="experience">
+          <Experience />
+        </Section>
 
-          {/* 404 */}
-          <Route path="*" element={
-            <PageWrapper>
-              <div style={{ textAlign: 'center', paddingTop: '8rem' }}>
-                <h1 style={{ fontSize: '3rem', fontFamily: 'var(--font-heading)' }}>404</h1>
-                <p style={{ color: 'var(--text-secondary)' }}>Page not found.</p>
-              </div>
-            </PageWrapper>
-          } />
-        </Routes>
-      </AnimatePresence>
+        <Section id="projects">
+          <Projects data={portfolioData} />
+        </Section>
+
+        <Section id="skills">
+          <Skills data={portfolioData} />
+        </Section>
+
+        <Section id="blog">
+          <Blog />
+        </Section>
+
+        <Section id="contact">
+          <Contact data={portfolioData} />
+        </Section>
+
+        <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.4, fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
+          <p>© {new Date().getFullYear()} Athira PT. Built with React &amp; AI Focus.</p>
+        </footer>
+      </div>
 
       <style>{`
-        .app { min-height: 100vh; position: relative; }
+        .app { 
+          min-height: 100vh; 
+          position: relative; 
+          background: var(--bg-main);
+        }
+        .page-section {
+          width: 100%;
+          overflow: hidden;
+        }
+        .hero-wrapper {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+        }
       `}</style>
     </div>
   );
