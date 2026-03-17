@@ -12,7 +12,7 @@
     --text-secondary: #94a3b8;
     --text-tertiary: #64748b;
     
-    --glass-bg: rgba(255, 255, 255, 0.015);
+    --glass-bg: rgba(15, 23, 42, 0.75);
     --glass-bg-hover: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.05);
     --glass-border-hover: rgba(56, 189, 248, 0.3);

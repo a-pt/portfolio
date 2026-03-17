@@ -39,7 +39,7 @@ const About = ({ data }) => {
         {stats.map(({ icon, label, value, sub }, i) => (
           <motion.div
             key={label}
-            className="stat-card"
+            className="stat-card glass-card"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -123,16 +123,15 @@ const About = ({ data }) => {
         .about-bio-card {
           padding: 3rem;
           margin-bottom: 3rem;
-          background: rgba(255, 255, 255, 0.015);
         }
 
         .about-text {
           font-family: var(--font-mono);
-          font-size: 0.9rem;
+          font-size: 1rem;
           color: #ffffff;
           line-height: 1.8;
           font-weight: 400;
-          opacity: 0.9;
+          opacity: 0.95;
           letter-spacing: -0.01em;
         }
 
@@ -147,9 +146,7 @@ const About = ({ data }) => {
           display: flex;
           flex-direction: column;
           padding: 2rem 1.5rem;
-          background: rgba(255, 255, 255, 0.015);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 12px;
+          border-radius: 16px;
           transition: all 0.3s ease;
         }
 
@@ -195,7 +192,6 @@ const About = ({ data }) => {
         .edu-card {
           padding: 3rem;
           margin-bottom: 4rem;
-          background: rgba(255, 255, 255, 0.015);
         }
 
         .card-heading {
@@ -271,7 +267,6 @@ const About = ({ data }) => {
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
-          background: rgba(255, 255, 255, 0.015);
         }
 
         .highlight-icon-wrap {
