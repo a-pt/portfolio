@@ -173,16 +173,49 @@ const Skills = ({ data }) => {
 
         @media (max-width: 950px) {
           .skills-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
           }
         }
 
         @media (max-width: 768px) {
           .skills-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
           }
           .skill-pillar {
-            padding: 2.5rem 2rem;
+            padding: 1.5rem 1rem;
+          }
+          .category-title {
+            font-size: 1rem;
+          }
+          .skill-tag {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.6rem;
+          }
+          .icon-box {
+            width: 40px;
+            height: 40px;
+          }
+          .cat-icon {
+            width: 20px;
+            height: 20px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .skills-grid {
+            gap: 0.5rem;
+          }
+          .skill-pillar {
+            padding: 1.25rem 0.75rem;
+          }
+          .category-title {
+            font-size: 0.85rem;
+          }
+          .skill-tag {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.4rem;
           }
         }
       `}</style>

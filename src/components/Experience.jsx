@@ -194,7 +194,7 @@ const Experience = () => {
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
       >
-        <h2 className="section-title">Professional Experience</h2>
+        <h2 className="section-title">Career Timeline</h2>
       </motion.div>
 
       <div className="exp-list">
