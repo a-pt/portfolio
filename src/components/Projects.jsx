@@ -167,7 +167,13 @@ const Projects = ({ data }) => {
             grid-template-columns: 1fr;
           }
           .project-card {
-            padding: 1.75rem;
+            padding: 1.5rem;
+          }
+          .project-title {
+            font-size: 1.2rem;
+          }
+          .project-description {
+            font-size: 0.85rem;
           }
         }
       `}</style>

@@ -322,6 +322,10 @@ const About = ({ data }) => {
           .stat-value {
             font-size: 1.2rem;
           }
+          .card-heading {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+          }
         }
 
         @media (max-width: 480px) {

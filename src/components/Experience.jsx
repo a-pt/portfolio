@@ -444,6 +444,12 @@ const Experience = () => {
           .exp-body-inner {
             padding: 0 1.25rem 1.5rem 1.25rem;
           }
+          .exp-company {
+            font-size: 1.05rem;
+          }
+          .exp-role {
+            font-size: 0.85rem;
+          }
         }
       `}</style>
     </div>

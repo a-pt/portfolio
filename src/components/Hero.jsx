@@ -267,6 +267,15 @@ const Hero = ({ data }) => {
           .hero-actions {
             justify-content: center;
           }
+          .hero-name {
+            font-size: clamp(2.2rem, 10vw, 3.5rem);
+          }
+          .hero-title {
+            font-size: 1.4rem;
+          }
+          .hero-summary {
+            font-size: 1rem;
+          }
         }
       `}</style>
     </div>
