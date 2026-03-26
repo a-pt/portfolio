@@ -55,50 +55,48 @@ const About = ({ data }) => {
         ))}
       </div>
 
-      <motion.div className="glass-card edu-card" {...fadeUp(0.2)}>
-        <h3 className="card-heading">Education</h3>
-        <div className="edu-grid">
-          {data.education.map((edu, i) => (
-            <div key={i} className="edu-item">
-              <div className="edu-indicator" />
-              <div className="edu-content">
-                <div className="edu-degree">{edu.degree}</div>
-                <div className="edu-institution">{edu.institution}</div>
-                <div className="edu-meta">{edu.period} &nbsp;·&nbsp; {edu.score}</div>
+      <div className="about-info-grid">
+        <motion.div className="glass-card edu-card" {...fadeUp(0.2)}>
+          <h3 className="card-heading">Education</h3>
+          <div className="edu-grid">
+            {data.education.map((edu, i) => (
+              <div key={i} className="edu-item">
+                <div className="edu-indicator" />
+                <div className="edu-content">
+                  <div className="edu-degree">{edu.degree}</div>
+                  <div className="edu-institution">{edu.institution}</div>
+                  <div className="edu-meta">{edu.period} &nbsp;·&nbsp; {edu.score}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div className="glass-card highlights-card" {...fadeUp(0.3)}>
+          <h3 className="card-heading">Key Highlights</h3>
+          <div className="highlights-grid">
+            <div className="highlight-item">
+              <div className="highlight-indicator" />
+              <div className="highlight-content">
+                <h4 className="highlight-title">TIFR GS 2020</h4>
+                <p className="highlight-desc">
+                  Shortlisted in the <span className="highlight-accent">Top 46</span> nationally for Computer & Systems Sciences — one of India's most competitive research aptitude exams.
+                </p>
               </div>
             </div>
-          ))}
-        </div>
-      </motion.div>
 
-      <motion.div className="highlights-section" {...fadeUp(0.3)}>
-        <h3 className="card-heading">Key Highlights</h3>
-        <div className="highlights-grid">
-          <div className="glass-card highlight-card">
-            <div className="highlight-icon-wrap">
-              <Trophy size={20} />
-            </div>
-            <div className="highlight-content">
-              <h4 className="highlight-title">TIFR GS 2020</h4>
-              <p className="highlight-desc">
-                Shortlisted in the <span className="highlight-accent">Top 46</span> nationally for Computer & Systems Sciences — one of India's most competitive research aptitude exams.
-              </p>
+            <div className="highlight-item">
+              <div className="highlight-indicator" />
+              <div className="highlight-content">
+                <h4 className="highlight-title">TEKON Project Expo 2019</h4>
+                <p className="highlight-desc">
+                  <span className="highlight-accent">1st Place Winner</span> at state-level expo for the "Flight Force" drone project — a real-time human detection & tracking system for aerial rescue operations.
+                </p>
+              </div>
             </div>
           </div>
-
-          <div className="glass-card highlight-card">
-            <div className="highlight-icon-wrap">
-              <Trophy size={20} />
-            </div>
-            <div className="highlight-content">
-              <h4 className="highlight-title">TEKON Project Expo 2019</h4>
-              <p className="highlight-desc">
-                <span className="highlight-accent">1st Place Winner</span> at state-level expo for the "Flight Force" drone project — a real-time human detection & tracking system for aerial rescue operations.
-              </p>
-            </div>
-          </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
 
       <style>{`
         .about-content {
@@ -190,8 +188,8 @@ const About = ({ data }) => {
         }
 
         .edu-card {
-          padding: 3rem;
-          margin-bottom: 4rem;
+          padding: 2.5rem;
+          height: 100%;
         }
 
         .card-heading {
@@ -200,6 +198,13 @@ const About = ({ data }) => {
           color: var(--text-primary);
           margin-bottom: 2rem;
           font-weight: 500;
+        }
+
+        .about-info-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+          align-items: start;
         }
 
         .edu-grid {
@@ -252,41 +257,47 @@ const About = ({ data }) => {
           margin-top: 0.25rem;
         }
 
-        .highlights-section {
-          margin-top: 2rem;
+        .highlights-card {
+          padding: 2.5rem;
+          height: 100%;
         }
 
         .highlights-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1.5rem;
-        }
-
-        .highlight-card {
-          padding: 2.5rem;
           display: flex;
           flex-direction: column;
+          gap: 2rem;
+        }
+
+        .highlight-item {
+          display: flex;
+          align-items: flex-start;
           gap: 1.5rem;
         }
 
-        .highlight-icon-wrap {
-          width: 48px;
-          height: 48px;
-          border-radius: 12px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+        .highlight-indicator {
+          width: 8px;
+          height: 8px;
+          background: var(--text-tertiary);
+          border-radius: 50%;
+          margin-top: 0.45rem;
+          flex-shrink: 0;
+          transition: background 0.3s;
+        }
+
+        .highlight-item:hover .highlight-indicator {
+          background: var(--accent-primary);
+        }
+
+        .highlight-content {
           display: flex;
-          align-items: center;
-          justify-content: center;
-          color: var(--accent-secondary);
+          flex-direction: column;
+          gap: 0.3rem;
         }
 
         .highlight-title {
-          font-family: var(--font-heading);
-          font-size: 1.25rem;
+          font-size: 1.1rem;
+          font-weight: 600;
           color: var(--text-primary);
-          margin-bottom: 0.75rem;
-          font-weight: 500;
         }
 
         .highlight-desc {
@@ -308,7 +319,11 @@ const About = ({ data }) => {
           .highlights-grid {
             grid-template-columns: 1fr;
           }
-          .about-bio-card, .edu-card, .highlight-card {
+          .about-info-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+          .about-bio-card, .edu-card, .highlights-card {
             padding: 1.5rem;
           }
           .stat-card {
