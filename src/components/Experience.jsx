@@ -42,7 +42,7 @@ const experiences = [
         ],
       },
     ],
-    tech: ['FastAPI', 'Gemma-3-4B-IT', 'Vertex AI', 'pgvector', 'Supabase', 'Anthropic', 'Flutter', 'Python'],
+    tech: ['FastAPI', 'Gemma-3-4B-IT', 'Vertex AI', 'pgvector', 'Supabase', 'Anthropic', 'Drift', 'Python'],
   },
   {
     company: 'Texas Instruments',
@@ -211,7 +211,7 @@ const Experience = () => {
 
       <style>{`
         .experience-content {
-          max-width: 900px;
+          max-width: 1200px;
           margin: 0 auto;
         }
 

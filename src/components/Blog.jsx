@@ -44,7 +44,7 @@ const Blog = () => {
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          maxWidth: 800px;
+          max-width: 1200px;
           margin: 0 auto;
         }
         .blog-date-wrap {

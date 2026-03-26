@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import NeuralNetworkBackground from './components/NeuralNetworkBackground';
+import MinimalistBackground from './components/MinimalistBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -74,6 +75,7 @@ function Section({ id, children, className = "" }) {
 function App() {
   return (
     <div className="app">
+      <MinimalistBackground />
       <ScrollToHashElement />
       <Navbar />
       
@@ -128,6 +130,8 @@ function App() {
           min-height: 100vh;
           display: flex;
           align-items: center;
+          position: relative;
+          overflow: hidden;
         }
       `}</style>
     </div>
