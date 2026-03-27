@@ -10,7 +10,7 @@ const Blog = () => {
     },
     {
       title: "From Prompting to AI Agents: A practical Generative AI roadmap with Code",
-      date: "March 2024",
+      date: "March 2026",
       url: "https://medium.com/@athirapt998/from-prompting-to-projects-a-journey-through-generative-ai-and-multi-agent-systems-58f3d39e4fc4",
       excerpt: "Exploring the evolution from simple prompting to architecting complex multi-agent generative AI systems, highlighting key technical milestones and the future of autonomous intelligence."
     }
