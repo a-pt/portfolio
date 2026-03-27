@@ -3,6 +3,12 @@ import React, { useState } from 'react';
 const Blog = () => {
   const posts = [
     {
+      title: "A Hands-On guide for Learning Langchain, LCEL, LLMOps the Practical Way",
+      date: "March 2026",
+      url: "https://pub.towardsai.net/a-hands-on-guide-for-learning-langchain-lcel-llmops-the-practical-way-43f107a8b588",
+      excerpt: "Large Language Models (LLMs) are revolutionary, but bridging the gap between a single prompt and a reliable, production-ready application is where the real challenge lies."
+    },
+    {
       title: "From Prompting to AI Agents: A practical Generative AI roadmap with Code",
       date: "March 2024",
       url: "https://medium.com/@athirapt998/from-prompting-to-projects-a-journey-through-generative-ai-and-multi-agent-systems-58f3d39e4fc4",
