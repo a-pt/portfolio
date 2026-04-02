@@ -1,282 +1,387 @@
 import React from 'react';
-import { Github, Linkedin, ArrowRight } from 'lucide-react';
+import { Github, Linkedin, ArrowRight, Settings, Eye, MessageSquare, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 30 },
-  animate: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 1, delay, ease: [0.16, 1, 0.3, 1] } 
-  },
-});
-
-const Hero = ({ data }) => {
+const AthiraHero = ({ data }) => {
   return (
-    <div className="hero-content-inner">
-      <div className="hero-grid">
-        <motion.div className="hero-image-container" {...fadeUp(0.3)}>
-          <div className="hero-image-wrapper">
-            <img src="/athira.jpeg" alt="Athira PT" className="hero-image" />
-            <div className="hero-image-glow"></div>
-            <div className="hero-image-ring"></div>
-          </div>
-        </motion.div>
+    <div className="hero-redesign">
+      {/* Background Effects */}
+      <div className="hero-bg-effects">
+        <div className="hero-radial-glow"></div>
+        <div className="hero-grid-pattern"></div>
+      </div>
 
-        <div className="hero-content">
-          <motion.h1 
-            className="hero-name" 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {data.name}
-          </motion.h1>
+      {/* Main Content */}
+      <div className="hero-content-container">
 
-          <motion.h2 
-            className="hero-title text-gradient-accent" 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            AI Engineer <br />
-            <span className="hero-specialties">Deep Learning | CV | LLM | Agentic AI</span>
-          </motion.h2>
 
-          <motion.p 
-            className="hero-summary" 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {data.tagline}
-          </motion.p>
+        <div className="hero-main-grid">
+          <div className="hero-text-side">
+            <motion.p 
+              className="hero-subtitle-tag"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              HELLO👋, I'M
+            </motion.p>
+            
+            <motion.h1 
+              className="hero-main-name"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              Athira <span className="name-accent">PT.</span>
+            </motion.h1>
 
-          <motion.div className="hero-actions" {...fadeUp(0.4)}>
-            <Link to="/contact">
-              <button className="btn-primary hero-cta">
-                Get In Touch <ArrowRight size={18} />
-              </button>
-            </Link>
-            <Link to="/projects">
-              <button className="btn-outline hero-cta">
+            <motion.p 
+              className="hero-description"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
+              Building <span className="text-highlight">scalable AI systems</span> for real-world intelligence. 
+              Specializing in high-performance Deep Learning architectures and Agentic workflows.
+            </motion.p>
+
+            <motion.div 
+              className="hero-tags"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.7 }}
+            >
+              {[
+                { label: 'Deep Learning', icon: <Settings size={14} /> },
+                { label: 'CV', icon: <Eye size={14} /> },
+                { label: 'LLM', icon: <MessageSquare size={14} /> },
+                { label: 'Agentic AI', icon: <Cpu size={14} /> }
+              ].map((tag) => (
+                <div key={tag.label} className="hero-tag">
+                  {tag.icon}
+                  <span>{tag.label}</span>
+                </div>
+              ))}
+            </motion.div>
+
+            <motion.div 
+              className="hero-actions-row"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+            >
+              <Link to="/projects" className="btn-stitch-primary">
                 View My Work
-              </button>
-            </Link>
-          </motion.div>
+              </Link>
+              <Link to="/contact" className="btn-stitch-primary">
+                Get In Touch <ArrowRight size={18} />
+              </Link>
+            </motion.div>
 
-          <motion.div className="social-links" {...fadeUp(0.5)}>
-            <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="GitHub">
-              <Github size={24} />
-            </a>
-            <a href={data.contact.linkedin} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">
-              <Linkedin size={24} />
-            </a>
+            <motion.div 
+              className="hero-socials"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1.1 }}
+            >
+              <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className="hero-social-link">
+                <Github size={20} />
+              </a>
+              <a href={data.contact.linkedin} target="_blank" rel="noopener noreferrer" className="hero-social-link">
+                <Linkedin size={20} />
+              </a>
+            </motion.div>
+          </div>
+
+          <motion.div 
+            className="hero-image-side"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.4 }}
+          >
+            <div className="image-lab-frame">
+              <div className="frame-glow"></div>
+              <div className="image-inner-wrapper">
+                <img src="/athira.jpeg" alt="Athira PT" className="hero-portrait" />
+                <div className="hud-corners top-left"></div>
+                <div className="hud-corners bottom-right"></div>
+              </div>
+            </div>
+
+
           </motion.div>
         </div>
       </div>
 
-
       <style>{`
-        /* ── Layout ──────────────── */
-        .hero-content-inner {
+        .hero-redesign {
+          position: relative;
+          min-height: 100vh;
+          width: 100%;
           display: flex;
           align-items: center;
-          justify-content: center;
-          padding: 2rem 0;
-          position: relative;
-          z-index: 10;
+          overflow: hidden;
+          background: #020408;
         }
 
-        .hero-grid {
+        .hero-bg-effects {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+        }
+
+        .hero-radial-glow {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
           width: 100%;
+          height: 100%;
+          background: radial-gradient(circle at 50% 20%, rgba(30, 58, 138, 0.3) 0%, transparent 70%);
+        }
+
+        .hero-grid-pattern {
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(128, 128, 128, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(128, 128, 128, 0.05) 1px, transparent 1px);
+          background-size: 50px 50px;
+          mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, black 70%, transparent 100%);
+          -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, black 70%, transparent 100%);
+        }
+
+        .hero-content-container {
+          position: relative;
+          z-index: 10;
+          max-width: 1200px;
+          margin: 0 auto;
+          width: 100%;
+          padding: 8rem 2rem 4rem;
+        }
+
+
+
+        .hero-main-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1.2fr 0.8fr;
           gap: 4rem;
           align-items: center;
         }
 
-        .hero-content {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          text-align: left;
-        }
-
-        /* ── Typography & Elements ─ */
-        .hero-name {
-          font-size: clamp(3rem, 7vw, 5.5rem);
-          font-weight: 700;
-          letter-spacing: -0.04em;
-          line-height: 1;
-          color: #ffffff;
-          margin-bottom: 0.5rem;
-          text-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
-        }
-
-        .hero-title {
-          font-size: clamp(1.2rem, 2.5vw, 2rem);
-          font-weight: 600;
-          letter-spacing: -0.02em;
-          margin-bottom: 2rem;
+        .hero-subtitle-tag {
           font-family: var(--font-heading);
-          line-height: 1.4;
+          font-weight: 700;
+          color: #b6c4ff;
+          letter-spacing: 0.1em;
+          font-size: 0.9rem;
+          margin-bottom: 1rem;
         }
 
-        .hero-specialties {
-          font-family: var(--font-mono);
-          font-size: 0.75em;
-          font-weight: 400;
-          opacity: 0.8;
-          display: block;
-          margin-top: 0.5rem;
-          letter-spacing: 0;
-          color: var(--text-primary);
+        .hero-main-name {
+          font-size: clamp(3.5rem, 8vw, 6rem);
+          font-weight: 800;
+          letter-spacing: -0.04em;
+          line-height: 0.9;
+          margin-bottom: 2rem;
         }
 
-        .hero-summary {
-          font-size: clamp(1.1rem, 2vw, 1.25rem);
-          color: var(--text-secondary);
-          max-width: 600px;
+        .name-accent {
+          background: linear-gradient(to right, #b6c4ff, #818cf8);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+
+        .hero-description {
+          font-size: 1.25rem;
           line-height: 1.6;
-          margin-bottom: 3rem;
-          font-weight: 300;
-          font-family: var(--font-body);
+          color: rgba(211, 187, 255, 0.7);
+          max-width: 500px;
+          margin-bottom: 2.5rem;
         }
 
-        .hero-actions {
+        .text-highlight {
+          color: #ffffff;
+          font-weight: 500;
+        }
+
+        .hero-tags {
           display: flex;
           flex-wrap: wrap;
-          gap: 1.25rem;
+          gap: 0.75rem;
           margin-bottom: 3rem;
         }
 
-        .hero-cta {
-          display: inline-flex;
+        .hero-tag {
+          display: flex;
           align-items: center;
-          justify-content: center;
           gap: 0.5rem;
-          font-size: 1rem;
-          padding: 1rem 2rem;
+          padding: 0.6rem 1rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          font-size: 0.85rem;
+          color: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(4px);
         }
 
-        .social-links {
+        .hero-tag svg {
+          color: #b6c4ff;
+        }
+
+        .hero-actions-row {
+          display: flex;
+          gap: 1.5rem;
+          margin-bottom: 3rem;
+        }
+
+        .btn-stitch-primary {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 1.25rem 2.5rem;
+          background: #1e3a8a;
+          border: 1px solid rgba(59, 130, 246, 0.3);
+          border-radius: 16px;
+          color: white;
+          font-family: var(--font-heading);
+          font-weight: 700;
+          text-decoration: none;
+          box-shadow: 0 10px 30px rgba(30, 58, 138, 0.4);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-stitch-primary:hover {
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 15px 40px rgba(30, 58, 138, 0.6);
+        }
+
+        .btn-stitch-outline {
+          padding: 1.25rem 2.5rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 16px;
+          color: white;
+          font-family: var(--font-heading);
+          font-weight: 700;
+          text-decoration: none;
+          backdrop-filter: blur(8px);
+          transition: all 0.3s ease;
+        }
+
+        .btn-stitch-outline:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-socials {
           display: flex;
           gap: 1.5rem;
         }
 
-        .social-icon {
-          color: var(--text-tertiary);
+        .hero-social-link {
+          color: rgba(255, 255, 255, 0.4);
           transition: all 0.3s ease;
         }
 
-        .social-icon:hover {
-          color: var(--text-primary);
+        .hero-social-link:hover {
+          color: white;
           transform: translateY(-2px);
         }
 
-        /* ── Image ───────────────── */
-        .hero-image-container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .hero-image-wrapper {
+        /* Image Side */
+        .image-lab-frame {
           position: relative;
-          width: clamp(200px, 25vw, 320px);
-          aspect-ratio: 1 / 1;
+          width: 100%;
+          max-width: 450px;
+          aspect-ratio: 1;
+          margin: 0 auto;
+        }
+
+        .frame-glow {
+          position: absolute;
+          inset: -20px;
+          background: radial-gradient(circle at center, rgba(79, 70, 229, 0.2) 0%, transparent 70%);
+          filter: blur(40px);
+          animation: pulseGlowEffect 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlowEffect {
+          from { opacity: 0.4; transform: scale(0.9); }
+          to { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .image-inner-wrapper {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          border-radius: 32px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.02);
+          backdrop-filter: blur(12px);
+          overflow: hidden;
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
-        .hero-image {
+        .hero-portrait {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          border-radius: 50%;
-          position: relative;
-          z-index: 2;
-          border: 4px solid rgba(255, 255, 255, 0.05);
+          filter: grayscale(0.8) brightness(0.9);
+          transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .hero-image-glow {
+        .image-lab-frame:hover .hero-portrait {
+          filter: grayscale(0) brightness(1);
+          transform: scale(1.05);
+        }
+
+        .hud-corners {
           position: absolute;
-          inset: -20px;
-          background: radial-gradient(circle at center, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
-          border-radius: 50%;
-          z-index: 1;
-          filter: blur(20px);
-          animation: pulseGlow 4s ease-in-out infinite alternate;
+          width: 60px;
+          height: 60px;
+          pointer-events: none;
         }
 
-        .hero-image-ring {
-          position: absolute;
-          inset: -10px;
-          border-radius: 50%;
-          border: 2px solid transparent;
-          background: linear-gradient(135deg, rgba(6, 182, 212, 0.8), transparent 70%) border-box;
-          -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          z-index: 3;
-          animation: rotateRing 15s linear infinite;
+        .hud-corners.top-left {
+          top: 20px;
+          left: 20px;
+          border-top: 2px solid rgba(182, 196, 255, 0.4);
+          border-left: 2px solid rgba(182, 196, 255, 0.4);
         }
 
-        @keyframes pulseGlow {
-          0% {
-            opacity: 0.6;
-            transform: scale(0.95);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1.05);
-          }
+        .hud-corners.bottom-right {
+          bottom: 20px;
+          right: 20px;
+          border-bottom: 2px solid rgba(182, 196, 255, 0.4);
+          border-right: 2px solid rgba(182, 196, 255, 0.4);
         }
 
-        @keyframes rotateRing {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
 
-        /* ── Responsive ───────────── */
-        @media (max-width: 900px) {
-          .hero-content-inner {
-            padding-top: 5rem;
-            align-items: center;
-          }
-          .hero-grid {
+
+        @media (max-width: 1024px) {
+          .hero-main-grid {
             grid-template-columns: 1fr;
-            gap: 3rem;
-          }
-          .hero-content {
-            align-items: center;
+            gap: 5rem;
             text-align: center;
-            order: 2;
           }
-          .hero-image-container {
-            order: 1;
+          .hero-text-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           }
-          .hero-summary {
-            max-width: 100%;
-          }
-          .hero-actions {
+          .hero-actions-row {
             justify-content: center;
           }
-          .hero-name {
-            font-size: clamp(2.2rem, 10vw, 3.5rem);
+          .hero-tags {
+            justify-content: center;
           }
-          .hero-title {
-            font-size: 1.4rem;
-          }
-          .hero-summary {
-            font-size: 1rem;
+          .hero-socials {
+            justify-content: center;
           }
         }
       `}</style>
@@ -284,4 +389,5 @@ const Hero = ({ data }) => {
   );
 };
 
-export default Hero;
+export default AthiraHero;
+
