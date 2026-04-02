@@ -180,10 +180,10 @@ const AthiraHero = ({ data }) => {
         }
 
         .hero-main-name {
-          font-size: clamp(3.5rem, 8vw, 6rem);
+          font-size: clamp(2.5rem, 8vw, 6rem);
           font-weight: 800;
           letter-spacing: -0.04em;
-          line-height: 0.9;
+          line-height: 1.1;
           margin-bottom: 2rem;
         }
 
@@ -195,7 +195,7 @@ const AthiraHero = ({ data }) => {
         }
 
         .hero-description {
-          font-size: 1.25rem;
+          font-size: 1.15rem;
           line-height: 1.6;
           color: rgba(211, 187, 255, 0.7);
           max-width: 500px;
@@ -222,7 +222,7 @@ const AthiraHero = ({ data }) => {
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 12px;
-          font-size: 0.85rem;
+          font-size: 0.8rem;
           color: rgba(255, 255, 255, 0.8);
           backdrop-filter: blur(4px);
         }
@@ -240,8 +240,9 @@ const AthiraHero = ({ data }) => {
         .btn-stitch-primary {
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 0.75rem;
-          padding: 1.25rem 2.5rem;
+          padding: 1.1rem 2rem;
           background: #1e3a8a;
           border: 1px solid rgba(59, 130, 246, 0.3);
           border-radius: 16px;
@@ -251,6 +252,7 @@ const AthiraHero = ({ data }) => {
           text-decoration: none;
           box-shadow: 0 10px 30px rgba(30, 58, 138, 0.4);
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          white-space: nowrap;
         }
 
         .btn-stitch-primary:hover {
@@ -366,7 +368,7 @@ const AthiraHero = ({ data }) => {
         @media (max-width: 1024px) {
           .hero-main-grid {
             grid-template-columns: 1fr;
-            gap: 5rem;
+            gap: 4rem;
             text-align: center;
           }
           .hero-text-side {
@@ -384,10 +386,39 @@ const AthiraHero = ({ data }) => {
             justify-content: center;
           }
         }
+
+        @media (max-width: 768px) {
+          .hero-content-container {
+            padding: 6rem 1.25rem 3rem;
+          }
+          .hero-main-name {
+            font-size: 2.8rem;
+            line-height: 1.1;
+          }
+          .hero-description {
+            font-size: 1.05rem;
+            max-width: 100%;
+          }
+          .hero-actions-row {
+            flex-direction: column;
+            width: 100%;
+            max-width: 300px;
+            gap: 1rem;
+          }
+          .btn-stitch-primary {
+            width: 100%;
+          }
+          .image-lab-frame {
+            max-width: 320px;
+          }
+          .hero-tag {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.75rem;
+          }
+        }
       `}</style>
     </div>
   );
 };
 
 export default AthiraHero;
-
