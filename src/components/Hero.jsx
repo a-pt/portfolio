@@ -14,8 +14,6 @@ const AthiraHero = ({ data }) => {
 
       {/* Main Content */}
       <div className="hero-content-container">
-
-
         <div className="hero-main-grid">
           <div className="hero-text-side">
             <motion.p 
@@ -108,8 +106,6 @@ const AthiraHero = ({ data }) => {
                 <div className="hud-corners bottom-right"></div>
               </div>
             </div>
-
-
           </motion.div>
         </div>
       </div>
@@ -160,8 +156,6 @@ const AthiraHero = ({ data }) => {
           width: 100%;
           padding: 8rem 2rem 4rem;
         }
-
-
 
         .hero-main-grid {
           display: grid;
@@ -333,12 +327,10 @@ const AthiraHero = ({ data }) => {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          filter: grayscale(0.8) brightness(0.9);
           transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .image-lab-frame:hover .hero-portrait {
-          filter: grayscale(0) brightness(1);
           transform: scale(1.05);
         }
 
@@ -363,18 +355,19 @@ const AthiraHero = ({ data }) => {
           border-right: 2px solid rgba(182, 196, 255, 0.4);
         }
 
-
-
         @media (max-width: 1024px) {
           .hero-main-grid {
             grid-template-columns: 1fr;
-            gap: 4rem;
+            gap: 2rem;
             text-align: center;
           }
           .hero-text-side {
             display: flex;
             flex-direction: column;
             align-items: center;
+          }
+          .hero-image-side {
+            order: -1;
           }
           .hero-actions-row {
             justify-content: center;
@@ -409,7 +402,7 @@ const AthiraHero = ({ data }) => {
             width: 100%;
           }
           .image-lab-frame {
-            max-width: 320px;
+            max-width: 220px;
           }
           .hero-tag {
             padding: 0.5rem 0.8rem;
