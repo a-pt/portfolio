@@ -1,48 +1,38 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const navItems = [
-  { label: 'Home',       path: '#home' },
-  { label: 'About',      path: '#about' },
-  { label: 'Timeline',  path: '#experience' },
-  { label: 'Projects',   path: '#projects' },
-  { label: 'Skills',     path: '#skills' },
-  { label: 'Blog',       path: '#blog' },
-  { label: 'Contact',    path: '#contact' },
+  { label: 'Home',       path: '/' },
+  { label: 'About',      path: '/about' },
+  { label: 'Timeline',   path: '/experience' },
+  { label: 'Projects',   path: '/projects' },
+  { label: 'Skills',     path: '/skills' },
+  { label: 'Blog',       path: '/blog' },
+  { label: 'Contact',    path: '/contact' },
 ];
 
 const Navbar = () => {
-  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <a href="#home" className="nav-logo" style={{ textDecoration: 'none' }}>APT</a>
+        <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>APT</Link>
 
         {/* Desktop links */}
         <div className="nav-links">
-          {navItems.map(({ label, path }) => {
-            const isActive = location.hash === path || (location.hash === '' && path === '#home');
-            return (
-              <a
-                key={path}
-                href={path}
-                className={`nav-link${isActive ? ' nav-link--active' : ''}`}
-                onClick={(e) => {
-                  if (path.startsWith('#')) {
-                    // Smooth scroll is handled in App.jsx ScrollToHashElement
-                  }
-                }}
-              >
-                {label}
-              </a>
-            );
-          })}
+          {navItems.map(({ label, path }) => (
+            <NavLink
+              key={path}
+              to={path}
+              className={({ isActive }) => `nav-link${isActive ? ' nav-link--active' : ''}`}
+            >
+              {label}
+            </NavLink>
+          ))}
         </div>
 
         <div className="nav-actions">
-
           {/* Mobile hamburger */}
           <button
             className="nav-hamburger"
@@ -57,21 +47,18 @@ const Navbar = () => {
       {/* Mobile drawer */}
       {menuOpen && (
         <div className="nav-mobile-drawer">
-          {navItems.map(({ label, path }) => {
-            const isActive = location.hash === path || (location.hash === '' && path === '#home');
-            return (
-              <a
-                key={path}
-                href={path}
-                className={`nav-link${isActive ? ' nav-link--active' : ''}`}
-                onClick={() => {
-                  setMenuOpen(false);
-                }}
-              >
-                {label}
-              </a>
-            );
-          })}
+          {navItems.map(({ label, path }) => (
+            <NavLink
+              key={path}
+              to={path}
+              className={({ isActive }) => `nav-link${isActive ? ' nav-link--active' : ''}`}
+              onClick={() => {
+                setMenuOpen(false);
+              }}
+            >
+              {label}
+            </NavLink>
+          ))}
         </div>
       )}
 
@@ -190,3 +177,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

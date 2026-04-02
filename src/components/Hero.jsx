@@ -1,6 +1,7 @@
 import React from 'react';
 import { Github, Linkedin, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -53,16 +54,16 @@ const Hero = ({ data }) => {
           </motion.p>
 
           <motion.div className="hero-actions" {...fadeUp(0.4)}>
-            <a href="#contact">
+            <Link to="/contact">
               <button className="btn-primary hero-cta">
                 Get In Touch <ArrowRight size={18} />
               </button>
-            </a>
-            <a href="#projects">
+            </Link>
+            <Link to="/projects">
               <button className="btn-outline hero-cta">
                 View My Work
               </button>
-            </a>
+            </Link>
           </motion.div>
 
           <motion.div className="social-links" {...fadeUp(0.5)}>
@@ -75,6 +76,7 @@ const Hero = ({ data }) => {
           </motion.div>
         </div>
       </div>
+
 
       <style>{`
         /* ── Layout ──────────────── */

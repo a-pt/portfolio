@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import NeuralNetworkBackground from './components/NeuralNetworkBackground';
 import MinimalistBackground from './components/MinimalistBackground';
 import Navbar from './components/Navbar';
@@ -13,103 +13,112 @@ import Blog from './components/Blog';
 import Contact from './components/Contact';
 import portfolioData from './data/portfolio.json';
 
-// Helper to handle smooth scrolling to hash links
-function ScrollToHashElement() {
-  const { hash } = useLocation();
-
+// Scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
   useEffect(() => {
-    if (hash) {
-      const element = document.getElementById(hash.slice(1));
-      if (element) {
-        const yOffset = -80; // Navbar height
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, [hash]);
-
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return null;
 }
 
-const sectionVariants = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { 
+const pageVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { 
     opacity: 1, 
     y: 0, 
     transition: { 
-      duration: 0.8, 
+      duration: 0.6, 
       ease: [0.16, 1, 0.3, 1]
     } 
   },
-  viewport: { once: true, amount: 0.2 }
+  exit: { 
+    opacity: 0, 
+    y: -20,
+    transition: { duration: 0.4 }
+  }
 };
 
-function Section({ id, children, className = "" }) {
-  const isHome = id === 'home';
+function PageWrapper({ children }) {
   return (
-    <motion.section
-      id={id}
-      className={`page-section ${className}`}
-      variants={sectionVariants}
+    <motion.div
+      variants={pageVariants}
       initial="initial"
-      whileInView="whileInView"
-      viewport={{ once: true, amount: 0.1 }}
+      animate="animate"
+      exit="exit"
       style={{ 
-        minHeight: isHome ? '100vh' : 'auto',
-        display: isHome ? 'flex' : 'block',
-        alignItems: 'center',
-        padding: isHome ? '0' : '6rem 0',
-        position: 'relative',
-        width: '100%'
+        maxWidth: '1200px', 
+        margin: '0 auto', 
+        padding: '8rem 1.5rem 4rem', 
+        width: '100%',
+        minHeight: 'calc(100vh - 160px)'
       }}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', width: '100%' }}>
-        {children}
-      </div>
-    </motion.section>
+      {children}
+    </motion.div>
   );
 }
 
 function App() {
+  const location = useLocation();
+
   return (
     <div className="app">
       <MinimalistBackground />
-      <ScrollToHashElement />
+      <ScrollToTop />
       <Navbar />
       
       <div className="main-content">
-        <div className="hero-wrapper" style={{ position: 'relative' }}>
-          <NeuralNetworkBackground />
-          <Section id="home">
-            <Hero data={portfolioData} />
-          </Section>
-        </div>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={
+              <div className="hero-wrapper" style={{ position: 'relative' }}>
+                <NeuralNetworkBackground />
+                <PageWrapper>
+                  <div style={{ display: 'flex', alignItems: 'center', minHeight: '80vh' }}>
+                    <Hero data={portfolioData} />
+                  </div>
+                </PageWrapper>
+              </div>
+            } />
+            
+            <Route path="/about" element={
+              <PageWrapper>
+                <About data={portfolioData} />
+              </PageWrapper>
+            } />
 
-        <Section id="about">
-          <About data={portfolioData} />
-        </Section>
+            <Route path="/experience" element={
+              <PageWrapper>
+                <Experience />
+              </PageWrapper>
+            } />
 
-        <Section id="experience">
-          <Experience />
-        </Section>
+            <Route path="/projects" element={
+              <PageWrapper>
+                <Projects data={portfolioData} />
+              </PageWrapper>
+            } />
 
-        <Section id="projects">
-          <Projects data={portfolioData} />
-        </Section>
+            <Route path="/skills" element={
+              <PageWrapper>
+                <Skills data={portfolioData} />
+              </PageWrapper>
+            } />
 
-        <Section id="skills">
-          <Skills data={portfolioData} />
-        </Section>
+            <Route path="/blog" element={
+              <PageWrapper>
+                <Blog />
+              </PageWrapper>
+            } />
 
-        <Section id="blog">
-          <Blog />
-        </Section>
-
-        <Section id="contact">
-          <Contact data={portfolioData} />
-        </Section>
+            <Route path="/contact" element={
+              <PageWrapper>
+                <Contact data={portfolioData} />
+              </PageWrapper>
+            } />
+          </Routes>
+        </AnimatePresence>
 
         <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.4, fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
           <p>© {new Date().getFullYear()} Athira PT. Built with React &amp; AI Focus.</p>
@@ -122,14 +131,12 @@ function App() {
           position: relative; 
           background: var(--bg-main);
         }
-        .page-section {
+        .main-content {
           width: 100%;
-          overflow: hidden;
         }
         .hero-wrapper {
           min-height: 100vh;
-          display: flex;
-          align-items: center;
+          width: 100%;
           position: relative;
           overflow: hidden;
         }
@@ -139,3 +146,4 @@ function App() {
 }
 
 export default App;
+
