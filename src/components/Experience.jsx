@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Briefcase, Cpu, Brain, Eye, Sparkles, Terminal, Activity, Zap } from 'lucide-react';
+import { ChevronDown, Briefcase, Cpu, Brain, Eye, Sparkles, Activity, Zap } from 'lucide-react';
 
 const experiences = [
   {
@@ -113,10 +113,6 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
         >
           <div className="header-glass-glow"></div>
           <div className="header-hud">
-            <div className="hud-id-wrap">
-              <Terminal size={10} />
-              <span className="hud-id">ENTRY_0{index + 1}</span>
-            </div>
             <div className="hud-line"></div>
             <div className={`hud-indicator ${isOpen ? 'active' : ''}`}>
               <div className="indicator-dot"></div>
@@ -305,13 +301,13 @@ const Experience = () => {
         .career-logbook {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 1rem;
           position: relative;
         }
 
         .career-log-item {
           display: grid;
-          grid-template-columns: 80px 1fr;
+          grid-template-columns: 60px 1fr;
           gap: 0;
         }
 
@@ -324,10 +320,10 @@ const Experience = () => {
         }
 
         .timeline-node {
-          width: 16px;
-          height: 16px;
+          width: 14px;
+          height: 14px;
           position: relative;
-          margin-top: 3.5rem;
+          margin-top: 2rem;
           z-index: 2;
         }
 
@@ -335,7 +331,7 @@ const Experience = () => {
           width: 100%;
           height: 100%;
           border: 1px solid rgba(182, 196, 255, 0.4);
-          border-radius: 4px;
+          border-radius: 3px;
           background: #0d0d12;
           transform: rotate(45deg);
           transition: all 0.3s ease;
@@ -344,14 +340,14 @@ const Experience = () => {
         .timeline-node.active .node-core {
           background: #b6c4ff;
           border-color: #b6c4ff;
-          box-shadow: 0 0 15px rgba(182, 196, 255, 0.5);
+          box-shadow: 0 0 12px rgba(182, 196, 255, 0.5);
         }
 
         .node-pulse {
           position: absolute;
-          inset: -4px;
+          inset: -3px;
           border: 1px solid #b6c4ff;
-          border-radius: 6px;
+          border-radius: 5px;
           transform: rotate(45deg);
           animation: nodePulse 2.5s infinite;
           opacity: 0.2;
@@ -359,7 +355,7 @@ const Experience = () => {
 
         @keyframes nodePulse {
           0% { transform: rotate(45deg) scale(1); opacity: 0.4; }
-          100% { transform: rotate(45deg) scale(1.8); opacity: 0; }
+          100% { transform: rotate(45deg) scale(1.6); opacity: 0; }
         }
 
         .timeline-connector {
@@ -373,15 +369,15 @@ const Experience = () => {
 
         /* Header Card Positioning */
         .item-content {
-          padding-bottom: 2rem;
+          padding-bottom: 1.5rem;
         }
 
         .log-header {
           width: 100%;
           background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
           border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 24px;
-          padding: 2.5rem;
+          border-radius: 20px;
+          padding: 1.5rem 2rem;
           text-align: left;
           color: #ffffff;
           transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -404,8 +400,8 @@ const Experience = () => {
         .log-header:hover {
           background: rgba(182, 196, 255, 0.04);
           border-color: rgba(182, 196, 255, 0.2);
-          transform: translateX(10px);
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+          transform: translateX(8px);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
 
         .log-header.active {
@@ -413,32 +409,32 @@ const Experience = () => {
           border-color: rgba(182, 196, 255, 0.3);
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
-          box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
         }
 
         /* HUD elements */
         .header-hud {
           display: flex;
           align-items: center;
-          gap: 1.5rem;
-          margin-bottom: 2rem;
+          gap: 1rem;
+          margin-bottom: 1rem;
         }
 
         .hud-id-wrap {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.4rem;
           color: #b6c4ff;
           opacity: 0.6;
         }
 
-        .hud-id { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; }
-        .hud-line { height: 1px; flex: 1; background: linear-gradient(90deg, rgba(182, 196, 255, 0.3), transparent); }
+        .hud-id { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; }
+        .hud-line { height: 1px; flex: 1; background: linear-gradient(90deg, rgba(182, 196, 255, 0.2), transparent); }
         
         .hud-indicator {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.6rem;
           opacity: 0.8;
           transition: all 0.3s ease;
           color: #b6c4ff;
@@ -447,16 +443,16 @@ const Experience = () => {
         .hud-indicator.active { opacity: 1; }
 
         .indicator-dot {
-          width: 6px;
-          height: 6px;
+          width: 5px;
+          height: 5px;
           border-radius: 50%;
           background: currentColor;
-          box-shadow: 0 0 8px currentColor;
+          box-shadow: 0 0 6px currentColor;
         }
 
         .hud-status { 
           font-family: var(--font-mono); 
-          font-size: 0.75rem; 
+          font-size: 0.7rem; 
           letter-spacing: 0.05em;
           white-space: nowrap;
         }
@@ -465,13 +461,13 @@ const Experience = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          gap: 2rem;
+          gap: 1.5rem;
         }
 
         .company-info {
           display: flex;
           align-items: center;
-          gap: 2rem;
+          gap: 1.5rem;
         }
 
         .icon-badge-outer {
@@ -480,11 +476,11 @@ const Experience = () => {
         }
 
         .icon-badge {
-          width: 56px;
-          height: 56px;
+          width: 44px;
+          height: 44px;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 16px;
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -496,56 +492,35 @@ const Experience = () => {
         .badge-glow {
           position: absolute;
           inset: 0;
-          filter: blur(15px);
+          filter: blur(12px);
           opacity: 0.1;
           z-index: 1;
         }
 
-        .company-name { font-size: 1.75rem; font-weight: 700; color: #ffffff; margin: 0; letter-spacing: -0.02em; }
+        .company-name { font-size: 1.4rem; font-weight: 700; color: #ffffff; margin: 0; letter-spacing: -0.01em; }
         
         .role-wrap {
           display: flex;
           align-items: center;
-          gap: 0.6rem;
-          margin-top: 0.4rem;
+          gap: 0.5rem;
+          margin-top: 0.25rem;
           color: #b6c4ff;
         }
         
-        .role-icon { opacity: 0.7; }
-        .job-role { font-size: 1.1rem; font-weight: 500; }
-
-        .period-badge {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 0.6rem 1.25rem;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 12px;
-          transition: all 0.3s ease;
-        }
-
-        .log-header:hover .period-badge { background: rgba(182, 196, 255, 0.05); border-color: rgba(182, 196, 255, 0.2); }
-
-        .period-icon { color: rgba(255, 255, 255, 0.3); }
-        .period-text {
-          font-family: var(--font-mono);
-          font-size: 0.8rem;
-          color: rgba(255, 255, 255, 0.5);
-          white-space: nowrap;
-        }
+        .role-icon { opacity: 0.6; }
+        .job-role { font-size: 0.95rem; font-weight: 500; }
 
         /* PROMINENT CHEVRON */
         .header-chevron-wrap {
           position: absolute;
-          right: 2.5rem;
+          right: 2rem;
           top: 50%;
           transform: translateY(-50%);
         }
 
         .chevron-box {
-          width: 44px;
-          height: 44px;
+          width: 36px;
+          height: 36px;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 50%;
@@ -561,14 +536,14 @@ const Experience = () => {
           background: #ffffff;
           color: #0d0d12;
           border-color: #ffffff;
-          box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+          box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
 
         .chevron-box.active {
           background: #b6c4ff;
           color: #0d0d12;
           border-color: #b6c4ff;
-          box-shadow: 0 0 20px rgba(182, 196, 255, 0.5);
+          box-shadow: 0 0 15px rgba(182, 196, 255, 0.5);
         }
 
         .header-scanning-line {
@@ -583,8 +558,8 @@ const Experience = () => {
         }
 
         .log-header:hover .header-scanning-line {
-          opacity: 0.4;
-          animation: scanLateral 2s infinite ease-in-out;
+          opacity: 0.3;
+          animation: scanLateral 2.5s infinite ease-in-out;
         }
 
         @keyframes scanLateral {
@@ -597,22 +572,22 @@ const Experience = () => {
           background: rgba(13, 13, 18, 0.4);
           border: 1px solid rgba(182, 196, 255, 0.3);
           border-top: none;
-          border-bottom-left-radius: 24px;
-          border-bottom-right-radius: 24px;
+          border-bottom-left-radius: 20px;
+          border-bottom-right-radius: 20px;
           overflow: hidden;
           backdrop-filter: blur(20px);
         }
 
         .details-inner {
-          padding: 3.5rem;
+          padding: 2.5rem;
           display: flex;
           flex-direction: column;
-          gap: 4rem;
+          gap: 2.5rem;
         }
 
         .role-summary {
           position: relative;
-          padding-left: 2rem;
+          padding-left: 1.5rem;
         }
 
         .summary-accent {
@@ -620,15 +595,14 @@ const Experience = () => {
           left: 0;
           top: 0;
           bottom: 0;
-          width: 4px;
+          width: 3px;
           background: linear-gradient(to bottom, #b6c4ff, transparent);
           border-radius: 2px;
-          box-shadow: 0 0 10px rgba(182, 196, 255, 0.3);
         }
 
         .role-description {
-          font-size: 1.2rem;
-          line-height: 1.8;
+          font-size: 1.1rem;
+          line-height: 1.7;
           color: rgba(255, 255, 255, 0.8);
           margin: 0;
         }
@@ -636,41 +610,41 @@ const Experience = () => {
         .achievements-matrix {
           display: flex;
           flex-direction: column;
-          gap: 3.5rem;
+          gap: 2.5rem;
         }
 
         .achievement-block {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 1.25rem;
         }
 
         .block-meta {
           display: flex;
           align-items: center;
-          gap: 1.5rem;
+          gap: 1.25rem;
         }
 
         .block-tag {
           font-family: var(--font-mono);
-          font-size: 0.7rem;
+          font-size: 0.65rem;
           color: #b6c4ff;
-          opacity: 0.6;
-          letter-spacing: 0.25em;
+          opacity: 0.5;
+          letter-spacing: 0.2em;
           white-space: nowrap;
         }
 
-        .block-line { height: 1px; flex: 1; background: rgba(182, 196, 255, 0.1); }
+        .block-line { height: 1px; flex: 1; background: rgba(182, 196, 255, 0.08); }
 
         .bullet-list {
           list-style: none;
           padding: 0;
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1rem;
         }
 
-        .bullet-list li { display: flex; gap: 1.5rem; }
+        .bullet-list li { display: flex; gap: 1.25rem; }
 
         .bullet-marker-wrap {
           position: relative;
@@ -679,8 +653,8 @@ const Experience = () => {
         }
 
         .bullet-marker {
-          width: 6px;
-          height: 6px;
+          width: 5px;
+          height: 5px;
           border-radius: 50%;
           position: relative;
           z-index: 2;
@@ -688,48 +662,48 @@ const Experience = () => {
 
         .bullet-glow {
           position: absolute;
-          inset: -4px;
-          filter: blur(6px);
-          opacity: 0.5;
+          inset: -3px;
+          filter: blur(5px);
+          opacity: 0.4;
           z-index: 1;
         }
 
         .bullet-text {
-          font-size: 1.1rem;
-          line-height: 1.7;
+          font-size: 1rem;
+          line-height: 1.6;
           color: rgba(255, 255, 255, 0.65);
         }
 
         /* Footer Details */
         .log-footer {
-          padding-top: 3rem;
+          padding-top: 2rem;
           border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .tech-tags {
           display: flex;
           flex-wrap: wrap;
-          gap: 0.8rem;
+          gap: 0.7rem;
         }
 
         .tech-chip {
-          padding: 0.6rem 1.25rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 12px;
+          padding: 0.5rem 1rem;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 10px;
           font-family: var(--font-mono);
-          font-size: 0.8rem;
-          color: rgba(255, 255, 255, 0.8);
+          font-size: 0.75rem;
+          color: rgba(255, 255, 255, 0.7);
           transition: all 0.3s ease;
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.4rem;
         }
 
-        .chip-code { color: #b6c4ff; opacity: 0.5; }
+        .chip-code { color: #b6c4ff; opacity: 0.4; }
 
         .tech-chip:hover {
-          background: rgba(182, 196, 255, 0.08);
+          background: rgba(182, 196, 255, 0.06);
           border-color: #b6c4ff;
           color: #ffffff;
           transform: translateY(-2px);
