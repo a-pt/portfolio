@@ -17,17 +17,16 @@ const MinimalistBackground = () => {
         pointerEvents: 'none',
       }}
     >
-      {/* Subtle Grid Pattern */}
+      {/* Technical Lab Grid - Now Global */}
       <div 
         style={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundImage: `linear-gradient(to right, rgba(182, 196, 255, 0.05) 1px, transparent 1px),
-                           linear-gradient(to bottom, rgba(182, 196, 255, 0.05) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
+          inset: 0,
+          backgroundImage: `linear-gradient(rgba(182, 196, 255, 0.15) 1px, transparent 1px),
+                           linear-gradient(90deg, rgba(182, 196, 255, 0.15) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+          opacity: 0.4,
+          pointerEvents: 'none'
         }}
       />
 

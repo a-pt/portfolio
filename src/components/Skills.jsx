@@ -26,7 +26,7 @@ const Skills = ({ data }) => {
       >
         <div className="lab-badge">
           <Sparkles size={14} className="badge-icon" />
-          <span>TECH_STACK_v3.2</span>
+          <span>TECH_STACK</span>
         </div>
         <h2 className="lab-section-title">Technical Matrix</h2>
       </motion.div>

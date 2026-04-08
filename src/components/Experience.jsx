@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Briefcase, Cpu, Brain, Eye, Sparkles } from 'lucide-react';
+import { ChevronDown, Briefcase, Cpu, Brain, Eye, Sparkles, Terminal, Activity, Zap } from 'lucide-react';
 
 const experiences = [
   {
     company: 'Zeldin.ai',
     role: 'AI Engineer – Intern',
-    period: 'Nov 2025 – Feb 2026',
+    period: 'Nov 2024 – Feb 2025',
     color: '#b6c4ff',
     icon: <Brain size={20} />,
     description: 'Built LLM-powered backend infrastructure for a real-estate AI platform across 4 major modules.',
@@ -92,86 +92,144 @@ const experiences = [
 const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
   return (
     <motion.div
-      className="log-item"
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      className="career-log-item"
+      initial={{ opacity: 0, scale: 0.98 }}
+      whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ once: true, margin: '-50px' }}
     >
-      <button
-        className={`log-header ${isOpen ? 'log-header--active' : ''}`}
-        onClick={onToggle}
-      >
-        <div className="log-icon-wrap" style={{ background: `rgba(${isOpen ? '182, 196, 255' : '255, 255, 255'}, 0.05)` }}>
-          <div className="icon-inner" style={{ color: exp.color }}>
-            {exp.icon}
-          </div>
+      <div className="item-timeline">
+        <div className={`timeline-node ${isOpen ? 'active' : ''}`}>
+          <div className="node-core"></div>
+          <div className="node-pulse"></div>
         </div>
+        {index !== experiences.length - 1 && <div className="timeline-connector"></div>}
+      </div>
 
-        <div className="log-meta">
-          <div className="log-meta-top">
-            <span className="log-company">{exp.company}</span>
-            <span className="log-period desktop-only">{exp.period}</span>
-          </div>
-          <span className="log-role">{exp.role}</span>
-          <span className="log-period mobile-only">{exp.period}</span>
-        </div>
-
-        <motion.div
-          className="log-chevron"
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
+      <div className="item-content">
+        <button
+          className={`log-header ${isOpen ? 'active' : ''}`}
+          onClick={onToggle}
         >
-          <ChevronDown size={18} />
-        </motion.div>
-      </button>
+          <div className="header-glass-glow"></div>
+          <div className="header-hud">
+            <div className="hud-id-wrap">
+              <Terminal size={10} />
+              <span className="hud-id">ENTRY_0{index + 1}</span>
+            </div>
+            <div className="hud-line"></div>
+            <div className={`hud-indicator ${isOpen ? 'active' : ''}`}>
+              <div className="indicator-dot"></div>
+              <span className="hud-status">{exp.period}</span>
+            </div>
+          </div>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            className="log-body"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="log-body-inner">
-              <p className="log-description">{exp.description}</p>
-
-              {exp.sections ? (
-                exp.sections.map((sec, si) => (
-                  <div key={si} className="log-section">
-                    <div className="log-section-tag">{sec.heading.toUpperCase()}</div>
-                    <ul className="log-bullets">
-                      {sec.bullets.map((b, bi) => (
-                        <li key={bi}>
-                          <div className="bullet-dot" style={{ backgroundColor: exp.color }} />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))
-              ) : (
-                <ul className="log-bullets">
-                  {exp.highlights.map((h, i) => (
-                    <li key={i}>
-                      <div className="bullet-dot" style={{ backgroundColor: exp.color }} />
-                      <span>{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              <div className="log-tech-row">
-                {exp.tech.map((t) => (
-                  <span key={t} className="log-tag">{t}</span>
-                ))}
+          <div className="header-main">
+            <div className="company-info">
+              <div className="icon-badge-outer">
+                <div className="icon-badge" style={{ color: exp.color }}>
+                  {exp.icon}
+                </div>
+                <div className="badge-glow" style={{ backgroundColor: exp.color }}></div>
+              </div>
+              <div className="title-group">
+                <h3 className="company-name">{exp.company}</h3>
+                <div className="role-wrap">
+                  <Zap size={12} className="role-icon" />
+                  <span className="job-role">{exp.role}</span>
+                </div>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            
+          </div>
+
+          <div className="header-chevron-wrap">
+            <motion.div
+              className={`chevron-box ${isOpen ? 'active' : ''}`}
+              animate={{ rotate: isOpen ? 180 : 0, scale: isOpen ? 1.1 : 1 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            >
+              <ChevronDown size={22} strokeWidth={2.5} />
+            </motion.div>
+          </div>
+
+          <div className="header-scanning-line"></div>
+        </button>
+
+        <AnimatePresence initial={false}>
+          {isOpen && (
+            <motion.div
+              className="log-details"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="details-inner">
+                <div className="role-summary">
+                  <div className="summary-accent"></div>
+                  <p className="role-description">{exp.description}</p>
+                </div>
+
+                <div className="achievements-matrix">
+                  {exp.sections ? (
+                    exp.sections.map((sec, si) => (
+                      <div key={si} className="achievement-block">
+                        <div className="block-meta">
+                          <div className="block-tag">{sec.heading.toUpperCase()}</div>
+                          <div className="block-line"></div>
+                        </div>
+                        <ul className="bullet-list">
+                          {sec.bullets.map((b, bi) => (
+                            <li key={bi}>
+                              <div className="bullet-marker-wrap">
+                                <div className="bullet-marker" style={{ background: exp.color }}></div>
+                                <div className="bullet-glow" style={{ background: exp.color }}></div>
+                              </div>
+                              <span className="bullet-text">{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="achievement-block">
+                      <div className="block-meta">
+                        <div className="block-tag">KEY_HIGHLIGHTS</div>
+                        <div className="block-line"></div>
+                      </div>
+                      <ul className="bullet-list">
+                        {exp.highlights.map((h, i) => (
+                          <li key={i}>
+                            <div className="bullet-marker-wrap">
+                              <div className="bullet-marker" style={{ background: exp.color }}></div>
+                              <div className="bullet-glow" style={{ background: exp.color }}></div>
+                            </div>
+                            <span className="bullet-text">{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                <div className="log-footer">
+                  <div className="tech-matrix">
+                    <div className="tech-tags">
+                      {exp.tech.map((t) => (
+                        <span key={t} className="tech-chip">
+                          <code className="chip-code">$</code>
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </motion.div>
   );
 };
@@ -185,29 +243,26 @@ const Experience = () => {
         className="lab-section-header"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
         <div className="lab-badge">
-          <Sparkles size={14} className="badge-icon" />
-          <span>CAREER_LOG_v2.0</span>
+          <Activity size={14} className="badge-pulse" />
+          <span>CAREER_HISTORY_LOG</span>
         </div>
         <h2 className="lab-section-title">Experience</h2>
       </motion.div>
 
-      <div className="log-container">
-        <div className="log-timeline-line"></div>
-        <div className="log-list">
-          {experiences.map((exp, i) => (
-            <ExperienceCard
-              key={exp.company}
-              exp={exp}
-              index={i}
-              isOpen={openIndex === i}
-              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
-            />
-          ))}
-        </div>
+      <div className="career-logbook">
+        {experiences.map((exp, i) => (
+          <ExperienceCard
+            key={exp.company}
+            exp={exp}
+            index={i}
+            isOpen={openIndex === i}
+            onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+          />
+        ))}
       </div>
 
       <style>{`
@@ -217,21 +272,27 @@ const Experience = () => {
           width: 100%;
         }
 
-        .lab-section-header { margin-bottom: 5rem; }
+        .lab-section-header { margin-bottom: 6rem; }
 
         .lab-badge {
           display: inline-flex;
           align-items: center;
-          gap: 0.6rem;
-          padding: 0.5rem 1rem;
+          gap: 0.8rem;
+          padding: 0.6rem 1.25rem;
           background: rgba(182, 196, 255, 0.05);
           border: 1px solid rgba(182, 196, 255, 0.15);
           border-radius: 100px;
           color: #b6c4ff;
           font-family: var(--font-mono);
-          font-size: 0.7rem;
+          font-size: 0.75rem;
           letter-spacing: 0.15em;
           margin-bottom: 1.5rem;
+        }
+
+        .badge-pulse { animation: heartbeat 2s infinite; }
+        @keyframes heartbeat {
+          0%, 100% { transform: scale(1); opacity: 0.8; }
+          50% { transform: scale(1.1); opacity: 1; }
         }
 
         .lab-section-title {
@@ -240,130 +301,457 @@ const Experience = () => {
           letter-spacing: -0.04em;
         }
 
-        .log-container {
-          position: relative;
-          padding-left: 20px;
-        }
-
-        .log-timeline-line {
-          position: absolute;
-          left: 0;
-          top: 0;
-          bottom: 0;
-          width: 1px;
-          background: linear-gradient(to bottom, #b6c4ff, rgba(182, 196, 255, 0.05));
-          opacity: 0.3;
-        }
-
-        .log-list {
+        /* Career Logbook Layout */
+        .career-logbook {
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 1.5rem;
+          position: relative;
         }
 
-        .log-item {
+        .career-log-item {
+          display: grid;
+          grid-template-columns: 80px 1fr;
+          gap: 0;
+        }
+
+        /* Timeline Elements */
+        .item-timeline {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           position: relative;
+        }
+
+        .timeline-node {
+          width: 16px;
+          height: 16px;
+          position: relative;
+          margin-top: 3.5rem;
+          z-index: 2;
+        }
+
+        .node-core {
+          width: 100%;
+          height: 100%;
+          border: 1px solid rgba(182, 196, 255, 0.4);
+          border-radius: 4px;
+          background: #0d0d12;
+          transform: rotate(45deg);
+          transition: all 0.3s ease;
+        }
+
+        .timeline-node.active .node-core {
+          background: #b6c4ff;
+          border-color: #b6c4ff;
+          box-shadow: 0 0 15px rgba(182, 196, 255, 0.5);
+        }
+
+        .node-pulse {
+          position: absolute;
+          inset: -4px;
+          border: 1px solid #b6c4ff;
+          border-radius: 6px;
+          transform: rotate(45deg);
+          animation: nodePulse 2.5s infinite;
+          opacity: 0.2;
+        }
+
+        @keyframes nodePulse {
+          0% { transform: rotate(45deg) scale(1); opacity: 0.4; }
+          100% { transform: rotate(45deg) scale(1.8); opacity: 0; }
+        }
+
+        .timeline-connector {
+          width: 1px;
+          flex: 1;
+          background: linear-gradient(to bottom, 
+            rgba(182, 196, 255, 0.2), 
+            rgba(182, 196, 255, 0.05)
+          );
+        }
+
+        /* Header Card Positioning */
+        .item-content {
+          padding-bottom: 2rem;
         }
 
         .log-header {
           width: 100%;
-          display: flex;
-          align-items: center;
-          gap: 2rem;
-          padding: 2rem;
-          background: rgba(255, 255, 255, 0.02);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 24px;
-          cursor: pointer;
+          padding: 2.5rem;
           text-align: left;
           color: #ffffff;
-          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
           backdrop-filter: blur(10px);
         }
 
+        .header-glass-glow {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 0% 0%, rgba(182, 196, 255, 0.05), transparent 50%);
+          opacity: 0;
+          transition: opacity 0.5s ease;
+        }
+
+        .log-header:hover .header-glass-glow { opacity: 1; }
+
         .log-header:hover {
-          background: rgba(182, 196, 255, 0.05);
+          background: rgba(182, 196, 255, 0.04);
           border-color: rgba(182, 196, 255, 0.2);
           transform: translateX(10px);
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
-        .log-header--active {
-          background: rgba(182, 196, 255, 0.08);
+        .log-header.active {
+          background: rgba(13, 13, 18, 0.6);
           border-color: rgba(182, 196, 255, 0.3);
-          box-shadow: 0 0 30px rgba(182, 196, 255, 0.1);
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+          box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .log-icon-wrap {
-          width: 52px;
-          height: 52px;
+        /* HUD elements */
+        .header-hud {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+          margin-bottom: 2rem;
+        }
+
+        .hud-id-wrap {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: #b6c4ff;
+          opacity: 0.6;
+        }
+
+        .hud-id { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; }
+        .hud-line { height: 1px; flex: 1; background: linear-gradient(90deg, rgba(182, 196, 255, 0.3), transparent); }
+        
+        .hud-indicator {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          opacity: 0.8;
+          transition: all 0.3s ease;
+          color: #b6c4ff;
+        }
+
+        .hud-indicator.active { opacity: 1; }
+
+        .indicator-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: currentColor;
+          box-shadow: 0 0 8px currentColor;
+        }
+
+        .hud-status { 
+          font-family: var(--font-mono); 
+          font-size: 0.75rem; 
+          letter-spacing: 0.05em;
+          white-space: nowrap;
+        }
+
+        .header-main {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 2rem;
+        }
+
+        .company-info {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+        }
+
+        .icon-badge-outer {
+          position: relative;
+          flex-shrink: 0;
+        }
+
+        .icon-badge {
+          width: 56px;
+          height: 56px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 16px;
           display: flex;
           align-items: center;
           justify-content: center;
-          flex-shrink: 0;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          position: relative;
+          z-index: 2;
+          backdrop-filter: blur(5px);
         }
 
-        .log-meta { flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
+        .badge-glow {
+          position: absolute;
+          inset: 0;
+          filter: blur(15px);
+          opacity: 0.1;
+          z-index: 1;
+        }
 
-        .log-meta-top { display: flex; justify-content: space-between; align-items: center; }
+        .company-name { font-size: 1.75rem; font-weight: 700; color: #ffffff; margin: 0; letter-spacing: -0.02em; }
+        
+        .role-wrap {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          margin-top: 0.4rem;
+          color: #b6c4ff;
+        }
+        
+        .role-icon { opacity: 0.7; }
+        .job-role { font-size: 1.1rem; font-weight: 500; }
 
-        .log-company { font-size: 1.4rem; font-weight: 700; color: #ffffff; }
+        .period-badge {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 0.6rem 1.25rem;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 12px;
+          transition: all 0.3s ease;
+        }
 
-        .log-role { font-size: 1rem; color: #b6c4ff; font-weight: 500; }
+        .log-header:hover .period-badge { background: rgba(182, 196, 255, 0.05); border-color: rgba(182, 196, 255, 0.2); }
 
-        .log-period { font-family: var(--font-mono); font-size: 0.75rem; color: rgba(255, 255, 255, 0.4); letter-spacing: 0.05em; }
+        .period-icon { color: rgba(255, 255, 255, 0.3); }
+        .period-text {
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+          color: rgba(255, 255, 255, 0.5);
+          white-space: nowrap;
+        }
 
-        .desktop-only { display: block; }
-        .mobile-only { display: none; }
+        /* PROMINENT CHEVRON */
+        .header-chevron-wrap {
+          position: absolute;
+          right: 2.5rem;
+          top: 50%;
+          transform: translateY(-50%);
+        }
 
-        .log-chevron {
-          width: 32px;
-          height: 32px;
-          background: #ffffff;
+        .chevron-box {
+          width: 44px;
+          height: 44px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #0d0d12;
-          flex-shrink: 0;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+          color: rgba(255, 255, 255, 0.8);
+          transition: all 0.3s ease;
+          backdrop-filter: blur(5px);
         }
 
-        .log-body { overflow: hidden; }
+        .log-header:hover .chevron-box {
+          background: #ffffff;
+          color: #0d0d12;
+          border-color: #ffffff;
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
 
-        .log-body-inner { padding: 2.5rem 2rem 1rem 5.5rem; }
+        .chevron-box.active {
+          background: #b6c4ff;
+          color: #0d0d12;
+          border-color: #b6c4ff;
+          box-shadow: 0 0 20px rgba(182, 196, 255, 0.5);
+        }
 
-        .log-description { font-size: 1.1rem; color: rgba(255, 255, 255, 0.7); line-height: 1.7; margin-bottom: 2.5rem; }
+        .header-scanning-line {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, #b6c4ff, transparent);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
 
-        .log-section { margin-bottom: 2.5rem; }
+        .log-header:hover .header-scanning-line {
+          opacity: 0.4;
+          animation: scanLateral 2s infinite ease-in-out;
+        }
 
-        .log-section-tag { font-family: var(--font-mono); font-size: 0.65rem; color: #b6c4ff; margin-bottom: 1rem; opacity: 0.6; letter-spacing: 0.15em; }
+        @keyframes scanLateral {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
 
-        .log-bullets { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+        /* Body Details Styling */
+        .log-details {
+          background: rgba(13, 13, 18, 0.4);
+          border: 1px solid rgba(182, 196, 255, 0.3);
+          border-top: none;
+          border-bottom-left-radius: 24px;
+          border-bottom-right-radius: 24px;
+          overflow: hidden;
+          backdrop-filter: blur(20px);
+        }
 
-        .log-bullets li { display: flex; gap: 1rem; font-size: 1rem; color: rgba(255, 255, 255, 0.6); line-height: 1.6; }
+        .details-inner {
+          padding: 3.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 4rem;
+        }
 
-        .bullet-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 0.6rem; flex-shrink: 0; }
+        .role-summary {
+          position: relative;
+          padding-left: 2rem;
+        }
 
-        .log-tech-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .summary-accent {
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: linear-gradient(to bottom, #b6c4ff, transparent);
+          border-radius: 2px;
+          box-shadow: 0 0 10px rgba(182, 196, 255, 0.3);
+        }
 
-        .log-tag { font-family: var(--font-mono); font-size: 0.75rem; color: #d3bbff; background: rgba(211, 187, 255, 0.05); border: 1px solid rgba(211, 187, 255, 0.1); padding: 0.4rem 1rem; border-radius: 10px; }
+        .role-description {
+          font-size: 1.2rem;
+          line-height: 1.8;
+          color: rgba(255, 255, 255, 0.8);
+          margin: 0;
+        }
+
+        .achievements-matrix {
+          display: flex;
+          flex-direction: column;
+          gap: 3.5rem;
+        }
+
+        .achievement-block {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .block-meta {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+        }
+
+        .block-tag {
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          color: #b6c4ff;
+          opacity: 0.6;
+          letter-spacing: 0.25em;
+          white-space: nowrap;
+        }
+
+        .block-line { height: 1px; flex: 1; background: rgba(182, 196, 255, 0.1); }
+
+        .bullet-list {
+          list-style: none;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+
+        .bullet-list li { display: flex; gap: 1.5rem; }
+
+        .bullet-marker-wrap {
+          position: relative;
+          margin-top: 0.6rem;
+          flex-shrink: 0;
+        }
+
+        .bullet-marker {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          position: relative;
+          z-index: 2;
+        }
+
+        .bullet-glow {
+          position: absolute;
+          inset: -4px;
+          filter: blur(6px);
+          opacity: 0.5;
+          z-index: 1;
+        }
+
+        .bullet-text {
+          font-size: 1.1rem;
+          line-height: 1.7;
+          color: rgba(255, 255, 255, 0.65);
+        }
+
+        /* Footer Details */
+        .log-footer {
+          padding-top: 3rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tech-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.8rem;
+        }
+
+        .tech-chip {
+          padding: 0.6rem 1.25rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+          color: rgba(255, 255, 255, 0.8);
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .chip-code { color: #b6c4ff; opacity: 0.5; }
+
+        .tech-chip:hover {
+          background: rgba(182, 196, 255, 0.08);
+          border-color: #b6c4ff;
+          color: #ffffff;
+          transform: translateY(-2px);
+        }
+
+        /* Responsive Settings */
+        @media (max-width: 1024px) {
+          .header-main { gap: 1rem; }
+          .header-chevron-wrap { position: static; transform: none; margin-top: 1.5rem; display: flex; justify-content: flex-end; }
+          .footer-status { flex-direction: row; gap: 2rem; }
+        }
 
         @media (max-width: 768px) {
-          .log-container { padding-left: 0; }
-          .log-timeline-line { display: none; }
-          .log-header { padding: 1.25rem; gap: 1rem; border-radius: 20px; }
-          .log-header:hover { transform: none; }
-          .log-icon-wrap { width: 42px; height: 42px; border-radius: 12px; }
-          .log-company { font-size: 1.1rem; }
-          .log-role { font-size: 0.9rem; }
-          .desktop-only { display: none; }
-          .mobile-only { display: block; }
-          .log-body-inner { padding: 1.5rem 1rem; }
-          .log-description { font-size: 1rem; margin-bottom: 2rem; }
-          .log-bullets li { font-size: 0.9rem; }
-          .log-chevron { width: 28px; height: 28px; }
+          .career-log-item { grid-template-columns: 40px 1fr; }
+          .log-header { padding: 1.75rem; border-radius: 20px; }
+          .details-inner { padding: 2rem; gap: 2.5rem; }
+          .company-name { font-size: 1.4rem; }
+          .role-description { font-size: 1.1rem; }
+          .bullet-text { font-size: 1rem; }
+          .header-main { flex-direction: column; align-items: flex-start; }
+          .period-badge { padding: 0.4rem 0.8rem; }
+          .log-footer { grid-template-columns: 1fr; gap: 2rem; }
         }
       `}</style>
     </div>
@@ -371,4 +759,3 @@ const Experience = () => {
 };
 
 export default Experience;
-

@@ -21,7 +21,7 @@ const BlogPostTemplate = ({ post, onBack }) => {
 
         <div className="article-badge">
           <Sparkles size={14} className="badge-icon" />
-          <span>DATA_STREAM_v0.2</span>
+          <span>DATA_STREAM</span>
         </div>
 
         <h1 className="article-title">{post.title}</h1>

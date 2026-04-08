@@ -61,7 +61,7 @@ const Contact = ({ data }) => {
             <div className="terminal-controls">
               <span></span><span></span><span></span>
             </div>
-            <div className="terminal-id">COMMS_TERM // v1.0.4</div>
+            <div className="terminal-id">COMMS_TERM</div>
           </div>
 
           <div className="terminal-body">

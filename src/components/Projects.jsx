@@ -14,7 +14,7 @@ const Projects = ({ data }) => {
       >
         <div className="lab-badge">
           <Sparkles size={14} className="badge-icon" />
-          <span>PROJECT_ARCHIVE_v4.0</span>
+          <span>PROJECT_ARCHIVE</span>
         </div>
         <h2 className="lab-section-title">Selected Projects</h2>
       </motion.div>

@@ -15,7 +15,7 @@ const About = ({ data }) => {
       >
         <div className="lab-badge">
           <Activity size={14} className="badge-animated" />
-          <span>BIOGRAPHIC_PROTOCOL_v0.5</span>
+          <span>BIOGRAPHIC_PROTOCOL</span>
         </div>
         <h2 className="lab-section-title">About Me</h2>
       </motion.div>

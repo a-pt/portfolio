@@ -4,13 +4,13 @@ import { Menu, X, Binary } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
-  { label: 'Overview',   path: '/',           id: '01' },
-  { label: 'Biometry',   path: '/about',      id: '02' },
-  { label: 'Logbook',    path: '/experience', id: '03' },
-  { label: 'Archive',    path: '/projects',   id: '04' },
-  { label: 'Matrix',     path: '/skills',     id: '05' },
-  { label: 'Blog',      path: '/blog',       id: '06' },
-  { label: 'Handshake',  path: '/contact',    id: '07' },
+  { label: 'Overview',   path: '/'           },
+  { label: 'Biometry',   path: '/about'      },
+  { label: 'Logbook',    path: '/experience' },
+  { label: 'Archive',    path: '/projects'   },
+  { label: 'Matrix',     path: '/skills'     },
+  { label: 'Blog',      path: '/blog'       },
+  { label: 'Handshake',  path: '/contact'    },
 ];
 
 const Navbar = () => {
@@ -38,13 +38,12 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="nav-links-desktop">
-          {navItems.map(({ label, path, id }) => (
+          {navItems.map(({ label, path }) => (
             <NavLink
               key={path}
               to={path}
               className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
             >
-              <span className="item-id">{id}</span>
               <span className="item-label">{label}</span>
             </NavLink>
           ))}
@@ -70,7 +69,7 @@ const Navbar = () => {
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
             <div className="mobile-links">
-              {navItems.map(({ label, path, id }, index) => (
+              {navItems.map(({ label, path }, index) => (
                 <motion.div
                   key={path}
                   initial={{ opacity: 0, x: -20 }}
@@ -81,7 +80,6 @@ const Navbar = () => {
                     to={path}
                     className={({ isActive }) => `mobile-link ${isActive ? 'active' : ''}`}
                   >
-                    <span className="mobile-id">{id}</span>
                     <span className="mobile-label">{label}</span>
                   </NavLink>
                 </motion.div>
@@ -143,18 +141,11 @@ const Navbar = () => {
 
         .nav-item {
           display: flex;
-          flex-direction: column;
+          align-items: center;
           padding: 0.5rem 1.25rem;
           text-decoration: none;
           position: relative;
           transition: all 0.3s ease;
-        }
-
-        .item-id {
-          font-family: var(--font-mono);
-          font-size: 0.6rem;
-          color: rgba(182, 196, 255, 0.4);
-          margin-bottom: 2px;
         }
 
         .item-label {
@@ -217,10 +208,7 @@ const Navbar = () => {
         }
 
         .mobile-id {
-          font-family: var(--font-mono);
-          font-size: 0.7rem;
-          color: #b6c4ff;
-          opacity: 0.4;
+          display: none;
         }
 
         .mobile-label {

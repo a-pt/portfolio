@@ -9,7 +9,6 @@ const AthiraHero = ({ data }) => {
       {/* Dynamic Background */}
       <div className="lab-background">
         <div className="neural-breathing"></div>
-        <div className="lab-grid"></div>
         <div className="glow-orb orb-1"></div>
         <div className="glow-orb orb-2"></div>
       </div>
@@ -156,15 +155,6 @@ const AthiraHero = ({ data }) => {
           to { opacity: 0.6; transform: scale(1.05); }
         }
 
-        .lab-grid {
-          position: absolute;
-          inset: 0;
-          background-image: 
-            linear-gradient(rgba(182, 196, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(182, 196, 255, 0.03) 1px, transparent 1px);
-          background-size: 60px 60px;
-          mask-image: radial-gradient(circle at center, black, transparent 90%);
-        }
 
         .glow-orb {
           position: absolute;
