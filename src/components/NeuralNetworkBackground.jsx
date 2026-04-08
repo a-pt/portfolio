@@ -51,12 +51,12 @@ const NeuralNetworkBackground = () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(56, 189, 248, 0.85)';
+        ctx.fillStyle = 'rgba(211, 187, 255, 0.85)';
         ctx.fill();
         // Soft glow
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(56, 189, 248, 0.08)';
+        ctx.fillStyle = 'rgba(211, 187, 255, 0.08)';
         ctx.fill();
       }
     }
@@ -99,7 +99,7 @@ const NeuralNetworkBackground = () => {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${opacity * 0.5})`;
+            ctx.strokeStyle = `rgba(211, 187, 255, ${opacity * 0.5})`;
             ctx.lineWidth = opacity * 1.2;
             ctx.stroke();
           }

@@ -46,13 +46,7 @@ function PageWrapper({ children }) {
       initial="initial"
       animate="animate"
       exit="exit"
-      style={{ 
-        maxWidth: '1200px', 
-        margin: '0 auto', 
-        padding: '8rem 1.5rem 4rem', 
-        width: '100%',
-        minHeight: 'calc(100vh - 160px)'
-      }}
+      className="page-wrapper"
     >
       {children}
     </motion.div>
@@ -68,16 +62,14 @@ function App() {
       <ScrollToTop />
       <Navbar />
       
-      <div className="main-content">
+      <main className="main-content">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={
-              <div className="hero-wrapper" style={{ position: 'relative' }}>
+              <div className="hero-wrapper">
                 <NeuralNetworkBackground />
                 <PageWrapper>
-                  <div style={{ display: 'flex', alignItems: 'center', minHeight: '80vh' }}>
-                    <Hero data={portfolioData} />
-                  </div>
+                  <Hero data={portfolioData} />
                 </PageWrapper>
               </div>
             } />
@@ -108,7 +100,7 @@ function App() {
 
             <Route path="/blog" element={
               <PageWrapper>
-                <Blog />
+                <Blog data={portfolioData} />
               </PageWrapper>
             } />
 
@@ -120,25 +112,80 @@ function App() {
           </Routes>
         </AnimatePresence>
 
-        <footer style={{ padding: '4rem 0', textAlign: 'center', opacity: 0.4, fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
-          <p>© {new Date().getFullYear()} Athira PT. Built with React &amp; AI Focus.</p>
+        <footer className="lab-footer">
+          <div className="footer-content">
+            <div className="footer-line"></div>
+            <p className="footer-text">
+              © {new Date().getFullYear()} ATHIRA_PT
+            </p>
+          </div>
         </footer>
-      </div>
+      </main>
 
       <style>{`
         .app { 
           min-height: 100vh; 
           position: relative; 
-          background: var(--bg-main);
+          background: #0d0d12;
+          color: #ffffff;
         }
-        .main-content {
+
+        .page-wrapper {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 120px 2.5rem 80px;
           width: 100%;
+          min-height: 100vh;
         }
+
         .hero-wrapper {
+          position: relative;
           min-height: 100vh;
           width: 100%;
-          position: relative;
+          display: flex;
+          align-items: center;
           overflow: hidden;
+        }
+
+        .hero-wrapper .page-wrapper {
+          padding-top: 0;
+          display: flex;
+          align-items: center;
+        }
+
+        .lab-footer {
+          padding: 80px 2.5rem 40px;
+          max-width: 1400px;
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        .footer-content {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          opacity: 0.3;
+        }
+
+        .footer-line {
+          height: 1px;
+          width: 100%;
+          background: linear-gradient(90deg, #b6c4ff, transparent);
+        }
+
+        .footer-text {
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          letter-spacing: 0.2em;
+        }
+
+        @media (max-width: 1024px) {
+          .page-wrapper {
+            padding: 100px 1.5rem 60px;
+          }
+          .hero-wrapper .page-wrapper {
+            padding-top: 20px;
+          }
         }
       `}</style>
     </div>

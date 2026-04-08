@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Briefcase, Cpu, Brain, Eye } from 'lucide-react';
+import { ChevronDown, Briefcase, Cpu, Brain, Eye, Sparkles } from 'lucide-react';
 
-// Full experience data — sourced from CV
 const experiences = [
   {
     company: 'Zeldin.ai',
     role: 'AI Engineer – Intern',
     period: 'Nov 2025 – Feb 2026',
-    color: '#38bdf8',
+    color: '#b6c4ff',
     icon: <Brain size={20} />,
     description: 'Built LLM-powered backend infrastructure for a real-estate AI platform across 4 major modules.',
     sections: [
@@ -42,49 +41,49 @@ const experiences = [
         ],
       },
     ],
-    tech: ['FastAPI', 'Gemma-3-4B-IT', 'Vertex AI', 'pgvector', 'Supabase', 'Anthropic', 'Drift', 'Python'],
+    tech: ['FastAPI', 'Gemma-3-4B-IT', 'Vertex AI', 'pgvector', 'Supabase', 'Anthropic', 'Python'],
   },
   {
     company: 'Texas Instruments',
     role: 'Software Engineer',
     period: 'Jul 2022 – Nov 2023',
-    color: '#818cf8',
+    color: '#d3bbff',
     icon: <Cpu size={20} />,
     description: 'Firmware development for TI\'s MSPM0 Arm Cortex-M0+ mixed-signal MCU family, focusing on early-silicon bring-up and peripheral enablement.',
     highlights: [
       'Worked in the MSPM0 MCU team building firmware for TI\'s Arm Cortex-M0+ mixed-signal microcontrollers, focusing on early-silicon (N1) bring-up and peripheral enablement.',
       'Participated in N1 silicon bring-up: initialized clocks, power domains and basic GPIO, enabled debug access, and verified that core subsystems (flash, SRAM, interrupts) were functional on first samples.',
-      'Designed and implemented SPI driver support for MSPM0 devices — configured SPI controller at the register level, supported both master and slave modes, and added blocking and interrupt-driven transfer APIs.',
-      'Wrote and maintained C-based HAL (Hardware Abstraction Layer) functions for MSPM0 peripherals (SPI, GPIO, timers, basic communication interfaces) that were later integrated into the internal SDK.',
+      'Designed and implemented SPI driver support for MSPM0 devices — configured SPI controller at the register level, supported master/slave modes, and added interrupt-driven transfer APIs.',
+      'Wrote and maintained C-based HAL functions for MSPM0 peripherals (SPI, GPIO, timers) later integrated into the internal SDK.',
     ],
     tech: ['C', 'Arm Cortex-M0+', 'MSPM0', 'SPI', 'GPIO', 'HAL', 'Embedded Firmware'],
   },
   {
     company: 'Siemens',
-    role: 'Deep Learning – NLP Research Intern',
+    role: 'Deep Learning – NLP Researcher',
     period: 'Jun 2020 – Jul 2020',
-    color: '#34d399',
+    color: '#b6c4ff',
     icon: <Brain size={20} />,
     description: 'Research on generalised learning of source-target mappings for automated data extraction from documents.',
     highlights: [
       'Conducted research on generalised learning of source-target mappings for data extraction.',
-      'Implemented a knowledge base construction model with multi-task learning — takes PDF documents as input and outputs a database with a user-defined schema populated from extracted information.',
-      'Relational databases are iteratively updated using a human-in-the-loop approach and data programming paradigm for efficiency.',
-      'Extracted textual, visual and structural information from input documents, achieving average quality of 77 F1 points — an improvement of 12 F1 points over existing human-curated knowledge bases.',
+      'Implemented a knowledge base construction model with multi-task learning — outputs structured database from PDF documents.',
+      'Used human-in-the-loop and data programming paradigms for efficient relational database updates.',
+      'Extracted textual, visual and structural information from documents, achieving an improvement of 12 F1 points over existing curated bases.',
     ],
     tech: ['PyTorch', 'NLP', 'Multi-task Learning', 'Data Programming', 'PDF Parsing', 'Python'],
   },
   {
-    company: 'Tata Consultancy Services (TCS)',
-    role: 'Computer Vision – Intern',
+    company: 'Tata Consultancy Services',
+    role: 'Computer Vision Intern',
     period: 'May 2018 – Aug 2018',
-    color: '#f472b6',
+    color: '#d3bbff',
     icon: <Eye size={20} />,
-    description: 'Realtime Occupancy Monitoring System — an OpenCV-based IoT solution for room occupancy tracking via centroid tracking and blob detection.',
+    description: 'Realtime Occupancy Monitoring System — an OpenCV-based IoT solution for room occupancy tracking.',
     highlights: [
-      'Built a Realtime Occupancy Monitoring System using OpenCV: an IoT device implementation that monitors and reports how many people are inside a room at any given time.',
-      'System monitors occupancy using centroid tracking and blob detection methods, with a real-time UI representation showing live occupancy counts.',
-      'Used background subtraction to highlight regions of interest (blobs), tracked across frames to compute the difference between people entered and exited — giving the number of seats occupied in the room.',
+      'Built a Realtime Occupancy Monitoring System using OpenCV: an IoT device implementation for monitoring room occupancy.',
+      'System monitors occupancy using centroid tracking and blob detection methods with a real-time UI.',
+      'Used background subtraction to compute the difference between entries and exits giving the live occupancy count.',
     ],
     tech: ['OpenCV', 'Python', 'Computer Vision', 'Blob Detection', 'Centroid Tracking', 'IoT'],
   },
@@ -93,33 +92,35 @@ const experiences = [
 const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
   return (
     <motion.div
-      className="exp-item"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      className="log-item"
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ once: true, margin: '-50px' }}
     >
       <button
-        className={`exp-header ${isOpen ? 'exp-header--open' : ''}`}
+        className={`log-header ${isOpen ? 'log-header--active' : ''}`}
         onClick={onToggle}
       >
-        <div className="exp-icon-wrap" style={{ color: exp.color }}>
-          {exp.icon}
+        <div className="log-icon-wrap" style={{ background: `rgba(${isOpen ? '182, 196, 255' : '255, 255, 255'}, 0.05)` }}>
+          <div className="icon-inner" style={{ color: exp.color }}>
+            {exp.icon}
+          </div>
         </div>
 
-        <div className="exp-meta">
-          <div className="exp-meta-top">
-            <span className="exp-company">{exp.company}</span>
-            <span className="exp-period exp-period--desktop">{exp.period}</span>
+        <div className="log-meta">
+          <div className="log-meta-top">
+            <span className="log-company">{exp.company}</span>
+            <span className="log-period desktop-only">{exp.period}</span>
           </div>
-          <span className="exp-role">{exp.role}</span>
-          <span className="exp-period exp-period--mobile">{exp.period}</span>
+          <span className="log-role">{exp.role}</span>
+          <span className="log-period mobile-only">{exp.period}</span>
         </div>
 
         <motion.div
-          className="exp-chevron"
+          className="log-chevron"
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.3 }}
         >
           <ChevronDown size={18} />
         </motion.div>
@@ -128,26 +129,23 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            className="exp-body"
+            className="log-body"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            style={{ overflow: 'hidden' }}
           >
-            <div className="exp-body-inner">
-              <p className="exp-description">{exp.description}</p>
+            <div className="log-body-inner">
+              <p className="log-description">{exp.description}</p>
 
               {exp.sections ? (
                 exp.sections.map((sec, si) => (
-                  <div key={si} className="exp-section">
-                    <div className="exp-section-heading">
-                      {sec.heading}
-                    </div>
-                    <ul className="exp-highlights">
+                  <div key={si} className="log-section">
+                    <div className="log-section-tag">{sec.heading.toUpperCase()}</div>
+                    <ul className="log-bullets">
                       {sec.bullets.map((b, bi) => (
                         <li key={bi}>
-                          <span className="exp-bullet" style={{ backgroundColor: exp.color }} />
+                          <div className="bullet-dot" style={{ backgroundColor: exp.color }} />
                           <span>{b}</span>
                         </li>
                       ))}
@@ -155,21 +153,19 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
                   </div>
                 ))
               ) : (
-                <ul className="exp-highlights">
+                <ul className="log-bullets">
                   {exp.highlights.map((h, i) => (
                     <li key={i}>
-                      <span className="exp-bullet" style={{ backgroundColor: exp.color }} />
+                      <div className="bullet-dot" style={{ backgroundColor: exp.color }} />
                       <span>{h}</span>
                     </li>
                   ))}
                 </ul>
               )}
 
-              <div className="exp-tech">
+              <div className="log-tech-row">
                 {exp.tech.map((t) => (
-                  <span key={t} className="exp-tag">
-                    {t}
-                  </span>
+                  <span key={t} className="log-tag">{t}</span>
                 ))}
               </div>
             </div>
@@ -183,289 +179,191 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
 const Experience = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
-  const toggle = (i) => setOpenIndex(openIndex === i ? null : i);
-
   return (
-    <div className="experience-content">
+    <div className="experience-laboratory">
       <motion.div
-        className="exp-page-header"
+        className="lab-section-header"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
       >
-        <h2 className="section-title">Career Timeline</h2>
+        <div className="lab-badge">
+          <Sparkles size={14} className="badge-icon" />
+          <span>CAREER_LOG_v2.0</span>
+        </div>
+        <h2 className="lab-section-title">Experience</h2>
       </motion.div>
 
-      <div className="exp-list">
-        {experiences.map((exp, i) => (
-          <ExperienceCard
-            key={exp.company}
-            exp={exp}
-            index={i}
-            isOpen={openIndex === i}
-            onToggle={() => toggle(i)}
-          />
-        ))}
+      <div className="log-container">
+        <div className="log-timeline-line"></div>
+        <div className="log-list">
+          {experiences.map((exp, i) => (
+            <ExperienceCard
+              key={exp.company}
+              exp={exp}
+              index={i}
+              isOpen={openIndex === i}
+              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+            />
+          ))}
+        </div>
       </div>
 
       <style>{`
-        .experience-content {
+        .experience-laboratory {
           max-width: 1200px;
           margin: 0 auto;
+          width: 100%;
         }
 
-        .exp-page-header {
-          margin-bottom: 4rem;
-        }
+        .lab-section-header { margin-bottom: 5rem; }
 
-        .section-eyebrow {
+        .lab-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          padding: 0.5rem 1rem;
+          background: rgba(182, 196, 255, 0.05);
+          border: 1px solid rgba(182, 196, 255, 0.15);
+          border-radius: 100px;
+          color: #b6c4ff;
           font-family: var(--font-mono);
-          font-size: 0.85rem;
-          color: var(--text-tertiary);
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          display: block;
-          margin-bottom: 1rem;
+          font-size: 0.7rem;
+          letter-spacing: 0.15em;
+          margin-bottom: 1.5rem;
         }
 
-        .exp-list {
+        .lab-section-title {
+          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-weight: 700;
+          letter-spacing: -0.04em;
+        }
+
+        .log-container {
+          position: relative;
+          padding-left: 20px;
+        }
+
+        .log-timeline-line {
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 1px;
+          background: linear-gradient(to bottom, #b6c4ff, rgba(182, 196, 255, 0.05));
+          opacity: 0.3;
+        }
+
+        .log-list {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 2rem;
+        }
+
+        .log-item {
           position: relative;
         }
 
-        /* Connecting vertical line */
-        .exp-list::before {
-          content: '';
-          position: absolute;
-          left: 31px;
-          top: 20px;
-          bottom: 20px;
-          width: 1px;
-          background: rgba(255, 255, 255, 0.05);
-          z-index: 0;
-        }
-
-        .exp-item {
-          background: var(--glass-bg);
-          backdrop-filter: blur(var(--card-blur));
-          -webkit-backdrop-filter: blur(var(--card-blur));
-          border: 1px solid var(--glass-border);
-          border-radius: 16px;
-          position: relative;
-          z-index: 1;
-          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        }
-
-        .exp-item:hover {
-          background: var(--glass-bg-hover);
-          border-color: var(--glass-border-hover);
-          transform: translateY(-2px);
-          box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-glow);
-        }
-
-        .exp-header {
+        .log-header {
           width: 100%;
           display: flex;
-          align-items: flex-start;
-          gap: 1.5rem;
-          padding: 1.5rem;
-          background: none;
-          border: none;
+          align-items: center;
+          gap: 2rem;
+          padding: 2rem;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 24px;
           cursor: pointer;
           text-align: left;
-          color: var(--text-primary);
+          color: #ffffff;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          backdrop-filter: blur(10px);
         }
 
-        .exp-icon-wrap {
-          width: 32px;
-          height: 32px;
-          border-radius: 8px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+        .log-header:hover {
+          background: rgba(182, 196, 255, 0.05);
+          border-color: rgba(182, 196, 255, 0.2);
+          transform: translateX(10px);
+        }
+
+        .log-header--active {
+          background: rgba(182, 196, 255, 0.08);
+          border-color: rgba(182, 196, 255, 0.3);
+          box-shadow: 0 0 30px rgba(182, 196, 255, 0.1);
+        }
+
+        .log-icon-wrap {
+          width: 52px;
+          height: 52px;
+          border-radius: 16px;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          margin-top: 0.2rem;
-          transition: all 0.3s ease;
+          border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .exp-item:hover .exp-icon-wrap {
-          background: rgba(255, 255, 255, 0.06);
-          transform: scale(1.05);
-          box-shadow: 0 0 15px currentColor;
-        }
+        .log-meta { flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
 
-        .exp-meta {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 0.4rem;
-        }
+        .log-meta-top { display: flex; justify-content: space-between; align-items: center; }
 
-        .exp-meta-top {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
+        .log-company { font-size: 1.4rem; font-weight: 700; color: #ffffff; }
 
-        .exp-company {
-          font-family: var(--font-heading);
-          font-size: 1.25rem;
-          font-weight: 600;
-          color: var(--text-primary);
-        }
+        .log-role { font-size: 1rem; color: #b6c4ff; font-weight: 500; }
 
-        .exp-role {
-          font-size: 0.95rem;
-          color: var(--text-secondary);
-        }
+        .log-period { font-family: var(--font-mono); font-size: 0.75rem; color: rgba(255, 255, 255, 0.4); letter-spacing: 0.05em; }
 
-        .exp-period {
-          font-family: var(--font-mono);
-          font-size: 0.8rem;
-          color: var(--text-tertiary);
-        }
+        .desktop-only { display: block; }
+        .mobile-only { display: none; }
 
-        .exp-period--mobile {
-          display: none;
-        }
-
-        .exp-chevron {
+        .log-chevron {
           width: 32px;
           height: 32px;
-          border-radius: 50%;
           background: #ffffff;
-          color: #0f172a;
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          color: #0d0d12;
           flex-shrink: 0;
-          margin-top: 0.2rem;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .exp-item:hover .exp-chevron {
-          transform: scale(1.1);
-          box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-        }
+        .log-body { overflow: hidden; }
 
+        .log-body-inner { padding: 2.5rem 2rem 1rem 5.5rem; }
 
-        .exp-body-inner {
-          padding: 0 1.5rem 1.75rem 4.5rem;
-        }
+        .log-description { font-size: 1.1rem; color: rgba(255, 255, 255, 0.7); line-height: 1.7; margin-bottom: 2.5rem; }
 
-        .exp-description {
-          font-size: 0.95rem;
-          color: var(--text-secondary);
-          line-height: 1.6;
-          margin-bottom: 1.5rem;
-        }
+        .log-section { margin-bottom: 2.5rem; }
 
-        .exp-section {
-          margin-bottom: 1.5rem;
-        }
+        .log-section-tag { font-family: var(--font-mono); font-size: 0.65rem; color: #b6c4ff; margin-bottom: 1rem; opacity: 0.6; letter-spacing: 0.15em; }
 
-        .exp-section-heading {
-          font-family: var(--font-mono);
-          font-size: 0.75rem;
-          color: var(--text-primary);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          margin-bottom: 0.75rem;
-        }
+        .log-bullets { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
 
-        .exp-highlights {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
+        .log-bullets li { display: flex; gap: 1rem; font-size: 1rem; color: rgba(255, 255, 255, 0.6); line-height: 1.6; }
 
-        .exp-highlights li {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.75rem;
-          font-size: 0.9rem;
-          line-height: 1.6;
-          color: var(--text-secondary);
-        }
+        .bullet-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 0.6rem; flex-shrink: 0; }
 
-        .exp-bullet {
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          margin-top: 0.5rem;
-          flex-shrink: 0;
-          opacity: 0.7;
-        }
+        .log-tech-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
 
-        .exp-tech {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.6rem;
-          margin-top: 2rem;
-          padding-top: 1.5rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .exp-tag {
-          font-family: var(--font-mono);
-          font-size: 0.75rem;
-          color: var(--accent-secondary);
-          background: rgba(167, 139, 250, 0.05);
-          border: 1px solid rgba(167, 139, 250, 0.15);
-          padding: 0.3rem 0.8rem;
-          border-radius: 8px;
-          transition: all 0.3s ease;
-        }
-
-        .exp-tag:hover {
-          color: var(--accent-primary);
-          background: rgba(56, 189, 248, 0.08);
-          border-color: rgba(56, 189, 248, 0.3);
-          box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
-          transform: translateY(-2px);
-        }
+        .log-tag { font-family: var(--font-mono); font-size: 0.75rem; color: #d3bbff; background: rgba(211, 187, 255, 0.05); border: 1px solid rgba(211, 187, 255, 0.1); padding: 0.4rem 1rem; border-radius: 10px; }
 
         @media (max-width: 768px) {
-          .exp-list::before {
-            display: none;
-          }
-          .exp-header {
-            padding: 1.25rem;
-            gap: 1rem;
-          }
-          .exp-icon-wrap {
-            width: 28px;
-            height: 28px;
-          }
-          .exp-meta-top {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.25rem;
-          }
-          .exp-period--desktop {
-            display: none;
-          }
-          .exp-period--mobile {
-            display: block;
-            margin-top: 0.25rem;
-          }
-          .exp-body-inner {
-            padding: 0 1.25rem 1.5rem 1.25rem;
-          }
-          .exp-company {
-            font-size: 1.05rem;
-          }
-          .exp-role {
-            font-size: 0.85rem;
-          }
+          .log-container { padding-left: 0; }
+          .log-timeline-line { display: none; }
+          .log-header { padding: 1.25rem; gap: 1rem; border-radius: 20px; }
+          .log-header:hover { transform: none; }
+          .log-icon-wrap { width: 42px; height: 42px; border-radius: 12px; }
+          .log-company { font-size: 1.1rem; }
+          .log-role { font-size: 0.9rem; }
+          .desktop-only { display: none; }
+          .mobile-only { display: block; }
+          .log-body-inner { padding: 1.5rem 1rem; }
+          .log-description { font-size: 1rem; margin-bottom: 2rem; }
+          .log-bullets li { font-size: 0.9rem; }
+          .log-chevron { width: 28px; height: 28px; }
         }
       `}</style>
     </div>
@@ -473,3 +371,4 @@ const Experience = () => {
 };
 
 export default Experience;
+

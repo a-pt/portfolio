@@ -1,354 +1,276 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Briefcase, Brain, MapPin, Trophy } from 'lucide-react';
-
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 30 },
-  whileInView: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] } 
-  },
-  viewport: { once: true, margin: '-50px' },
-});
-
-const stats = [
-  { icon: <Award size={20} />,     label: 'GATE 2020',  value: 'AIR 53',      sub: 'Score 880' },
-  { icon: <Briefcase size={20} />, label: 'Experience', value: '2+ Years',    sub: 'AI / Software' },
-  { icon: <Brain size={20} />,     label: 'Speciality', value: 'AI Engineer', sub: 'CV · LLM · Agentic AI' },
-  { icon: <MapPin size={20} />,    label: 'Location',   value: 'India',       sub: 'Kerala' },
-];
+import { Sparkles, Binary, ChevronRight, Activity, Cpu, ShieldCheck } from 'lucide-react';
 
 const About = ({ data }) => {
   return (
-    <div className="about-content">
-
-      <motion.div className="about-header" {...fadeUp(0)}>
-        <h2 className="section-title">About Me</h2>
+    <div className="about-laboratory">
+      {/* HUD Header */}
+      <motion.div 
+        className="lab-section-header"
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <div className="lab-badge">
+          <Activity size={14} className="badge-animated" />
+          <span>BIOGRAPHIC_PROTOCOL_v0.5</span>
+        </div>
+        <h2 className="lab-section-title">About Me</h2>
       </motion.div>
 
-      <motion.div className="glass-card about-bio-card" {...fadeUp(0.1)}>
-        {data.about.split('\n\n').map((para, i, arr) => (
-          <p key={i} className="about-text" style={{ marginBottom: i < arr.length - 1 ? '1.5rem' : 0 }}>
-            {para}
-          </p>
-        ))}
-      </motion.div>
-
-      <div className="stats-grid">
-        {stats.map(({ icon, label, value, sub }, i) => (
-          <motion.div
-            key={label}
-            className="stat-card glass-card"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-          >
-            <div className="stat-icon-wrap">{icon}</div>
-            <div className="stat-content">
-              <span className="stat-label">{label}</span>
-              <span className="stat-value">{value}</span>
-              <span className="stat-sub">{sub}</span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="about-info-grid">
-        <motion.div className="glass-card edu-card" {...fadeUp(0.2)}>
-          <h3 className="card-heading">Education</h3>
-          <div className="edu-grid">
-            {data.education.map((edu, i) => (
-              <div key={i} className="edu-item">
-                <div className="edu-indicator" />
-                <div className="edu-content">
-                  <div className="edu-degree">{edu.degree}</div>
-                  <div className="edu-institution">{edu.institution}</div>
-                  <div className="edu-meta">{edu.period} &nbsp;·&nbsp; {edu.score}</div>
-                </div>
-              </div>
+      {/* Main Content Layout: Two Columns */}
+      <div className="about-split-layout">
+        
+        {/* Left Column: Dossier (Bio) */}
+        <motion.div 
+          className="dossier-panel"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <div className="dossier-header">
+            <Binary size={18} className="text-accent" />
+            <div className="header-line"></div>
+            <span className="mono-label">SUBJECT_FILE.log</span>
+          </div>
+          
+          <div className="dossier-body">
+            {data.about.split('\n\n').map((para, i) => (
+              <p key={i} className="editorial-text">
+                {para}
+              </p>
             ))}
           </div>
-        </motion.div>
 
-        <motion.div className="glass-card highlights-card" {...fadeUp(0.3)}>
-          <h3 className="card-heading">Key Highlights</h3>
-          <div className="highlights-grid">
-            <div className="highlight-item">
-              <div className="highlight-indicator" />
-              <div className="highlight-content">
-                <h4 className="highlight-title">TIFR GS 2020</h4>
-                <p className="highlight-desc">
-                  Shortlisted in the <span className="highlight-accent">Top 46</span> nationally for Computer & Systems Sciences — one of India's most competitive research aptitude exams.
-                </p>
-              </div>
-            </div>
-
-            <div className="highlight-item">
-              <div className="highlight-indicator" />
-              <div className="highlight-content">
-                <h4 className="highlight-title">TEKON Project Expo 2019</h4>
-                <p className="highlight-desc">
-                  <span className="highlight-accent">1st Place Winner</span> at state-level expo for the "Flight Force" drone project — a real-time human detection & tracking system for aerial rescue operations.
-                </p>
-              </div>
+          <div className="dossier-footer">
+            <div className="coord-marker">SESSION_ACTIVE // UID: {data.name.split(' ')[0].toUpperCase()}</div>
+            <div className="footer-line"></div>
+            <div className="status-indicator">
+              <div className="status-dot pulsed"></div>
+              <span>OPERATIONAL</span>
             </div>
           </div>
         </motion.div>
+
+        {/* Right Column: Technical Recognition Modules */}
+        <div className="recognition-panel">
+          <div className="panel-header">
+            <Cpu size={18} className="text-accent" />
+            <span className="mono-label">VERIFIED_ACHIEVEMENTS</span>
+          </div>
+
+          <div className="recognition-grid">
+            {data?.achievements?.map((achievement, i) => (
+              <motion.div 
+                key={i}
+                className="recognition-module"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 + (i * 0.1) }}
+                viewport={{ once: true }}
+              >
+                <div className="module-head">
+                  <div className="module-id">FILE_0{i + 1}</div>
+                  <ShieldCheck size={14} className="text-active" />
+                </div>
+                <div className="module-body">
+                  <p className="achievement-text">
+                    {achievement}
+                  </p>
+                </div>
+                <div className="module-glow"></div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <style>{`
-        .about-content {
-          max-width: 1200px;
+        .about-laboratory {
+          width: 100%;
+          max-width: 1400px;
           margin: 0 auto;
         }
 
-        .about-header {
-          margin-bottom: 4rem;
-        }
+        .lab-section-header { margin-bottom: 5rem; }
 
-        .section-eyebrow {
-          font-family: var(--font-mono);
-          font-size: 0.85rem;
-          color: var(--text-tertiary);
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          display: block;
-          margin-bottom: 1rem;
-        }
-
-        .about-bio-card {
-          padding: 3rem;
-          margin-bottom: 3rem;
-        }
-
-        .about-text {
-          font-family: var(--font-mono);
-          font-size: 1rem;
-          color: #ffffff;
-          line-height: 1.8;
-          font-weight: 400;
-          opacity: 0.95;
-          letter-spacing: -0.01em;
-        }
-
-        .stats-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1.5rem;
-          margin-bottom: 3rem;
-        }
-
-        .stat-card {
-          display: flex;
-          flex-direction: column;
-          padding: 2rem 1.5rem;
-          border-radius: 16px;
-          transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-          background: rgba(255, 255, 255, 0.03);
-          border-color: rgba(255, 255, 255, 0.1);
-          transform: translateY(-2px);
-        }
-
-        .stat-icon-wrap {
-          color: var(--accent-primary);
-          margin-bottom: 1.5rem;
-        }
-
-        .stat-content {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .stat-label {
+        .lab-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.8rem;
+          padding: 0.6rem 1.25rem;
+          background: rgba(182, 196, 255, 0.05);
+          border: 1px solid rgba(182, 196, 255, 0.15);
+          border-radius: 100px;
+          color: #b6c4ff;
           font-family: var(--font-mono);
           font-size: 0.75rem;
-          color: var(--text-tertiary);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          margin-bottom: 0.5rem;
-        }
-
-        .stat-value {
-          font-family: var(--font-heading);
-          font-size: 1.5rem;
-          font-weight: 600;
-          color: var(--text-primary);
-          margin-bottom: 0.25rem;
-          line-height: 1.2;
-        }
-
-        .stat-sub {
-          font-size: 0.85rem;
-          color: var(--text-secondary);
-        }
-
-        .edu-card {
-          padding: 2.5rem;
-          height: 100%;
-        }
-
-        .card-heading {
-          font-family: var(--font-heading);
-          font-size: 1.5rem;
-          color: var(--text-primary);
+          letter-spacing: 0.15em;
           margin-bottom: 2rem;
-          font-weight: 500;
         }
 
-        .about-info-grid {
+        .badge-animated { animation: heartbeat 2s infinite; }
+        @keyframes heartbeat {
+          0%, 100% { transform: scale(1); opacity: 0.8; }
+          50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .lab-section-title {
+          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-weight: 700;
+          letter-spacing: -0.04em;
+        }
+
+        /* Split Layout Styling */
+        .about-split-layout {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2rem;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 3rem;
           align-items: start;
         }
 
-        .edu-grid {
+        /* Dossier Panel (Bio) */
+        .dossier-panel {
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 32px;
+          padding: 3.5rem;
+          backdrop-filter: blur(20px);
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 2.5rem;
+          position: relative;
         }
 
-        .edu-item {
+        .dossier-header {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           gap: 1.5rem;
+          opacity: 0.5;
         }
 
-        .edu-indicator {
-          width: 8px;
-          height: 8px;
-          background: var(--text-tertiary);
-          border-radius: 50%;
-          margin-top: 0.45rem;
-          flex-shrink: 0;
-          transition: background 0.3s;
+        .header-line { height: 1px; flex: 1; background: linear-gradient(90deg, #b6c4ff, transparent); }
+        .mono-label { font-family: var(--font-mono); font-size: 0.75rem; color: #b6c4ff; letter-spacing: 0.2em; }
+
+        .editorial-text {
+          font-size: 1.2rem;
+          line-height: 1.8;
+          color: rgba(255, 255, 255, 0.65);
+          margin-bottom: 1.5rem;
         }
 
-        .edu-item:hover .edu-indicator {
-          background: var(--accent-primary);
-        }
-
-        .edu-content {
+        .dossier-footer {
           display: flex;
-          flex-direction: column;
-          gap: 0.3rem;
+          align-items: center;
+          gap: 2rem;
+          padding-top: 2.5rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .edu-degree {
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: var(--text-primary);
-        }
+        .coord-marker { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(255, 255, 255, 0.2); }
+        .footer-line { flex: 1; height: 1px; background: rgba(255, 255, 255, 0.05); }
 
-        .edu-institution {
-          font-size: 1rem;
-          color: var(--accent-primary);
-        }
-
-        .edu-meta {
+        .status-indicator {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
           font-family: var(--font-mono);
-          font-size: 0.85rem;
-          color: var(--text-secondary);
-          margin-top: 0.25rem;
+          font-size: 0.7rem;
+          color: #b6c4ff;
         }
 
-        .highlights-card {
-          padding: 2.5rem;
-          height: 100%;
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #b6c4ff; }
+        .pulsed { animation: glowPulse 2s infinite; }
+        @keyframes glowPulse {
+          0%, 100% { opacity: 0.4; box-shadow: 0 0 0px #b6c4ff; }
+          50% { opacity: 1; box-shadow: 0 0 10px #b6c4ff; }
         }
 
-        .highlights-grid {
+        /* Recognition Panel */
+        .recognition-panel {
           display: flex;
           flex-direction: column;
           gap: 2rem;
         }
 
-        .highlight-item {
+        .panel-header {
           display: flex;
-          align-items: flex-start;
-          gap: 1.5rem;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 1rem;
         }
 
-        .highlight-indicator {
-          width: 8px;
-          height: 8px;
-          background: var(--text-tertiary);
-          border-radius: 50%;
-          margin-top: 0.45rem;
-          flex-shrink: 0;
-          transition: background 0.3s;
-        }
-
-        .highlight-item:hover .highlight-indicator {
-          background: var(--accent-primary);
-        }
-
-        .highlight-content {
+        .recognition-grid {
           display: flex;
           flex-direction: column;
-          gap: 0.3rem;
+          gap: 1.25rem;
         }
 
-        .highlight-title {
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: var(--text-primary);
+        .recognition-module {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 20px;
+          padding: 1.75rem;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .highlight-desc {
-          font-size: 0.95rem;
-          color: var(--text-secondary);
-          line-height: 1.6;
+        .recognition-module:hover {
+          border-color: rgba(182, 196, 255, 0.2);
+          background: rgba(182, 196, 255, 0.04);
+          transform: translateX(10px);
         }
 
-        .highlight-accent {
-          color: var(--text-primary);
+        .module-head {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+        }
+
+        .module-id {
+          font-family: var(--font-mono);
+          font-size: 0.65rem;
+          color: rgba(255, 255, 255, 0.3);
+          letter-spacing: 0.1em;
+        }
+
+        .text-active { color: #b6c4ff; }
+
+        .achievement-text {
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.8);
+          line-height: 1.5;
           font-weight: 500;
         }
 
-        @media (max-width: 768px) {
-          .stats-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-          }
-          .highlights-grid {
-            grid-template-columns: 1fr;
-          }
-          .about-info-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-          .about-bio-card, .edu-card, .highlights-card {
-            padding: 1.5rem;
-          }
-          .stat-card {
-            padding: 1.25rem 1rem;
-          }
-          .stat-value {
-            font-size: 1.2rem;
-          }
-          .card-heading {
-            font-size: 1.25rem;
-            margin-bottom: 1.5rem;
-          }
+        .module-glow {
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          background: linear-gradient(135deg, rgba(182, 196, 255, 0.1), transparent);
+          opacity: 0;
+          transition: opacity 0.4s ease;
         }
 
-        @media (max-width: 480px) {
-          .stats-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-          }
-          .stat-card {
-            padding: 1rem 0.75rem;
-          }
-          .stat-value {
-            font-size: 1.1rem;
-          }
+        .recognition-module:hover .module-glow { opacity: 1; }
+
+        /* Responsive Settings */
+        @media (max-width: 1100px) {
+          .about-split-layout { grid-template-columns: 1fr; gap: 4rem; }
+          .dossier-panel { padding: 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+          .lab-section-header { margin-bottom: 3rem; }
+          .dossier-panel { padding: 2rem; border-radius: 24px; }
+          .editorial-text { font-size: 1.1rem; }
+          .achievement-text { font-size: 0.95rem; }
+          .recognition-module:hover { transform: translateY(-5px); }
         }
       `}</style>
     </div>

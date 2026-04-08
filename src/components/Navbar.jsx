@@ -1,175 +1,245 @@
-import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
+import { Menu, X, Binary } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
-  { label: 'Home',       path: '/' },
-  { label: 'About',      path: '/about' },
-  { label: 'Timeline',   path: '/experience' },
-  { label: 'Projects',   path: '/projects' },
-  { label: 'Skills',     path: '/skills' },
-  { label: 'Blog',       path: '/blog' },
-  { label: 'Contact',    path: '/contact' },
+  { label: 'Overview',   path: '/',           id: '01' },
+  { label: 'Biometry',   path: '/about',      id: '02' },
+  { label: 'Logbook',    path: '/experience', id: '03' },
+  { label: 'Archive',    path: '/projects',   id: '04' },
+  { label: 'Matrix',     path: '/skills',     id: '05' },
+  { label: 'Blog',      path: '/blog',       id: '06' },
+  { label: 'Handshake',  path: '/contact',    id: '07' },
 ];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location]);
 
   return (
-    <nav className="navbar">
+    <nav className={`lab-navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
-        <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>APT</Link>
+        <Link to="/" className="nav-logo">
+          <Binary size={24} className="logo-icon" />
+          <span className="logo-text">ATHIRA_PT</span>
+        </Link>
 
-        {/* Desktop links */}
-        <div className="nav-links">
-          {navItems.map(({ label, path }) => (
+        {/* Desktop Navigation */}
+        <div className="nav-links-desktop">
+          {navItems.map(({ label, path, id }) => (
             <NavLink
               key={path}
               to={path}
-              className={({ isActive }) => `nav-link${isActive ? ' nav-link--active' : ''}`}
+              className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
             >
-              {label}
+              <span className="item-id">{id}</span>
+              <span className="item-label">{label}</span>
             </NavLink>
           ))}
         </div>
 
-        <div className="nav-actions">
-          {/* Mobile hamburger */}
-          <button
-            className="nav-hamburger"
-            onClick={() => setMenuOpen(o => !o)}
-            aria-label="Toggle menu"
-          >
-            <span /><span /><span />
-          </button>
-        </div>
+        <button 
+          className="mobile-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle Menu"
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
 
-      {/* Mobile drawer */}
-      {menuOpen && (
-        <div className="nav-mobile-drawer">
-          {navItems.map(({ label, path }) => (
-            <NavLink
-              key={path}
-              to={path}
-              className={({ isActive }) => `nav-link${isActive ? ' nav-link--active' : ''}`}
-              onClick={() => {
-                setMenuOpen(false);
-              }}
-            >
-              {label}
-            </NavLink>
-          ))}
-        </div>
-      )}
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div 
+            className="mobile-drawer"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          >
+            <div className="mobile-links">
+              {navItems.map(({ label, path, id }, index) => (
+                <motion.div
+                  key={path}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                >
+                  <NavLink
+                    to={path}
+                    className={({ isActive }) => `mobile-link ${isActive ? 'active' : ''}`}
+                  >
+                    <span className="mobile-id">{id}</span>
+                    <span className="mobile-label">{label}</span>
+                  </NavLink>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style>{`
-        .navbar {
+        .lab-navbar {
           position: fixed;
           top: 0;
           left: 0;
           right: 0;
-          background: var(--nav-bg);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
+          height: 90px;
           z-index: 1000;
-          border-bottom: 1px solid var(--nav-border);
-          transition: background 0.4s ease, border-color 0.4s ease;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          border-bottom: 1px solid transparent;
         }
+
+        .lab-navbar.scrolled {
+          height: 70px;
+          background: rgba(13, 13, 18, 0.8);
+          backdrop-filter: blur(15px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
         .nav-container {
-          height: 80px;
-          max-width: 1200px;
+          max-width: 1400px;
+          height: 100%;
           margin: 0 auto;
-          width: 100%;
-          padding: 0 2rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
+          padding: 0 2.5rem;
         }
+
         .nav-logo {
-          font-family: var(--font-heading);
-          font-size: 1.4rem;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          color: var(--text-primary);
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          color: #ffffff;
+          text-decoration: none;
         }
-        .nav-links {
+
+        .logo-icon { color: #b6c4ff; }
+        .logo-text {
+          font-family: var(--font-mono);
+          font-weight: 700;
+          font-size: 1.1rem;
+          letter-spacing: 0.1em;
+        }
+
+        .nav-links-desktop {
           display: flex;
           gap: 0.5rem;
-          align-items: center;
         }
-        .nav-link {
-          font-family: var(--font-mono);
-          font-size: 0.8rem;
-          font-weight: 500;
-          color: var(--text-secondary);
-          padding: 0.5rem 1rem;
-          border-radius: 8px;
-          transition: all 0.3s ease;
+
+        .nav-item {
+          display: flex;
+          flex-direction: column;
+          padding: 0.5rem 1.25rem;
           text-decoration: none;
+          position: relative;
+          transition: all 0.3s ease;
+        }
+
+        .item-id {
+          font-family: var(--font-mono);
+          font-size: 0.6rem;
+          color: rgba(182, 196, 255, 0.4);
+          margin-bottom: 2px;
+        }
+
+        .item-label {
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
           text-transform: uppercase;
           letter-spacing: 0.05em;
+          color: rgba(255, 255, 255, 0.5);
+          transition: all 0.3s ease;
         }
-        .nav-link:hover {
-          color: var(--text-primary);
-          background: rgba(125, 125, 125, 0.08);
+
+        .nav-item:hover .item-label,
+        .nav-item.active .item-label {
+          color: #ffffff;
         }
-        .nav-link--active {
-          color: var(--text-primary) !important;
-          background: rgba(125, 125, 125, 0.12);
+
+        .nav-item.active::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 1.25rem;
+          right: 1.25rem;
+          height: 1px;
+          background: #b6c4ff;
+          box-shadow: 0 0 10px rgba(182, 196, 255, 0.5);
         }
-        
-        .nav-actions {
+
+        .mobile-toggle {
+          display: none;
+          background: none;
+          border: none;
+          color: #ffffff;
+          cursor: pointer;
+          padding: 0.5rem;
+        }
+
+        .mobile-drawer {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: rgba(13, 13, 18, 0.95);
+          backdrop-filter: blur(20px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          padding: 2rem;
+        }
+
+        .mobile-links {
           display: flex;
-          align-items: center;
+          flex-direction: column;
           gap: 1.5rem;
         }
 
-        /* Hamburger */
-        .nav-hamburger {
-          display: none;
-          flex-direction: column;
-          gap: 6px;
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 4px;
-        }
-        .nav-hamburger span {
-          display: block;
-          width: 26px;
-          height: 2px;
-          background: var(--text-primary);
-          border-radius: 2px;
-          transition: background 0.3s;
-        }
-        .nav-hamburger:hover span {
-          background: var(--accent-primary);
-        }
-        /* Mobile drawer */
-        .nav-mobile-drawer {
+        .mobile-link {
           display: flex;
-          flex-direction: column;
-          padding: 1rem 2rem 1.5rem;
-          gap: 0.5rem;
-          border-top: 1px solid var(--nav-border);
-          background: var(--nav-bg);
-          backdrop-filter: blur(20px);
+          align-items: center;
+          gap: 1.5rem;
+          text-decoration: none;
+          color: rgba(255, 255, 255, 0.5);
         }
-        .nav-mobile-drawer .nav-link {
-          padding: 0.8rem 1rem;
-          font-size: 0.9rem;
+
+        .mobile-id {
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          color: #b6c4ff;
+          opacity: 0.4;
         }
-        @media (max-width: 850px) {
-          .nav-links {
-            display: none;
-          }
-          .nav-hamburger {
-            display: flex;
-          }
-          .nav-container {
-            padding: 0 1.5rem;
-            height: 70px;
-          }
+
+        .mobile-label {
+          font-family: var(--font-mono);
+          font-size: 1rem;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+        }
+
+        .mobile-link.active .mobile-label {
+          color: #ffffff;
+          font-weight: 700;
+        }
+
+        @media (max-width: 1024px) {
+          .nav-links-desktop { display: none; }
+          .mobile-toggle { display: block; }
+          .nav-container { padding: 0 1.5rem; }
+          .lab-navbar { height: 75px; }
         }
       `}</style>
     </nav>

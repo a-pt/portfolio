@@ -71,7 +71,7 @@
   },
   "achievements": [
     "GATE 2020: All India Rank 53 (Score 880)",
-    "TIFR GS 2020: Shortlisted in Top 46 for Computer & Systems Sciences",
+    "TIFR GS 2020: Shortlisted in Top 46 nationaly for Computer & Systems Sciences",
     "TEKON Project Expo 2019: 1st Place Winner (State level)",
     "All Kerala Rank 6: B.Tech CSE Honours (University Rank)"
   ],
@@ -79,5 +79,22 @@
     "email": "athirapt998@gmail.com",
     "linkedin": "https://www.linkedin.com/in/athirapt998/",
     "github": "https://github.com/a-pt"
-  }
+  },
+  "blogPosts": [
+    {
+      "title": "A Hands-On guide for Learning Langchain, LCEL, LLMOps the Practical Way",
+      "date": "March 2026",
+      "link": "https://pub.towardsai.net/a-hands-on-guide-for-learning-langchain-lcel-llmops-the-practical-way-43f107a8b588",
+      "excerpt": "Large Language Models (LLMs) are revolutionary, but bridging the gap between a single prompt and a reliable, production-ready application is where the real challenge lies.",
+      "readTime": "12 min"
+    },
+    {
+      "title": "From Prompting to AI Agents: A practical Generative AI roadmap with Code",
+      "date": "March 2026",
+      "link": "https://medium.com/@athirapt998/from-prompting-to-projects-a-journey-through-generative-ai-and-multi-agent-systems-58f3d39e4fc4",
+      "excerpt": "Exploring the evolution from simple prompting to architecting complex multi-agent generative AI systems, highlighting key technical milestones and the future of autonomous intelligence.",
+      "readTime": "10 min"
+    }
+  ]
 }
+

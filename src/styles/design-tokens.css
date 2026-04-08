@@ -1,37 +1,37 @@
 :root {
-    /* Dark Theme (Default) */
-    --bg-base: #020408;
-    --bg-gradient: radial-gradient(circle at top center, #0a1128 0%, #060913 50%, #020408 100%);
+    /* Digital Laboratory Theme - Violet Core */
+    --bg-base: #0d0d12;
+    --bg-gradient: radial-gradient(circle at top center, #161621 0%, #0d0d12 100%);
     
-    --accent-primary: #38bdf8; /* Soft Cyan */
-    --accent-secondary: #a78bfa; /* Violet */
-    --accent-tertiary: #4f46e5; /* Indigo */
-    --accent-glow: rgba(56, 189, 248, 0.25);
+    --accent-primary: #b6c4ff; /* Desaturated Blue */
+    --accent-secondary: #d3bbff; /* Violet */
+    --accent-tertiary: #ffffff;
+    --accent-glow: rgba(182, 196, 255, 0.15);
     
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-tertiary: #64748b;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-tertiary: rgba(255, 255, 255, 0.4);
     
-    --glass-bg: rgba(15, 23, 42, 0.75);
-    --glass-bg-hover: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.05);
-    --glass-border-hover: rgba(56, 189, 248, 0.3);
+    --glass-bg: rgba(255, 255, 255, 0.02);
+    --glass-bg-hover: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.06);
+    --glass-border-hover: rgba(182, 196, 255, 0.2);
     
-    --btn-primary-bg: #ffffff;
-    --btn-primary-text: #000000;
-    --btn-primary-hover: #e2e8f0;
+    --btn-primary-bg: #b6c4ff;
+    --btn-primary-text: #0d0d12;
+    --btn-primary-hover: #ffffff;
     
-    --btn-outline-bg: rgba(255, 255, 255, 0.02);
+    --btn-outline-bg: rgba(255, 255, 255, 0.03);
     --btn-outline-border: rgba(255, 255, 255, 0.1);
-    --btn-outline-hover-bg: rgba(255, 255, 255, 0.06);
-    --btn-outline-hover-border: rgba(255, 255, 255, 0.2);
+    --btn-outline-hover-bg: #ffffff;
+    --btn-outline-hover-text: #0d0d12;
 
-    --nav-bg: rgba(2, 4, 8, 0.65);
+    --nav-bg: rgba(13, 13, 18, 0.8);
     --nav-border: rgba(255, 255, 255, 0.05);
 
-    --card-blur: 24px;
+    --card-blur: 15px;
     
-    --font-heading: 'Space Grotesk', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 }

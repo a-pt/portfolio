@@ -1,96 +1,200 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Sparkles, Calendar, Clock, ArrowUpRight, BookOpen } from 'lucide-react';
 
-const Blog = () => {
-  const posts = [
-    {
-      title: "A Hands-On guide for Learning Langchain, LCEL, LLMOps the Practical Way",
-      date: "March 2026",
-      url: "https://pub.towardsai.net/a-hands-on-guide-for-learning-langchain-lcel-llmops-the-practical-way-43f107a8b588",
-      excerpt: "Large Language Models (LLMs) are revolutionary, but bridging the gap between a single prompt and a reliable, production-ready application is where the real challenge lies."
-    },
-    {
-      title: "From Prompting to AI Agents: A practical Generative AI roadmap with Code",
-      date: "March 2026",
-      url: "https://medium.com/@athirapt998/from-prompting-to-projects-a-journey-through-generative-ai-and-multi-agent-systems-58f3d39e4fc4",
-      excerpt: "Exploring the evolution from simple prompting to architecting complex multi-agent generative AI systems, highlighting key technical milestones and the future of autonomous intelligence."
-    }
-  ];
-
+const Blog = ({ data }) => {
   return (
-    <div className="blog-content">
-      <h2 className="section-title text-gradient">Blog & Research Notes</h2>
-      
-      <div className="blog-grid">
-        {posts.map((post, index) => (
-          <div key={index} className="glass-card blog-card">
-            <div className="blog-date-wrap">
-              <span className="blog-date">{post.date}</span>
+    <div className="blog-laboratory">
+      <motion.div
+        className="lab-section-header"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
+        <div className="lab-badge">
+          <Sparkles size={14} className="badge-icon" />
+          <span>DATA_TRANSMISSIONS</span>
+        </div>
+        <h2 className="lab-section-title">Technical Writings</h2>
+      </motion.div>
+
+      <div className="blog-matrix">
+        {data?.blogPosts?.map((post, index) => (
+
+          <motion.div 
+            key={index} 
+            className="blog-node"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: '-50px' }}
+          >
+            <div className="node-hud">
+              <span className="node-id">0{index + 1}</span>
+              <div className="node-line"></div>
+              <BookOpen size={14} className="node-icon" />
             </div>
-            <h3 className="blog-card-title">{post.title}</h3>
-            <p className="blog-excerpt">
-              {post.excerpt}
-            </p>
-            <a 
-              href={post.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline blog-btn"
-            >
-              Read Post
-            </a>
-          </div>
+
+            <div className="node-content">
+              <div className="node-meta">
+                <div className="meta-item">
+                  <Calendar size={12} />
+                  <span>{post.date}</span>
+                </div>
+              </div>
+
+              <h3 className="node-title">{post.title}</h3>
+              <p className="node-excerpt">{post.excerpt}</p>
+
+              <div className="node-footer">
+                <a 
+                  href={post.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="read-more-btn"
+                >
+                  <span>READ_POST</span>
+                  <ArrowUpRight size={16} />
+                </a>
+              </div>
+            </div>
+          </motion.div>
         ))}
       </div>
 
       <style>{`
-        .blog-grid {
-          margin-top: 2rem;
-        }
-        .blog-card {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          max-width: 1200px;
+        .blog-laboratory {
+          max-width: 1300px;
           margin: 0 auto;
+          width: 100%;
         }
-        .blog-date-wrap {
+
+        .lab-section-header { margin-bottom: 5rem; }
+
+        .lab-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          padding: 0.5rem 1rem;
+          background: rgba(182, 196, 255, 0.05);
+          border: 1px solid rgba(182, 196, 255, 0.15);
+          border-radius: 100px;
+          color: #b6c4ff;
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          letter-spacing: 0.15em;
+          margin-bottom: 1.5rem;
+        }
+
+        .lab-section-title {
+          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-weight: 700;
+          letter-spacing: -0.04em;
+        }
+
+        .blog-matrix {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2.5rem;
+        }
+
+        .blog-node {
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 32px;
+          padding: 2.5rem;
+          position: relative;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          backdrop-filter: blur(10px);
+        }
+
+        .blog-node:hover {
+          background: rgba(182, 196, 255, 0.04);
+          border-color: rgba(182, 196, 255, 0.2);
+          transform: translateY(-8px);
+        }
+
+        .node-hud {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 2rem;
+          opacity: 0.4;
+        }
+
+        .node-id { font-family: var(--font-mono); font-size: 0.7rem; color: #b6c4ff; }
+        .node-line { height: 1px; flex: 1; background: linear-gradient(90deg, #b6c4ff, transparent); }
+        .node-icon { color: #b6c4ff; }
+
+        .node-meta {
+          display: flex;
+          gap: 1.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .meta-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-family: var(--font-mono);
+          font-size: 0.65rem;
+          color: rgba(255, 255, 255, 0.4);
+          letter-spacing: 0.05em;
+        }
+
+        .node-title {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #ffffff;
+          line-height: 1.3;
+          margin-bottom: 1rem;
+        }
+
+        .node-excerpt {
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.6);
+          line-height: 1.6;
+          margin-bottom: 2.5rem;
+        }
+
+        .node-footer {
+          margin-top: auto;
           display: flex;
           justify-content: flex-end;
+        }
+
+        .read-more-btn {
+          display: inline-flex;
           align-items: center;
+          gap: 0.75rem;
+          padding: 0.8rem 1.5rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          color: #ffffff;
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          transition: all 0.3s ease;
         }
-        .blog-date {
-          font-size: 0.8rem;
-          opacity: 0.6;
+
+        .read-more-btn:hover {
+          background: #ffffff;
+          color: #0d0d12;
+          border-color: #ffffff;
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
-        .blog-card-title {
-          font-size: 1.5rem;
-          line-height: 1.4;
-          font-family: var(--font-heading);
-        }
-        .blog-excerpt {
-          color: var(--text-secondary);
-          font-size: 1.05rem;
-          line-height: 1.8;
-        }
-        .blog-btn {
-          margin-top: 1.5rem;
-          align-self: flex-start;
-          padding: 0.6rem 1.25rem;
-          font-size: 0.9rem;
-          text-decoration: none;
-          display: inline-block;
+
+        @media (max-width: 1100px) {
+          .blog-matrix { grid-template-columns: 1fr; gap: 2rem; }
         }
 
         @media (max-width: 768px) {
-          .blog-card-title {
-            font-size: 1.25rem;
-          }
-          .blog-excerpt {
-            font-size: 0.95rem;
-          }
-          .blog-card {
-            padding: 2rem 1.5rem;
-          }
+          .blog-laboratory { padding: 0 1rem; }
+          .lab-section-header { margin-bottom: 3rem; }
+          .blog-node { padding: 2rem; border-radius: 24px; }
+          .node-title { font-size: 1.25rem; }
+          .node-excerpt { font-size: 0.95rem; }
         }
       `}</style>
     </div>
