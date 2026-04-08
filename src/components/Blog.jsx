@@ -65,7 +65,7 @@ const Blog = ({ data }) => {
 
       <style>{`
         .blog-laboratory {
-          max-width: 1300px;
+          max-width: 1400px;
           margin: 0 auto;
           width: 100%;
         }
@@ -95,18 +95,20 @@ const Blog = ({ data }) => {
 
         .blog-matrix {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 2.5rem;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
         }
 
         .blog-node {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 32px;
-          padding: 2.5rem;
+          border-radius: 28px;
+          padding: 2rem;
           position: relative;
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           backdrop-filter: blur(10px);
+          display: flex;
+          flex-direction: column;
         }
 
         .blog-node:hover {
@@ -185,14 +187,18 @@ const Blog = ({ data }) => {
           box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
-        @media (max-width: 1100px) {
-          .blog-matrix { grid-template-columns: 1fr; gap: 2rem; }
+        @media (max-width: 1200px) {
+          .blog-matrix { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 800px) {
+          .blog-matrix { grid-template-columns: 1fr; gap: 1.5rem; }
         }
 
         @media (max-width: 768px) {
-          .blog-laboratory { padding: 0 1rem; }
+          .blog-laboratory { padding: 0 1.5rem; }
           .lab-section-header { margin-bottom: 3rem; }
-          .blog-node { padding: 2rem; border-radius: 24px; }
+          .blog-node { padding: 1.5rem; border-radius: 20px; }
           .node-title { font-size: 1.25rem; }
           .node-excerpt { font-size: 0.95rem; }
         }
