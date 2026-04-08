@@ -336,9 +336,25 @@ const Experience = () => {
         }
 
         .exp-chevron {
-          color: var(--text-tertiary);
-          margin-top: 0.4rem;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: #ffffff;
+          color: #0f172a;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          flex-shrink: 0;
+          margin-top: 0.2rem;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
+
+        .exp-item:hover .exp-chevron {
+          transform: scale(1.1);
+          box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
 
         .exp-body-inner {
           padding: 0 1.5rem 1.75rem 4.5rem;
