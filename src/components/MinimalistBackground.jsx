@@ -17,16 +17,20 @@ const MinimalistBackground = () => {
         pointerEvents: 'none',
       }}
     >
-      {/* Technical Lab Grid - Now Global */}
+      {/* Smudged Translucent Grid - Global */}
       <div 
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: `linear-gradient(rgba(182, 196, 255, 0.15) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(182, 196, 255, 0.15) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-          opacity: 0.4,
-          pointerEvents: 'none'
+          backgroundImage: `linear-gradient(rgba(182, 196, 255, 0.25) 1px, transparent 1px),
+                           linear-gradient(90deg, rgba(182, 196, 255, 0.25) 1px, transparent 1px)`,
+          backgroundSize: '45px 45px',
+          opacity: 0.22,
+          filter: 'blur(1.2px)',
+          WebkitMaskImage: 'radial-gradient(circle at center, black 20%, transparent 95%)',
+          maskImage: 'radial-gradient(circle at center, black 20%, transparent 95%)',
+          pointerEvents: 'none',
+          zIndex: 1
         }}
       />
 

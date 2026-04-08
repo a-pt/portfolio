@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import NeuralNetworkBackground from './components/NeuralNetworkBackground';
 import MinimalistBackground from './components/MinimalistBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -67,7 +66,6 @@ function App() {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={
               <div className="hero-wrapper">
-                <NeuralNetworkBackground />
                 <PageWrapper>
                   <Hero data={portfolioData} />
                 </PageWrapper>
@@ -126,7 +124,6 @@ function App() {
         .app { 
           min-height: 100vh; 
           position: relative; 
-          background: #0d0d12;
           color: #ffffff;
         }
 
@@ -164,7 +161,6 @@ function App() {
           display: flex;
           flex-direction: column;
           gap: 2rem;
-          opacity: 0.3;
         }
 
         .footer-line {
@@ -193,4 +189,3 @@ function App() {
 }
 
 export default App;
-
