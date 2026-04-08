@@ -17,15 +17,7 @@ const AthiraHero = ({ data }) => {
         <div className="lab-layout">
           {/* Text Content Area */}
           <div className="lab-info">
-            <motion.div
-              className="lab-badge"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Sparkles size={14} className="badge-icon" />
-              <span>Hello 👋, I'm</span>
-            </motion.div>
+
 
             <motion.h1 
               className="lab-title"
@@ -217,6 +209,7 @@ const AthiraHero = ({ data }) => {
           font-weight: 700;
           line-height: 0.95;
           letter-spacing: -0.05em;
+          margin-top: 4.5rem;
           margin-bottom: 2rem;
         }
 
