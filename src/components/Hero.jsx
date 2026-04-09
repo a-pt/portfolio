@@ -251,10 +251,10 @@ const AthiraHero = ({ data }) => {
         .lab-container {
           position: relative;
           z-index: 10;
-          max-width: 1400px;
+          max-width: 1600px;
           margin: 0 auto;
           width: 100%;
-          padding: 6rem 2rem;
+          padding: 6rem 5%;
         }
 
         .lab-layout {

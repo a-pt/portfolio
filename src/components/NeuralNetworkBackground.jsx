@@ -26,10 +26,10 @@ const NeuralNetworkBackground = () => {
 
     const getSettings = () => {
       const w = window.innerWidth;
-      if (w < 480) return { count: 12, dist: 110 };
-      if (w < 768) return { count: 25, dist: 130 };
-      if (w < 1200) return { count: 45, dist: 160 };
-      return { count: 65, dist: 200 };
+      if (w < 480) return { count: 8, dist: 110 };
+      if (w < 768) return { count: 15, dist: 130 };
+      if (w < 1200) return { count: 25, dist: 160 };
+      return { count: 40, dist: 200 };
     };
 
     class Particle {
