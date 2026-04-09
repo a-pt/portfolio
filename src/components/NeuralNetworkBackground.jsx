@@ -84,7 +84,7 @@ const NeuralNetworkBackground = () => {
 
     const resize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = window.innerHeight * 0.5;
       const s = getSettings();
       particleCount = s.count;
       connectionDistance = s.dist;

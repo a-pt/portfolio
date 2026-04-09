@@ -100,11 +100,57 @@ const AthiraHero = ({ data }) => {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <Link to="/projects" className="lab-btn btn-primary">
-                Explore Work
+                <motion.span
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.05, delayChildren: 1.0 } }
+                  }}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <span className="btn-text-reveal">
+                    {"Explore Work".split("").map((char, index) => (
+                      <motion.span 
+                        key={index} 
+                        variants={{
+                          hidden: { opacity: 0 },
+                          visible: { opacity: 1 }
+                        }}
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
+                </motion.span>
                 <div className="btn-glow"></div>
+                <div className="btn-scanner"></div>
               </Link>
-              <Link to="/contact" className="lab-btn btn-outline">
-                Get In Touch <ArrowRight size={18} className="arrow-icon" />
+
+              <Link to="/contact" className="lab-btn btn-primary">
+                <motion.span
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.05, delayChildren: 1.2 } }
+                  }}
+                  initial="hidden"
+                  animate="visible"
+                  className="btn-content-wrap"
+                >
+                  <span className="btn-text-reveal">
+                    {"Get In Touch".split("").map((char, index) => (
+                      <motion.span 
+                        key={index} 
+                        variants={{
+                          hidden: { opacity: 0 },
+                          visible: { opacity: 1 }
+                        }}
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
+                  <ArrowRight size={18} className="arrow-icon" />
+                </motion.span>
+                <div className="btn-glow"></div>
+                <div className="btn-scanner"></div>
               </Link>
             </motion.div>
 
@@ -310,38 +356,67 @@ const AthiraHero = ({ data }) => {
         }
 
         .lab-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 1.2rem 2.5rem;
+          border-radius: 100px;
+          font-weight: 700;
+          font-family: var(--font-mono);
+          font-size: 0.9rem;
+          letter-spacing: 0.05em;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           position: relative;
+          overflow: hidden;
+        }
+
+        .btn-scanner {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            90deg, 
+            transparent 0%, 
+            rgba(255, 255, 255, 0.2) 50%, 
+            transparent 100%
+          );
+          transform: translateX(-100%);
+          pointer-events: none;
+        }
+
+        .lab-btn:hover .btn-scanner {
+          animation: scan 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes scan {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+
+        .btn-primary {
+          background: var(--btn-primary-bg);
+          color: var(--btn-primary-text);
+          border: none;
+        }
+
+        .btn-outline:hover {
+          background: var(--btn-outline-hover-bg);
+          color: var(--btn-outline-hover-text);
+          border-color: var(--btn-outline-hover-border);
+          transform: translateY(-4px);
+          box-shadow: 0 20px 40px -10px var(--accent-glow);
+        }
+
+        .btn-content-wrap {
           display: flex;
           align-items: center;
-          gap: 0.8rem;
-          padding: 1.1rem 2.2rem;
-          border-radius: 14px;
-          font-weight: 700;
-          text-decoration: none;
-          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-          overflow: hidden;
-          font-size: 0.95rem;
-        }
-
-        .btn-glow {
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 50%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-          transition: 0.7s;
-        }
-
-        .btn-primary:hover .btn-glow {
-          left: 200%;
+          gap: 1rem;
         }
 
         .arrow-icon {
           transition: transform 0.3s ease;
         }
 
-        .btn-outline:hover .arrow-icon {
+        .lab-btn:hover .arrow-icon {
           transform: translateX(5px);
         }
 
