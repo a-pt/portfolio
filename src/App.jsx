@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import MinimalistBackground from './components/MinimalistBackground';
+import NeuralNetworkBackground from './components/NeuralNetworkBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -57,7 +57,7 @@ function App() {
 
   return (
     <div className="app">
-      <MinimalistBackground />
+      <NeuralNetworkBackground />
       <ScrollToTop />
       <Navbar />
       
@@ -124,7 +124,9 @@ function App() {
         .app { 
           min-height: 100vh; 
           position: relative; 
-          color: #ffffff;
+          color: var(--text-primary);
+          background-color: var(--bg-base);
+          transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         .page-wrapper {
@@ -166,13 +168,14 @@ function App() {
         .footer-line {
           height: 1px;
           width: 100%;
-          background: linear-gradient(90deg, #b6c4ff, transparent);
+          background: linear-gradient(90deg, var(--accent-primary), transparent);
         }
 
         .footer-text {
           font-family: var(--font-mono);
           font-size: 0.7rem;
           letter-spacing: 0.2em;
+          color: var(--text-secondary);
         }
 
         @media (max-width: 1024px) {

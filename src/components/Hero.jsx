@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const AthiraHero = ({ data }) => {
   return (
     <div className="hero-laboratory">
-      {/* Dynamic Background */}
+      {/* Dynamic Background Effects */}
       <div className="lab-background">
         <div className="neural-breathing"></div>
         <div className="glow-orb orb-1"></div>
@@ -18,14 +18,39 @@ const AthiraHero = ({ data }) => {
           {/* Text Content Area */}
           <div className="lab-info">
 
-
             <motion.h1 
               className="lab-title"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              variants={{
+                visible: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } }
+              }}
+              initial="hidden"
+              animate="visible"
             >
-              Athira <span className="title-accent">PT.</span>
+              {"Athira ".split("").map((char, index) => (
+                <motion.span 
+                  key={index} 
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    visible: { opacity: 1, y: 0 }
+                  }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+              <span className="title-accent">
+                {"PT".split("").map((char, index) => (
+                  <motion.span 
+                    key={index} 
+                    variants={{
+                      hidden: { opacity: 0, y: 10 },
+                      visible: { opacity: 1, y: 0 }
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+                <span className="cursor-blink">|</span>
+              </span>
             </motion.h1>
 
             <motion.p 
@@ -53,7 +78,11 @@ const AthiraHero = ({ data }) => {
                 <motion.div 
                   key={tag.label} 
                   className="lab-tag"
-                  whileHover={{ y: -2, backgroundColor: 'rgba(182, 196, 255, 0.1)' }}
+                  whileHover={{ 
+                    y: -2, 
+                    backgroundColor: 'var(--glass-bg-hover)',
+                    borderColor: 'var(--accent-primary)'
+                  }}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6 + (idx * 0.1) }}
@@ -70,13 +99,12 @@ const AthiraHero = ({ data }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              <Link to="/projects" className="lab-btn lab-btn-primary">
+              <Link to="/projects" className="lab-btn btn-primary">
                 Explore Work
                 <div className="btn-glow"></div>
               </Link>
-              <Link to="/contact" className="lab-btn lab-btn-primary">
+              <Link to="/contact" className="lab-btn btn-outline">
                 Get In Touch <ArrowRight size={18} className="arrow-icon" />
-                <div className="btn-glow"></div>
               </Link>
             </motion.div>
 
@@ -121,11 +149,12 @@ const AthiraHero = ({ data }) => {
           position: relative;
           min-height: 100vh;
           width: 100%;
-          background: #0d0d12;
-          color: #ffffff;
+          background: var(--bg-base);
+          color: var(--text-primary);
           overflow: hidden;
           display: flex;
           align-items: center;
+          transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         /* --- Background Effects --- */
@@ -138,7 +167,7 @@ const AthiraHero = ({ data }) => {
         .neural-breathing {
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.15) 0%, transparent 80%);
+          background: radial-gradient(circle at 50% 50%, var(--accent-glow) 0%, transparent 80%);
           animation: breathing 8s ease-in-out infinite alternate;
         }
 
@@ -147,28 +176,34 @@ const AthiraHero = ({ data }) => {
           to { opacity: 0.6; transform: scale(1.05); }
         }
 
-
         .glow-orb {
           position: absolute;
           border-radius: 50%;
-          filter: blur(80px);
+          filter: blur(100px);
           z-index: 1;
+          opacity: 0.2;
+          transition: all 1s ease;
+        }
+
+        [data-theme='light'] .glow-orb {
+          opacity: 0.1;
+          filter: blur(120px);
         }
 
         .orb-1 {
           top: 10%;
-          right: 15%;
-          width: 300px;
-          height: 300px;
-          background: rgba(182, 196, 255, 0.1);
+          right: 5%;
+          width: 500px;
+          height: 500px;
+          background: var(--accent-primary);
         }
 
         .orb-2 {
           bottom: 10%;
-          left: 10%;
-          width: 400px;
-          height: 400px;
-          background: rgba(211, 187, 255, 0.05);
+          left: 5%;
+          width: 600px;
+          height: 600px;
+          background: var(--accent-secondary);
         }
 
         /* --- Container & Layout --- */
@@ -194,41 +229,56 @@ const AthiraHero = ({ data }) => {
           align-items: center;
           gap: 0.6rem;
           padding: 0.5rem 1rem;
-          background: rgba(182, 196, 255, 0.05);
-          border: 1px solid rgba(182, 196, 255, 0.15);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 100px;
-          color: #b6c4ff;
+          color: var(--accent-primary);
           font-family: var(--font-mono);
-          font-size: 0.75rem;
-          letter-spacing: 0.1em;
-          margin-bottom: 1.5rem;
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          margin-bottom: 2rem;
+          backdrop-filter: blur(10px);
         }
 
         .lab-title {
-          font-size: clamp(3rem, 10vw, 6.5rem);
-          font-weight: 700;
-          line-height: 0.95;
-          letter-spacing: -0.05em;
-          margin-top: 4.5rem;
+          font-size: clamp(3.5rem, 8vw, 6.5rem);
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: -0.04em;
+          margin-top: 4rem; /* Offset for removed badge */
           margin-bottom: 2rem;
         }
 
         .title-accent {
-          color: #b6c4ff;
+          color: var(--accent-primary);
           position: relative;
         }
 
+        .cursor-blink {
+          display: inline-block;
+          color: var(--accent-primary);
+          margin-left: 0.2rem;
+          animation: blink 1s step-end infinite;
+          font-weight: 300;
+        }
+
+        @keyframes blink {
+          50% { opacity: 0; }
+        }
+
         .lab-bio {
-          font-size: 1.25rem;
-          line-height: 1.6;
-          color: rgba(255, 255, 255, 0.6);
-          max-width: 580px;
+          font-size: 1.2rem;
+          line-height: 1.7;
+          color: var(--text-secondary);
+          max-width: 540px;
           margin-bottom: 3rem;
         }
 
         .highlight-text {
-          color: #ffffff;
-          font-weight: 500;
+          color: var(--text-primary);
+          font-weight: 600;
+          border-bottom: 2px solid var(--accent-glow);
         }
 
         .lab-tags {
@@ -242,19 +292,15 @@ const AthiraHero = ({ data }) => {
           display: flex;
           align-items: center;
           gap: 0.6rem;
-          padding: 0.75rem 1.25rem;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 16px;
-          font-size: 0.85rem;
-          color: rgba(255, 255, 255, 0.8);
+          padding: 0.6rem 1.1rem;
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
+          border-radius: 12px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: var(--text-primary);
           backdrop-filter: blur(10px);
           transition: all 0.3s ease;
-        }
-
-        .lab-tag svg {
-          color: #b6c4ff;
-          opacity: 0.8;
         }
 
         .lab-actions {
@@ -268,24 +314,13 @@ const AthiraHero = ({ data }) => {
           display: flex;
           align-items: center;
           gap: 0.8rem;
-          padding: 1.25rem 2.5rem;
-          border-radius: 18px;
+          padding: 1.1rem 2.2rem;
+          border-radius: 14px;
           font-weight: 700;
-          font-family: var(--font-heading);
           text-decoration: none;
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           overflow: hidden;
-        }
-
-        .lab-btn-primary {
-          background: #b6c4ff;
-          color: #0d0d12;
-          box-shadow: 0 10px 25px rgba(182, 196, 255, 0.2);
-        }
-
-        .lab-btn-primary:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 20px 40px rgba(182, 196, 255, 0.4);
+          font-size: 0.95rem;
         }
 
         .btn-glow {
@@ -298,27 +333,15 @@ const AthiraHero = ({ data }) => {
           transition: 0.7s;
         }
 
-        .lab-btn-primary:hover .btn-glow {
+        .btn-primary:hover .btn-glow {
           left: 200%;
-        }
-
-        .lab-btn-ghost {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          color: #ffffff;
-        }
-
-        .lab-btn-ghost:hover {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: rgba(255, 255, 255, 0.2);
-          transform: translateY(-4px);
         }
 
         .arrow-icon {
           transition: transform 0.3s ease;
         }
 
-        .lab-btn-ghost:hover .arrow-icon {
+        .btn-outline:hover .arrow-icon {
           transform: translateX(5px);
         }
 
@@ -328,12 +351,12 @@ const AthiraHero = ({ data }) => {
         }
 
         .social-icon {
-          color: rgba(255, 255, 255, 0.3);
+          color: var(--text-tertiary);
           transition: all 0.3s ease;
         }
 
         .social-icon:hover {
-          color: #b6c4ff;
+          color: var(--accent-primary);
           transform: translateY(-3px);
         }
 
@@ -341,27 +364,27 @@ const AthiraHero = ({ data }) => {
         .lab-visual {
           position: relative;
           display: flex;
-          justify-content: flex-end;
+          justify-content: center; /* Shifted left from flex-end */
           align-items: center;
         }
 
         .lab-frame {
           position: relative;
           width: 100%;
-          max-width: 420px;
+          max-width: 440px;
           aspect-ratio: 0.85;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 40px;
           padding: 20px;
-          backdrop-filter: blur(20px);
-          box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(30px);
+          box-shadow: 0 40px 100px rgba(0, 0, 0, 0.2);
         }
 
         .frame-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(135deg, rgba(182, 196, 255, 0.1) 0%, transparent 50%);
+          background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 50%);
           pointer-events: none;
         }
 
@@ -378,25 +401,12 @@ const AthiraHero = ({ data }) => {
           height: 100%;
           object-fit: cover;
           filter: contrast(1.1) brightness(0.9) grayscale(0.2);
-          transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .lab-frame:hover .lab-portrait {
-          transform: scale(1.08);
-        }
-
-        .hud-data-tag {
-          position: absolute;
-          bottom: 20px;
-          left: 20px;
-          background: rgba(13, 13, 18, 0.8);
-          backdrop-filter: blur(10px);
-          padding: 0.4rem 0.8rem;
-          border-radius: 8px;
-          font-family: var(--font-mono);
-          font-size: 0.7rem;
-          color: #b6c4ff;
-          border: 1px solid rgba(182, 196, 255, 0.2);
+          transform: scale(1.05);
+          filter: contrast(1.1) brightness(1) grayscale(0);
         }
 
         .hud-scanner {
@@ -404,9 +414,9 @@ const AthiraHero = ({ data }) => {
           top: 0;
           left: 0;
           width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, rgba(182, 196, 255, 0.5), transparent);
-          box-shadow: 0 0 15px rgba(182, 196, 255, 0.3);
+          height: 3px;
+          background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+          box-shadow: 0 0 15px var(--accent-glow);
           animation: scanEffect 4s linear infinite;
         }
 
@@ -419,25 +429,26 @@ const AthiraHero = ({ data }) => {
 
         .orb-decoration {
           position: absolute;
-          width: 100px;
-          height: 100px;
+          width: 120px;
+          height: 120px;
           border-radius: 50%;
-          border: 1px solid rgba(182, 196, 255, 0.2);
+          border: 1px solid var(--glass-border);
           z-index: -1;
         }
 
         .orb-top {
-          top: -30px;
-          right: -30px;
-          background: radial-gradient(circle at center, rgba(182, 196, 255, 0.1), transparent);
+          top: -40px;
+          right: -40px;
+          background: radial-gradient(circle at center, var(--accent-glow), transparent);
         }
 
         .orb-bottom {
-          bottom: -40px;
-          left: -40px;
-          width: 150px;
-          height: 150px;
-          background: radial-gradient(circle at center, rgba(211, 187, 255, 0.05), transparent);
+          bottom: -50px;
+          left: -50px;
+          width: 180px;
+          height: 180px;
+          background: radial-gradient(circle at center, var(--accent-glow), transparent);
+          opacity: 0.5;
         }
 
         /* --- Responsive Styles --- */
@@ -465,9 +476,6 @@ const AthiraHero = ({ data }) => {
           .lab-actions {
             justify-content: center;
           }
-          .lab-socials {
-            justify-content: center;
-          }
         }
 
         @media (max-width: 768px) {
@@ -476,9 +484,6 @@ const AthiraHero = ({ data }) => {
           }
           .lab-title {
             font-size: 3.5rem;
-          }
-          .lab-badge {
-            margin-bottom: 2rem;
           }
           .lab-actions {
             flex-direction: column;

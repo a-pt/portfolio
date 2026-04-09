@@ -6,8 +6,8 @@ const experiences = [
   {
     company: 'Zeldin.ai',
     role: 'AI Engineer – Intern',
-    period: 'Nov 2024 – Feb 2025',
-    color: '#b6c4ff',
+    period: 'Nov 2025 – Feb 2026',
+    color: 'var(--accent-primary)',
     icon: <Brain size={20} />,
     description: 'Built LLM-powered backend infrastructure for a real-estate AI platform across 4 major modules.',
     sections: [
@@ -47,7 +47,7 @@ const experiences = [
     company: 'Texas Instruments',
     role: 'Software Engineer',
     period: 'Jul 2022 – Nov 2023',
-    color: '#d3bbff',
+    color: 'var(--accent-secondary)',
     icon: <Cpu size={20} />,
     description: 'Firmware development for TI\'s MSPM0 Arm Cortex-M0+ mixed-signal MCU family, focusing on early-silicon bring-up and peripheral enablement.',
     highlights: [
@@ -60,9 +60,9 @@ const experiences = [
   },
   {
     company: 'Siemens',
-    role: 'Deep Learning – NLP Researcher',
+    role: 'Deep Learning – NLP Research Intern',
     period: 'Jun 2020 – Jul 2020',
-    color: '#b6c4ff',
+    color: 'var(--accent-primary)',
     icon: <Brain size={20} />,
     description: 'Research on generalised learning of source-target mappings for automated data extraction from documents.',
     highlights: [
@@ -77,7 +77,7 @@ const experiences = [
     company: 'Tata Consultancy Services',
     role: 'Computer Vision Intern',
     period: 'May 2018 – Aug 2018',
-    color: '#d3bbff',
+    color: 'var(--accent-secondary)',
     icon: <Eye size={20} />,
     description: 'Realtime Occupancy Monitoring System — an OpenCV-based IoT solution for room occupancy tracking.',
     highlights: [
@@ -101,7 +101,6 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
       <div className="item-timeline">
         <div className={`timeline-node ${isOpen ? 'active' : ''}`}>
           <div className="node-core"></div>
-          <div className="node-pulse"></div>
         </div>
         {index !== experiences.length - 1 && <div className="timeline-connector"></div>}
       </div>
@@ -148,8 +147,6 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
               <ChevronDown size={22} strokeWidth={2.5} />
             </motion.div>
           </div>
-
-          <div className="header-scanning-line"></div>
         </button>
 
         <AnimatePresence initial={false}>
@@ -163,7 +160,7 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
             >
               <div className="details-inner">
                 <div className="role-summary">
-                  <div className="summary-accent"></div>
+                  <div className="summary-accent" style={{ background: `linear-gradient(to bottom, ${exp.color}, transparent)` }}></div>
                   <p className="role-description">{exp.description}</p>
                 </div>
 
@@ -210,15 +207,13 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
                 </div>
 
                 <div className="log-footer">
-                  <div className="tech-matrix">
-                    <div className="tech-tags">
-                      {exp.tech.map((t) => (
-                        <span key={t} className="tech-chip">
-                          <code className="chip-code">$</code>
-                          {t}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="tech-tags">
+                    {exp.tech.map((t) => (
+                      <span key={t} className="tech-chip">
+                        <code className="chip-code" style={{ color: exp.color }}>$</code>
+                        {t}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -275,10 +270,10 @@ const Experience = () => {
           align-items: center;
           gap: 0.8rem;
           padding: 0.6rem 1.25rem;
-          background: rgba(182, 196, 255, 0.05);
-          border: 1px solid rgba(182, 196, 255, 0.15);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 100px;
-          color: #b6c4ff;
+          color: var(--accent-primary);
           font-family: var(--font-mono);
           font-size: 0.75rem;
           letter-spacing: 0.15em;
@@ -295,9 +290,9 @@ const Experience = () => {
           font-size: clamp(2.5rem, 5vw, 4rem);
           font-weight: 700;
           letter-spacing: -0.04em;
+          color: var(--text-primary);
         }
 
-        /* Career Logbook Layout */
         .career-logbook {
           display: flex;
           flex-direction: column;
@@ -311,7 +306,6 @@ const Experience = () => {
           gap: 0;
         }
 
-        /* Timeline Elements */
         .item-timeline {
           display: flex;
           flex-direction: column;
@@ -330,56 +324,40 @@ const Experience = () => {
         .node-core {
           width: 100%;
           height: 100%;
-          border: 1px solid rgba(182, 196, 255, 0.4);
+          border: 1px solid var(--glass-border-hover);
           border-radius: 3px;
-          background: #0d0d12;
+          background: var(--bg-base);
           transform: rotate(45deg);
           transition: all 0.3s ease;
         }
 
         .timeline-node.active .node-core {
-          background: #b6c4ff;
-          border-color: #b6c4ff;
-          box-shadow: 0 0 12px rgba(182, 196, 255, 0.5);
-        }
-
-        .node-pulse {
-          position: absolute;
-          inset: -3px;
-          border: 1px solid #b6c4ff;
-          border-radius: 5px;
-          transform: rotate(45deg);
-          animation: nodePulse 2.5s infinite;
-          opacity: 0.2;
-        }
-
-        @keyframes nodePulse {
-          0% { transform: rotate(45deg) scale(1); opacity: 0.4; }
-          100% { transform: rotate(45deg) scale(1.6); opacity: 0; }
+          background: var(--accent-primary);
+          border-color: var(--accent-primary);
+          box-shadow: 0 0 12px var(--accent-glow);
         }
 
         .timeline-connector {
           width: 1px;
           flex: 1;
           background: linear-gradient(to bottom, 
-            rgba(182, 196, 255, 0.2), 
-            rgba(182, 196, 255, 0.05)
+            var(--accent-glow), 
+            transparent
           );
         }
 
-        /* Header Card Positioning */
         .item-content {
           padding-bottom: 1.5rem;
         }
 
         .log-header {
           width: 100%;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 20px;
           padding: 1.5rem 2rem;
           text-align: left;
-          color: #ffffff;
+          color: var(--text-primary);
           transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           cursor: pointer;
           position: relative;
@@ -390,7 +368,7 @@ const Experience = () => {
         .header-glass-glow {
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle at 0% 0%, rgba(182, 196, 255, 0.05), transparent 50%);
+          background: radial-gradient(circle at 0% 0%, var(--accent-glow), transparent 50%);
           opacity: 0;
           transition: opacity 0.5s ease;
         }
@@ -398,21 +376,18 @@ const Experience = () => {
         .log-header:hover .header-glass-glow { opacity: 1; }
 
         .log-header:hover {
-          background: rgba(182, 196, 255, 0.04);
-          border-color: rgba(182, 196, 255, 0.2);
+          background: var(--glass-bg-hover);
+          border-color: var(--glass-border-hover);
           transform: translateX(8px);
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
 
         .log-header.active {
-          background: rgba(13, 13, 18, 0.6);
-          border-color: rgba(182, 196, 255, 0.3);
+          background: var(--glass-bg-hover);
+          border-color: var(--accent-primary);
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
-          box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        /* HUD elements */
         .header-hud {
           display: flex;
           align-items: center;
@@ -420,27 +395,15 @@ const Experience = () => {
           margin-bottom: 1rem;
         }
 
-        .hud-id-wrap {
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-          color: #b6c4ff;
-          opacity: 0.6;
-        }
-
-        .hud-id { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; }
-        .hud-line { height: 1px; flex: 1; background: linear-gradient(90deg, rgba(182, 196, 255, 0.2), transparent); }
+        .hud-line { height: 1px; flex: 1; background: linear-gradient(90deg, var(--accent-glow), transparent); }
         
         .hud-indicator {
           display: flex;
           align-items: center;
           gap: 0.6rem;
           opacity: 0.8;
-          transition: all 0.3s ease;
-          color: #b6c4ff;
+          color: var(--accent-primary);
         }
-
-        .hud-indicator.active { opacity: 1; }
 
         .indicator-dot {
           width: 5px;
@@ -454,7 +417,6 @@ const Experience = () => {
           font-family: var(--font-mono); 
           font-size: 0.7rem; 
           letter-spacing: 0.05em;
-          white-space: nowrap;
         }
 
         .header-main {
@@ -470,16 +432,11 @@ const Experience = () => {
           gap: 1.5rem;
         }
 
-        .icon-badge-outer {
-          position: relative;
-          flex-shrink: 0;
-        }
-
         .icon-badge {
           width: 44px;
           height: 44px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 12px;
           display: flex;
           align-items: center;
@@ -497,20 +454,18 @@ const Experience = () => {
           z-index: 1;
         }
 
-        .company-name { font-size: 1.4rem; font-weight: 700; color: #ffffff; margin: 0; letter-spacing: -0.01em; }
+        .company-name { font-size: 1.4rem; font-weight: 700; color: var(--text-primary); margin: 0; }
         
         .role-wrap {
           display: flex;
           align-items: center;
           gap: 0.5rem;
           margin-top: 0.25rem;
-          color: #b6c4ff;
+          color: var(--accent-primary);
         }
         
-        .role-icon { opacity: 0.6; }
         .job-role { font-size: 0.95rem; font-weight: 500; }
 
-        /* PROMINENT CHEVRON */
         .header-chevron-wrap {
           position: absolute;
           right: 2rem;
@@ -521,56 +476,31 @@ const Experience = () => {
         .chevron-box {
           width: 36px;
           height: 36px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: rgba(255, 255, 255, 0.8);
+          color: var(--text-secondary);
           transition: all 0.3s ease;
-          backdrop-filter: blur(5px);
         }
 
         .log-header:hover .chevron-box {
-          background: #ffffff;
-          color: #0d0d12;
-          border-color: #ffffff;
-          box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+          background: var(--accent-primary);
+          color: var(--btn-primary-text);
+          border-color: var(--accent-primary);
         }
 
         .chevron-box.active {
-          background: #b6c4ff;
-          color: #0d0d12;
-          border-color: #b6c4ff;
-          box-shadow: 0 0 15px rgba(182, 196, 255, 0.5);
+          background: var(--accent-primary);
+          color: var(--btn-primary-text);
+          border-color: var(--accent-primary);
         }
 
-        .header-scanning-line {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 1px;
-          background: linear-gradient(90deg, transparent, #b6c4ff, transparent);
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-
-        .log-header:hover .header-scanning-line {
-          opacity: 0.3;
-          animation: scanLateral 2.5s infinite ease-in-out;
-        }
-
-        @keyframes scanLateral {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-
-        /* Body Details Styling */
         .log-details {
-          background: rgba(13, 13, 18, 0.4);
-          border: 1px solid rgba(182, 196, 255, 0.3);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-top: none;
           border-bottom-left-radius: 20px;
           border-bottom-right-radius: 20px;
@@ -596,14 +526,13 @@ const Experience = () => {
           top: 0;
           bottom: 0;
           width: 3px;
-          background: linear-gradient(to bottom, #b6c4ff, transparent);
           border-radius: 2px;
         }
 
         .role-description {
           font-size: 1.1rem;
           line-height: 1.7;
-          color: rgba(255, 255, 255, 0.8);
+          color: var(--text-primary);
           margin: 0;
         }
 
@@ -628,13 +557,12 @@ const Experience = () => {
         .block-tag {
           font-family: var(--font-mono);
           font-size: 0.65rem;
-          color: #b6c4ff;
-          opacity: 0.5;
+          color: var(--accent-primary);
+          opacity: 0.6;
           letter-spacing: 0.2em;
-          white-space: nowrap;
         }
 
-        .block-line { height: 1px; flex: 1; background: rgba(182, 196, 255, 0.08); }
+        .block-line { height: 1px; flex: 1; background: var(--glass-border); }
 
         .bullet-list {
           list-style: none;
@@ -671,13 +599,12 @@ const Experience = () => {
         .bullet-text {
           font-size: 1rem;
           line-height: 1.6;
-          color: rgba(255, 255, 255, 0.65);
+          color: var(--text-secondary);
         }
 
-        /* Footer Details */
         .log-footer {
           padding-top: 2rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid var(--glass-border);
         }
 
         .tech-tags {
@@ -688,44 +615,36 @@ const Experience = () => {
 
         .tech-chip {
           padding: 0.5rem 1rem;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 10px;
           font-family: var(--font-mono);
           font-size: 0.75rem;
-          color: rgba(255, 255, 255, 0.7);
+          color: var(--text-secondary);
           transition: all 0.3s ease;
           display: flex;
           align-items: center;
           gap: 0.4rem;
         }
 
-        .chip-code { color: #b6c4ff; opacity: 0.4; }
-
         .tech-chip:hover {
-          background: rgba(182, 196, 255, 0.06);
-          border-color: #b6c4ff;
-          color: #ffffff;
+          background: var(--glass-bg-hover);
+          border-color: var(--accent-primary);
+          color: var(--text-primary);
           transform: translateY(-2px);
         }
 
-        /* Responsive Settings */
         @media (max-width: 1024px) {
           .header-main { gap: 1rem; }
           .header-chevron-wrap { position: static; transform: none; margin-top: 1.5rem; display: flex; justify-content: flex-end; }
-          .footer-status { flex-direction: row; gap: 2rem; }
         }
 
         @media (max-width: 768px) {
           .career-log-item { grid-template-columns: 40px 1fr; }
-          .log-header { padding: 1.75rem; border-radius: 20px; }
-          .details-inner { padding: 2rem; gap: 2.5rem; }
+          .log-header { padding: 1.75rem; }
+          .details-inner { padding: 2rem; }
           .company-name { font-size: 1.4rem; }
-          .role-description { font-size: 1.1rem; }
-          .bullet-text { font-size: 1rem; }
           .header-main { flex-direction: column; align-items: flex-start; }
-          .period-badge { padding: 0.4rem 0.8rem; }
-          .log-footer { grid-template-columns: 1fr; gap: 2rem; }
         }
       `}</style>
     </div>

@@ -90,7 +90,7 @@ const Contact = ({ data }) => {
               </div>
               
               <div className="form-footer">
-                <button type="submit" className="lab-btn lab-btn-primary" disabled={status.submitting}>
+                <button type="submit" className="lab-btn btn-primary" disabled={status.submitting}>
                   <span>{status.submitting ? 'TRANSMITTING...' : 'SEND_MESSAGE'}</span>
                   <Send size={16} />
                   <div className="btn-glow"></div>
@@ -126,10 +126,10 @@ const Contact = ({ data }) => {
           align-items: center;
           gap: 0.6rem;
           padding: 0.5rem 1rem;
-          background: rgba(182, 196, 255, 0.05);
-          border: 1px solid rgba(182, 196, 255, 0.15);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 100px;
-          color: #b6c4ff;
+          color: var(--accent-primary);
           font-family: var(--font-mono);
           font-size: 0.7rem;
           letter-spacing: 0.15em;
@@ -140,40 +140,42 @@ const Contact = ({ data }) => {
           font-size: clamp(2.5rem, 5vw, 4rem);
           font-weight: 700;
           letter-spacing: -0.04em;
+          color: var(--text-primary);
         }
 
         .terminal-card {
-          background: rgba(13, 13, 18, 0.8);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 24px;
           overflow: hidden;
-          box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(20px);
         }
 
         .terminal-header {
-          background: rgba(255, 255, 255, 0.03);
+          background: var(--glass-bg-hover);
           padding: 1rem 1.5rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid var(--glass-border);
         }
 
         .terminal-controls { display: flex; gap: 8px; }
-        .terminal-controls span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); }
-        .terminal-id { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(255, 255, 255, 0.3); letter-spacing: 0.1em; }
+        .terminal-controls span { width: 10px; height: 10px; border-radius: 50%; background: var(--glass-border-hover); }
+        .terminal-id { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-tertiary); letter-spacing: 0.1em; }
 
         .terminal-body { padding: 3rem; }
 
         .terminal-intro {
           font-family: var(--font-mono);
           font-size: 1rem;
-          color: #b6c4ff;
+          color: var(--accent-primary);
           line-height: 1.6;
           margin-bottom: 3rem;
         }
 
-        .prompt { color: #d3bbff; margin-right: 0.5rem; }
+        .prompt { color: var(--accent-secondary); margin-right: 0.5rem; }
 
         .lab-form { display: flex; flex-direction: column; gap: 2rem; }
 
@@ -184,17 +186,17 @@ const Contact = ({ data }) => {
         .lab-input-group label {
           font-family: var(--font-mono);
           font-size: 0.7rem;
-          color: rgba(255, 255, 255, 0.4);
+          color: var(--text-tertiary);
           letter-spacing: 0.1em;
         }
 
         .lab-input-group input,
         .lab-input-group textarea {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 12px;
           padding: 1rem;
-          color: #ffffff;
+          color: var(--text-primary);
           font-size: 1rem;
           transition: all 0.3s ease;
         }
@@ -202,9 +204,15 @@ const Contact = ({ data }) => {
         .lab-input-group input:focus,
         .lab-input-group textarea:focus {
           outline: none;
-          background: rgba(182, 196, 255, 0.05);
-          border-color: #b6c4ff;
-          box-shadow: 0 0 20px rgba(182, 196, 255, 0.1);
+          background: var(--glass-bg-hover);
+          border-color: var(--accent-primary);
+          box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .lab-input-group input::placeholder,
+        .lab-input-group textarea::placeholder {
+           color: var(--text-tertiary);
+           opacity: 0.5;
         }
 
         .form-footer {
@@ -212,33 +220,6 @@ const Contact = ({ data }) => {
           align-items: center;
           gap: 2rem;
           margin-top: 1rem;
-        }
-
-        .lab-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 1rem 2rem;
-          border-radius: 100px;
-          font-weight: 700;
-          font-size: 0.9rem;
-          letter-spacing: 0.05em;
-          font-family: var(--font-mono);
-          cursor: pointer;
-          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .lab-btn-primary {
-          background: #b6c4ff;
-          color: #0d0d12;
-          border: none;
-        }
-
-        .lab-btn-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 0 30px rgba(182, 196, 255, 0.4);
         }
 
         .btn-glow {
@@ -262,7 +243,7 @@ const Contact = ({ data }) => {
           font-size: 0.8rem;
         }
 
-        .status-msg.success { color: #b6c4ff; }
+        .status-msg.success { color: var(--accent-primary); }
         .status-msg.error { color: #ff8e8e; }
 
         @media (max-width: 768px) {
@@ -270,7 +251,6 @@ const Contact = ({ data }) => {
           .terminal-body { padding: 1.75rem; }
           .form-row { grid-template-columns: 1fr; gap: 1.5rem; }
           .form-footer { flex-direction: column; align-items: stretch; gap: 1.5rem; }
-          .lab-btn { justify-content: center; }
         }
       `}</style>
     </div>
@@ -278,4 +258,3 @@ const Contact = ({ data }) => {
 };
 
 export default Contact;
-

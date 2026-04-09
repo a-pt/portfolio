@@ -5,12 +5,24 @@ const NeuralNetworkBackground = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let animationFrameId;
     let particles = [];
     let particleCount = 120;
     let connectionDistance = 200;
     const mouse = { x: null, y: null, radius: 180 };
+
+    // Get colors from CSS variables
+    const getThemeColors = () => {
+      const styles = getComputedStyle(document.documentElement);
+      return {
+        node: styles.getPropertyValue('--neural-node').trim() || 'rgba(182, 196, 255, 0.85)',
+        line: styles.getPropertyValue('--neural-line').trim() || 'rgba(182, 196, 255, 0.15)'
+      };
+    };
+
+    let colors = getThemeColors();
 
     const getSettings = () => {
       const w = window.innerWidth;
@@ -51,12 +63,14 @@ const NeuralNetworkBackground = () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(211, 187, 255, 0.85)';
+        ctx.fillStyle = colors.node;
         ctx.fill();
-        // Soft glow
+        
+        // Soft glow 
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(211, 187, 255, 0.08)';
+        const glowOpacity = '0.08';
+        ctx.fillStyle = colors.node.replace(/[\d.]+\)$/g, `${glowOpacity})`);
         ctx.fill();
       }
     }
@@ -99,7 +113,9 @@ const NeuralNetworkBackground = () => {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(211, 187, 255, ${opacity * 0.5})`;
+            
+            // Apply theme-aware line color with opacity
+            ctx.strokeStyle = colors.line.replace(/[\d.]+\)$/g, `${opacity * 0.5})`);
             ctx.lineWidth = opacity * 1.2;
             ctx.stroke();
           }
@@ -109,10 +125,9 @@ const NeuralNetworkBackground = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    // All functions defined — safe to init and start
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', handleMouseMove);
-    resize();   // sets canvas size, particleCount, connectionDistance, and calls init()
+    resize();
     animate();
 
     return () => {
@@ -120,7 +135,7 @@ const NeuralNetworkBackground = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, []); // Static background
 
   return (
     <canvas
@@ -129,7 +144,7 @@ const NeuralNetworkBackground = () => {
         position: 'absolute',
         top: 0,
         left: 0,
-        zIndex: -1,
+        zIndex: 0,
         pointerEvents: 'none',
       }}
     />

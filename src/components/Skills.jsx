@@ -42,7 +42,7 @@ const Skills = ({ data }) => {
             viewport={{ once: true, margin: '-50px' }}
           >
             <div className="cat-header">
-              <div className="cat-icon-wrap" style={{ color: index % 2 === 0 ? '#b6c4ff' : '#d3bbff' }}>
+              <div className="cat-icon-wrap" style={{ color: 'var(--accent-primary)' }}>
                 {cat.icon}
               </div>
               <h3 className="cat-name">{cat.name}</h3>
@@ -51,7 +51,7 @@ const Skills = ({ data }) => {
             <div className="skills-cluster">
               {cat.skills.map((skill, i) => (
                 <div key={i} className="skill-item">
-                  <span className="skill-dot" style={{ backgroundColor: index % 2 === 0 ? '#b6c4ff' : '#d3bbff' }}></span>
+                  <span className="skill-dot" style={{ backgroundColor: 'var(--accent-primary)' }}></span>
                   {skill}
                 </div>
               ))}
@@ -74,10 +74,10 @@ const Skills = ({ data }) => {
           align-items: center;
           gap: 0.6rem;
           padding: 0.5rem 1rem;
-          background: rgba(182, 196, 255, 0.05);
-          border: 1px solid rgba(182, 196, 255, 0.15);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 100px;
-          color: #b6c4ff;
+          color: var(--accent-primary);
           font-family: var(--font-mono);
           font-size: 0.7rem;
           letter-spacing: 0.15em;
@@ -88,6 +88,7 @@ const Skills = ({ data }) => {
           font-size: clamp(2.5rem, 5vw, 4rem);
           font-weight: 700;
           letter-spacing: -0.04em;
+          color: var(--text-primary);
         }
 
         .skills-matrix {
@@ -97,8 +98,8 @@ const Skills = ({ data }) => {
         }
 
         .skill-category-box {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 24px;
           padding: 2rem;
           backdrop-filter: blur(10px);
@@ -106,8 +107,8 @@ const Skills = ({ data }) => {
         }
 
         .skill-category-box:hover {
-          background: rgba(255, 255, 255, 0.04);
-          border-color: rgba(182, 196, 255, 0.2);
+          background: var(--glass-bg-hover);
+          border-color: var(--glass-border-hover);
           transform: translateY(-5px);
         }
 
@@ -121,7 +122,7 @@ const Skills = ({ data }) => {
         .cat-icon-wrap {
           width: 40px;
           height: 40px;
-          background: rgba(255, 255, 255, 0.03);
+          background: var(--glass-bg-hover);
           border-radius: 10px;
           display: flex;
           align-items: center;
@@ -131,7 +132,7 @@ const Skills = ({ data }) => {
         .cat-name {
           font-size: 1.1rem;
           font-weight: 700;
-          color: #ffffff;
+          color: var(--text-primary);
         }
 
         .skills-cluster {
@@ -146,16 +147,16 @@ const Skills = ({ data }) => {
           gap: 0.75rem;
           font-family: var(--font-mono);
           font-size: 0.9rem;
-          color: rgba(255, 255, 255, 0.6);
+          color: var(--text-secondary);
           padding: 0.5rem 0.8rem;
-          background: rgba(255, 255, 255, 0.015);
+          background: var(--glass-bg);
           border-radius: 8px;
           transition: all 0.3s ease;
         }
 
         .skill-category-box:hover .skill-item {
-          color: #ffffff;
-          background: rgba(255, 255, 255, 0.03);
+          color: var(--text-primary);
+          background: var(--glass-bg-hover);
         }
 
         .skill-dot {
@@ -177,4 +178,3 @@ const Skills = ({ data }) => {
 };
 
 export default Skills;
-

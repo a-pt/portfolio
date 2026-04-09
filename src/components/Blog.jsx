@@ -77,10 +77,10 @@ const Blog = ({ data }) => {
           align-items: center;
           gap: 0.6rem;
           padding: 0.5rem 1rem;
-          background: rgba(182, 196, 255, 0.05);
-          border: 1px solid rgba(182, 196, 255, 0.15);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 100px;
-          color: #b6c4ff;
+          color: var(--accent-primary);
           font-family: var(--font-mono);
           font-size: 0.7rem;
           letter-spacing: 0.15em;
@@ -91,6 +91,7 @@ const Blog = ({ data }) => {
           font-size: clamp(2.5rem, 5vw, 4rem);
           font-weight: 700;
           letter-spacing: -0.04em;
+          color: var(--text-primary);
         }
 
         .blog-matrix {
@@ -100,8 +101,8 @@ const Blog = ({ data }) => {
         }
 
         .blog-node {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 28px;
           padding: 2rem;
           position: relative;
@@ -112,9 +113,10 @@ const Blog = ({ data }) => {
         }
 
         .blog-node:hover {
-          background: rgba(182, 196, 255, 0.04);
-          border-color: rgba(182, 196, 255, 0.2);
+          background: var(--glass-bg-hover);
+          border-color: var(--glass-border-hover);
           transform: translateY(-8px);
+          box-shadow: 0 40px 80px -20px var(--accent-glow);
         }
 
         .node-hud {
@@ -122,12 +124,12 @@ const Blog = ({ data }) => {
           align-items: center;
           gap: 1rem;
           margin-bottom: 2rem;
-          opacity: 0.4;
+          opacity: 0.6;
         }
 
-        .node-id { font-family: var(--font-mono); font-size: 0.7rem; color: #b6c4ff; }
-        .node-line { height: 1px; flex: 1; background: linear-gradient(90deg, #b6c4ff, transparent); }
-        .node-icon { color: #b6c4ff; }
+        .node-id { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-primary); }
+        .node-line { height: 1px; flex: 1; background: linear-gradient(90deg, var(--accent-primary), transparent); }
+        .node-icon { color: var(--accent-primary); }
 
         .node-meta {
           display: flex;
@@ -141,21 +143,21 @@ const Blog = ({ data }) => {
           gap: 0.5rem;
           font-family: var(--font-mono);
           font-size: 0.65rem;
-          color: rgba(255, 255, 255, 0.4);
+          color: var(--text-tertiary);
           letter-spacing: 0.05em;
         }
 
         .node-title {
           font-size: 1.5rem;
           font-weight: 700;
-          color: #ffffff;
+          color: var(--text-primary);
           line-height: 1.3;
           margin-bottom: 1rem;
         }
 
         .node-excerpt {
           font-size: 1rem;
-          color: rgba(255, 255, 255, 0.6);
+          color: var(--text-secondary);
           line-height: 1.6;
           margin-bottom: 2.5rem;
         }
@@ -171,20 +173,19 @@ const Blog = ({ data }) => {
           align-items: center;
           gap: 0.75rem;
           padding: 0.8rem 1.5rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 12px;
-          color: #ffffff;
+          color: var(--text-primary);
           font-family: var(--font-mono);
           font-size: 0.75rem;
           transition: all 0.3s ease;
         }
 
         .read-more-btn:hover {
-          background: #ffffff;
-          color: #0d0d12;
-          border-color: #ffffff;
-          box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+          background: var(--btn-outline-hover-bg);
+          color: var(--btn-outline-hover-text);
+          border-color: var(--btn-outline-hover-border);
         }
 
         @media (max-width: 1200px) {

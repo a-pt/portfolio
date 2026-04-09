@@ -102,10 +102,10 @@ const About = ({ data }) => {
           align-items: center;
           gap: 0.8rem;
           padding: 0.6rem 1.25rem;
-          background: rgba(182, 196, 255, 0.05);
-          border: 1px solid rgba(182, 196, 255, 0.15);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 100px;
-          color: #b6c4ff;
+          color: var(--accent-primary);
           font-family: var(--font-mono);
           font-size: 0.75rem;
           letter-spacing: 0.15em;
@@ -122,6 +122,7 @@ const About = ({ data }) => {
           font-size: clamp(2.5rem, 5vw, 4rem);
           font-weight: 700;
           letter-spacing: -0.04em;
+          color: var(--text-primary);
         }
 
         /* Split Layout Styling */
@@ -134,8 +135,8 @@ const About = ({ data }) => {
 
         /* Dossier Panel (Bio) */
         .dossier-panel {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 32px;
           padding: 3.5rem;
           backdrop-filter: blur(20px);
@@ -152,13 +153,13 @@ const About = ({ data }) => {
           opacity: 0.5;
         }
 
-        .header-line { height: 1px; flex: 1; background: linear-gradient(90deg, #b6c4ff, transparent); }
-        .mono-label { font-family: var(--font-mono); font-size: 0.75rem; color: #b6c4ff; letter-spacing: 0.2em; }
+        .header-line { height: 1px; flex: 1; background: linear-gradient(90deg, var(--accent-primary), transparent); }
+        .mono-label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-primary); letter-spacing: 0.2em; }
 
         .editorial-text {
           font-size: 1.2rem;
           line-height: 1.8;
-          color: rgba(255, 255, 255, 0.65);
+          color: var(--text-secondary);
           margin-bottom: 1.5rem;
         }
 
@@ -167,11 +168,11 @@ const About = ({ data }) => {
           align-items: center;
           gap: 2rem;
           padding-top: 2.5rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid var(--glass-border);
         }
 
-        .coord-marker { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(255, 255, 255, 0.2); }
-        .footer-line { flex: 1; height: 1px; background: rgba(255, 255, 255, 0.05); }
+        .coord-marker { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-tertiary); }
+        .footer-line { flex: 1; height: 1px; background: var(--glass-border); }
 
         .status-indicator {
           display: flex;
@@ -179,14 +180,14 @@ const About = ({ data }) => {
           gap: 0.8rem;
           font-family: var(--font-mono);
           font-size: 0.7rem;
-          color: #b6c4ff;
+          color: var(--accent-primary);
         }
 
-        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #b6c4ff; }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-primary); }
         .pulsed { animation: glowPulse 2s infinite; }
         @keyframes glowPulse {
-          0%, 100% { opacity: 0.4; box-shadow: 0 0 0px #b6c4ff; }
-          50% { opacity: 1; box-shadow: 0 0 10px #b6c4ff; }
+          0%, 100% { opacity: 0.4; box-shadow: 0 0 0px var(--accent-primary); }
+          50% { opacity: 1; box-shadow: 0 0 10px var(--accent-primary); }
         }
 
         /* Recognition Panel */
@@ -210,8 +211,8 @@ const About = ({ data }) => {
         }
 
         .recognition-module {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 20px;
           padding: 1.75rem;
           position: relative;
@@ -220,8 +221,8 @@ const About = ({ data }) => {
         }
 
         .recognition-module:hover {
-          border-color: rgba(182, 196, 255, 0.2);
-          background: rgba(182, 196, 255, 0.04);
+          border-color: var(--glass-border-hover);
+          background: var(--glass-bg-hover);
           transform: translateX(10px);
         }
 
@@ -235,15 +236,15 @@ const About = ({ data }) => {
         .module-id {
           font-family: var(--font-mono);
           font-size: 0.65rem;
-          color: rgba(255, 255, 255, 0.3);
+          color: var(--text-tertiary);
           letter-spacing: 0.1em;
         }
 
-        .text-active { color: #b6c4ff; }
+        .text-active { color: var(--accent-primary); }
 
         .achievement-text {
           font-size: 1rem;
-          color: rgba(255, 255, 255, 0.8);
+          color: var(--text-primary);
           line-height: 1.5;
           font-weight: 500;
         }
@@ -252,7 +253,7 @@ const About = ({ data }) => {
           position: absolute;
           top: 0; left: 0;
           width: 100%; height: 100%;
-          background: linear-gradient(135deg, rgba(182, 196, 255, 0.1), transparent);
+          background: linear-gradient(135deg, var(--accent-glow), transparent);
           opacity: 0;
           transition: opacity 0.4s ease;
         }

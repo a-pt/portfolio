@@ -87,10 +87,10 @@ const Projects = ({ data }) => {
           align-items: center;
           gap: 0.6rem;
           padding: 0.5rem 1rem;
-          background: rgba(182, 196, 255, 0.05);
-          border: 1px solid rgba(182, 196, 255, 0.15);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 100px;
-          color: #b6c4ff;
+          color: var(--accent-primary);
           font-family: var(--font-mono);
           font-size: 0.7rem;
           letter-spacing: 0.15em;
@@ -101,6 +101,7 @@ const Projects = ({ data }) => {
           font-size: clamp(2.5rem, 5vw, 4rem);
           font-weight: 700;
           letter-spacing: -0.04em;
+          color: var(--text-primary);
         }
 
         .projects-matrix {
@@ -110,21 +111,23 @@ const Projects = ({ data }) => {
         }
 
         .project-module {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 32px;
           padding: 2.5rem;
           position: relative;
           overflow: hidden;
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           backdrop-filter: blur(10px);
+          display: flex;
+          flex-direction: column;
         }
 
         .project-module:hover {
-          background: rgba(182, 196, 255, 0.04);
-          border-color: rgba(182, 196, 255, 0.2);
+          background: var(--glass-bg-hover);
+          border-color: var(--glass-border-hover);
           transform: translateY(-8px);
-          box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 40px 80px -20px var(--accent-glow);
         }
 
         .module-hud {
@@ -132,13 +135,13 @@ const Projects = ({ data }) => {
           align-items: center;
           gap: 1rem;
           margin-bottom: 2rem;
-          opacity: 0.4;
+          opacity: 0.6;
         }
 
-        .hud-line { height: 1px; flex: 1; background: linear-gradient(90deg, #b6c4ff, transparent); }
+        .hud-line { height: 1px; flex: 1; background: linear-gradient(90deg, var(--accent-primary), transparent); }
         .hud-dots { display: flex; gap: 4px; }
-        .hud-dots span { width: 4px; height: 4px; border-radius: 50%; background: #b6c4ff; }
-        .hud-id { font-family: var(--font-mono); font-size: 0.65rem; color: #b6c4ff; letter-spacing: 0.1em; }
+        .hud-dots span { width: 4px; height: 4px; border-radius: 50%; background: var(--accent-primary); }
+        .hud-id { font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent-primary); letter-spacing: 0.1em; }
 
         .module-top {
           display: flex;
@@ -151,7 +154,7 @@ const Projects = ({ data }) => {
         .module-title {
           font-size: 1.6rem;
           font-weight: 700;
-          color: #ffffff;
+          color: var(--text-primary);
           line-height: 1.2;
         }
 
@@ -160,25 +163,24 @@ const Projects = ({ data }) => {
           align-items: center;
           gap: 0.6rem;
           padding: 0.6rem 1rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           border-radius: 12px;
-          color: rgba(255, 255, 255, 0.6);
+          color: var(--text-secondary);
           font-family: var(--font-mono);
           font-size: 0.75rem;
           transition: all 0.3s ease;
         }
 
         .module-link:hover {
-          background: #ffffff;
-          color: #0d0d12;
-          border-color: #ffffff;
-          box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+          background: var(--btn-outline-hover-bg);
+          color: var(--btn-outline-hover-text);
+          border-color: var(--btn-outline-hover-border);
         }
 
         .module-desc {
           font-size: 1rem;
-          color: rgba(255, 255, 255, 0.6);
+          color: var(--text-secondary);
           line-height: 1.7;
           margin-bottom: 2.5rem;
           min-height: 80px;
@@ -187,7 +189,7 @@ const Projects = ({ data }) => {
         .module-footer {
           margin-top: auto;
           padding-top: 1.5rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid var(--glass-border);
         }
 
         .tech-stack {
@@ -200,22 +202,22 @@ const Projects = ({ data }) => {
           display: inline-flex;
           align-items: center;
           gap: 0.4rem;
-          background: rgba(182, 196, 255, 0.05);
-          border: 1px solid rgba(182, 196, 255, 0.1);
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
           padding: 0.35rem 0.75rem;
           border-radius: 8px;
           font-family: var(--font-mono);
           font-size: 0.7rem;
-          color: #b6c4ff;
+          color: var(--accent-primary);
           transition: all 0.3s ease;
         }
 
         .project-module:hover .tech-pill {
-          border-color: rgba(182, 196, 255, 0.3);
-          background: rgba(182, 196, 255, 0.1);
+          border-color: var(--accent-primary);
+          background: var(--glass-bg-hover);
         }
 
-        .pill-icon { opacity: 0.5; }
+        .pill-icon { opacity: 0.6; }
 
         .desktop-only { display: block; }
 

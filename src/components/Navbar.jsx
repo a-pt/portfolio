@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Menu, X, Binary } from 'lucide-react';
+import { Menu, X, Binary, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
@@ -33,29 +33,35 @@ const Navbar = () => {
       <div className="nav-container">
         <Link to="/" className="nav-logo">
           <Binary size={24} className="logo-icon" />
-          <span className="logo-text">ATHIRA_PT</span>
+          <span className="logo-text">A_PT</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="nav-links-desktop">
-          {navItems.map(({ label, path }) => (
-            <NavLink
-              key={path}
-              to={path}
-              className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
-            >
-              <span className="item-label">{label}</span>
-            </NavLink>
-          ))}
+        <div className="nav-actions-desktop">
+          <div className="nav-links-desktop">
+            {navItems.map(({ label, path }) => (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+              >
+                <span className="item-label">{label}</span>
+              </NavLink>
+            ))}
+          </div>
+
         </div>
 
-        <button 
-          className="mobile-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle Menu"
-        >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="nav-actions-mobile">
+          
+          <button 
+            className="mobile-toggle"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle Menu"
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -103,9 +109,9 @@ const Navbar = () => {
 
         .lab-navbar.scrolled {
           height: 70px;
-          background: rgba(13, 13, 18, 0.8);
+          background: var(--nav-bg);
           backdrop-filter: blur(15px);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid var(--nav-border);
         }
 
         .nav-container {
@@ -122,16 +128,22 @@ const Navbar = () => {
           display: flex;
           align-items: center;
           gap: 1rem;
-          color: #ffffff;
+          color: var(--text-primary);
           text-decoration: none;
         }
 
-        .logo-icon { color: #b6c4ff; }
+        .logo-icon { color: var(--accent-primary); }
         .logo-text {
           font-family: var(--font-mono);
           font-weight: 700;
           font-size: 1.1rem;
           letter-spacing: 0.1em;
+        }
+
+        .nav-actions-desktop {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
         }
 
         .nav-links-desktop {
@@ -153,13 +165,13 @@ const Navbar = () => {
           font-size: 0.75rem;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          color: rgba(255, 255, 255, 0.5);
+          color: var(--text-secondary);
           transition: all 0.3s ease;
         }
 
         .nav-item:hover .item-label,
         .nav-item.active .item-label {
-          color: #ffffff;
+          color: var(--text-primary);
         }
 
         .nav-item.active::after {
@@ -169,15 +181,38 @@ const Navbar = () => {
           left: 1.25rem;
           right: 1.25rem;
           height: 1px;
-          background: #b6c4ff;
-          box-shadow: 0 0 10px rgba(182, 196, 255, 0.5);
+          background: var(--accent-primary);
+          box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .theme-toggle {
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
+          color: var(--text-primary);
+          padding: 0.6rem;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+          background: var(--glass-bg-hover);
+          border-color: var(--accent-primary);
+          transform: translateY(-2px);
+        }
+
+        .nav-actions-mobile {
+          display: none;
+          align-items: center;
+          gap: 1rem;
         }
 
         .mobile-toggle {
-          display: none;
           background: none;
           border: none;
-          color: #ffffff;
+          color: var(--text-primary);
           cursor: pointer;
           padding: 0.5rem;
         }
@@ -187,9 +222,9 @@ const Navbar = () => {
           top: 100%;
           left: 0;
           right: 0;
-          background: rgba(13, 13, 18, 0.95);
+          background: var(--nav-bg);
           backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid var(--nav-border);
           padding: 2rem;
         }
 
@@ -204,11 +239,7 @@ const Navbar = () => {
           align-items: center;
           gap: 1.5rem;
           text-decoration: none;
-          color: rgba(255, 255, 255, 0.5);
-        }
-
-        .mobile-id {
-          display: none;
+          color: var(--text-secondary);
         }
 
         .mobile-label {
@@ -219,13 +250,13 @@ const Navbar = () => {
         }
 
         .mobile-link.active .mobile-label {
-          color: #ffffff;
+          color: var(--text-primary);
           font-weight: 700;
         }
 
         @media (max-width: 1024px) {
-          .nav-links-desktop { display: none; }
-          .mobile-toggle { display: block; }
+          .nav-actions-desktop { display: none; }
+          .nav-actions-mobile { display: flex; }
           .nav-container { padding: 0 1.5rem; }
           .lab-navbar { height: 75px; }
         }
@@ -235,4 +266,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
