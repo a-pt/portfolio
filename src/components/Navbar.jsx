@@ -104,6 +104,7 @@ const Navbar = () => {
           height: 90px;
           z-index: 1000;
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          background: var(--nav-bg);
           border-bottom: 1px solid transparent;
         }
 

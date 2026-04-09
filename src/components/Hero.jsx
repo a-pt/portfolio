@@ -49,7 +49,6 @@ const AthiraHero = ({ data }) => {
                     {char}
                   </motion.span>
                 ))}
-                <span className="cursor-blink">|</span>
               </span>
             </motion.h1>
 
@@ -135,7 +134,7 @@ const AthiraHero = ({ data }) => {
                   className="btn-content-wrap"
                 >
                   <span className="btn-text-reveal">
-                    {"Get In Touch".split("").map((char, index) => (
+                    {"Get in Touch".split("").map((char, index) => (
                       <motion.span 
                         key={index} 
                         variants={{
@@ -147,7 +146,6 @@ const AthiraHero = ({ data }) => {
                       </motion.span>
                     ))}
                   </span>
-                  <ArrowRight size={18} className="arrow-icon" />
                 </motion.span>
                 <div className="btn-glow"></div>
                 <div className="btn-scanner"></div>
@@ -225,16 +223,12 @@ const AthiraHero = ({ data }) => {
         .glow-orb {
           position: absolute;
           border-radius: 50%;
-          filter: blur(100px);
+          filter: blur(120px);
           z-index: 1;
-          opacity: 0.2;
+          opacity: 0.15;
           transition: all 1s ease;
         }
 
-        [data-theme='light'] .glow-orb {
-          opacity: 0.1;
-          filter: blur(120px);
-        }
 
         .orb-1 {
           top: 10%;
@@ -245,11 +239,12 @@ const AthiraHero = ({ data }) => {
         }
 
         .orb-2 {
-          bottom: 10%;
-          left: 5%;
-          width: 600px;
-          height: 600px;
+          bottom: -5%;
+          left: -5%;
+          width: 500px;
+          height: 500px;
           background: var(--accent-secondary);
+          opacity: 0.1; /* Further reduced for left side */
         }
 
         /* --- Container & Layout --- */
@@ -301,17 +296,6 @@ const AthiraHero = ({ data }) => {
           position: relative;
         }
 
-        .cursor-blink {
-          display: inline-block;
-          color: var(--accent-primary);
-          margin-left: 0.2rem;
-          animation: blink 1s step-end infinite;
-          font-weight: 300;
-        }
-
-        @keyframes blink {
-          50% { opacity: 0; }
-        }
 
         .lab-bio {
           font-size: 1.2rem;
@@ -396,6 +380,17 @@ const AthiraHero = ({ data }) => {
           background: var(--btn-primary-bg);
           color: var(--btn-primary-text);
           border: none;
+          box-shadow: 0 10px 30px -10px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+          background: var(--text-primary);
+          transform: translateY(-5px) scale(1.02);
+          box-shadow: 0 20px 40px -10px var(--accent-glow);
+        }
+
+        .btn-primary:active {
+          transform: translateY(-2px) scale(0.98);
         }
 
         .btn-outline:hover {
@@ -481,7 +476,6 @@ const AthiraHero = ({ data }) => {
 
         .lab-frame:hover .lab-portrait {
           transform: scale(1.05);
-          filter: contrast(1.1) brightness(1) grayscale(0);
         }
 
         .hud-scanner {
