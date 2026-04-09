@@ -283,7 +283,7 @@ const AthiraHero = ({ data }) => {
         }
 
         .lab-title {
-          font-size: clamp(3.5rem, 8vw, 6.5rem);
+          font-size: clamp(3.2rem, 7vw, 5.5rem);
           font-weight: 800;
           line-height: 1;
           letter-spacing: -0.04em;
