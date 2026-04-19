@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Briefcase, Cpu, Brain, Eye, Sparkles, Activity, Zap } from 'lucide-react';
+import { ChevronRight, Briefcase, Cpu, Brain, Eye, Sparkles, Activity, Zap, X, Maximize2 } from 'lucide-react';
 
 const experiences = [
   {
@@ -89,7 +89,7 @@ const experiences = [
   },
 ];
 
-const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
+const ExperienceCard = ({ exp, onOpen, index }) => {
   return (
     <motion.div
       className="career-log-item"
@@ -99,7 +99,7 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
       viewport={{ once: true, margin: '-50px' }}
     >
       <div className="item-timeline">
-        <div className={`timeline-node ${isOpen ? 'active' : ''}`}>
+        <div className="timeline-node">
           <div className="node-core"></div>
         </div>
         {index !== experiences.length - 1 && <div className="timeline-connector"></div>}
@@ -107,13 +107,13 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
 
       <div className="item-content">
         <button
-          className={`log-header ${isOpen ? 'active' : ''}`}
-          onClick={onToggle}
+          className="log-header"
+          onClick={onOpen}
         >
           <div className="header-glass-glow"></div>
           <div className="header-hud">
             <div className="hud-line"></div>
-            <div className={`hud-indicator ${isOpen ? 'active' : ''}`}>
+            <div className="hud-indicator">
               <div className="indicator-dot"></div>
               <span className="hud-status">{exp.period}</span>
             </div>
@@ -138,95 +138,130 @@ const ExperienceCard = ({ exp, isOpen, onToggle, index }) => {
             
           </div>
 
-          <div className="header-chevron-wrap">
-            <motion.div
-              className={`chevron-box ${isOpen ? 'active' : ''}`}
-              animate={{ rotate: isOpen ? 180 : 0, scale: isOpen ? 1.1 : 1 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            >
-              <ChevronDown size={22} strokeWidth={2.5} />
-            </motion.div>
+          <div className="header-action">
+            <div className="view-log-btn">
+              <span className="btn-text">VIEW_LOG</span>
+              <Maximize2 size={14} className="btn-icon" />
+            </div>
           </div>
         </button>
 
-        <AnimatePresence initial={false}>
-          {isOpen && (
-            <motion.div
-              className="log-details"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="details-inner">
-                <div className="role-summary">
-                  <div className="summary-accent" style={{ background: `linear-gradient(to bottom, ${exp.color}, transparent)` }}></div>
-                  <p className="role-description">{exp.description}</p>
-                </div>
-
-                <div className="achievements-matrix">
-                  {exp.sections ? (
-                    exp.sections.map((sec, si) => (
-                      <div key={si} className="achievement-block">
-                        <div className="block-meta">
-                          <div className="block-tag">{sec.heading.toUpperCase()}</div>
-                          <div className="block-line"></div>
-                        </div>
-                        <ul className="bullet-list">
-                          {sec.bullets.map((b, bi) => (
-                            <li key={bi}>
-                              <div className="bullet-marker-wrap">
-                                <div className="bullet-marker" style={{ background: exp.color }}></div>
-                                <div className="bullet-glow" style={{ background: exp.color }}></div>
-                              </div>
-                              <span className="bullet-text">{b}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="achievement-block">
-                      <div className="block-meta">
-                        <div className="block-tag">KEY_HIGHLIGHTS</div>
-                        <div className="block-line"></div>
-                      </div>
-                      <ul className="bullet-list">
-                        {exp.highlights.map((h, i) => (
-                          <li key={i}>
-                            <div className="bullet-marker-wrap">
-                              <div className="bullet-marker" style={{ background: exp.color }}></div>
-                              <div className="bullet-glow" style={{ background: exp.color }}></div>
-                            </div>
-                            <span className="bullet-text">{h}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-
-                <div className="log-footer">
-                  <div className="tech-tags">
-                    {exp.tech.map((t) => (
-                      <span key={t} className="tech-chip">
-                        <code className="chip-code" style={{ color: exp.color }}>$</code>
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </motion.div>
   );
 };
 
+const ExperienceModal = ({ exp, onClose }) => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  return (
+    <div className="modal-fixed-overlay">
+      <motion.div 
+        className="modal-backdrop"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      />
+      
+      <motion.div 
+        className="modal-container"
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+      >
+        <div className="modal-glass">
+          <div className="modal-header">
+            <div className="modal-title-area">
+              <div className="modal-badge">
+                <div className="badge-dot" style={{ backgroundColor: exp.color }}></div>
+                <span>{exp.period}</span>
+              </div>
+              <h3 className="modal-company">{exp.company}</h3>
+              <div className="modal-role">
+                <Zap size={14} style={{ color: exp.color }} />
+                <span>{exp.role}</span>
+              </div>
+            </div>
+            <button className="modal-close-btn" onClick={onClose}>
+              <X size={24} />
+            </button>
+          </div>
+
+          <div className="modal-body custom-scrollbar">
+            <div className="role-summary">
+              <div className="summary-accent" style={{ background: `linear-gradient(to bottom, ${exp.color}, transparent)` }}></div>
+              <p className="role-description">{exp.description}</p>
+            </div>
+
+            <div className="achievements-matrix">
+              {exp.sections ? (
+                exp.sections.map((sec, si) => (
+                  <div key={si} className="achievement-block">
+                    <div className="block-meta">
+                      <div className="block-tag">{sec.heading.toUpperCase()}</div>
+                      <div className="block-line"></div>
+                    </div>
+                    <ul className="bullet-list">
+                      {sec.bullets.map((b, bi) => (
+                        <li key={bi}>
+                          <div className="bullet-marker-wrap">
+                            <div className="bullet-marker" style={{ background: exp.color }}></div>
+                            <div className="bullet-glow" style={{ background: exp.color }}></div>
+                          </div>
+                          <span className="bullet-text">{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))
+              ) : (
+                <div className="achievement-block">
+                  <div className="block-meta">
+                    <div className="block-tag">KEY_HIGHLIGHTS</div>
+                    <div className="block-line"></div>
+                  </div>
+                  <ul className="bullet-list">
+                    {exp.highlights.map((h, i) => (
+                      <li key={i}>
+                        <div className="bullet-marker-wrap">
+                          <div className="bullet-marker" style={{ background: exp.color }}></div>
+                          <div className="bullet-glow" style={{ background: exp.color }}></div>
+                        </div>
+                        <span className="bullet-text">{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            <div className="modal-footer">
+              <div className="footer-tag">STACK_INVENTORY</div>
+              <div className="tech-tags">
+                {exp.tech.map((t) => (
+                  <span key={t} className="tech-chip">
+                    <code className="chip-code" style={{ color: exp.color }}>$</code>
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
 const Experience = () => {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [selectedExp, setSelectedExp] = useState(null);
 
   return (
     <div className="experience-laboratory">
@@ -250,11 +285,19 @@ const Experience = () => {
             key={exp.company}
             exp={exp}
             index={i}
-            isOpen={openIndex === i}
-            onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+            onOpen={() => setSelectedExp(exp)}
           />
         ))}
       </div>
+
+      <AnimatePresence>
+        {selectedExp && (
+          <ExperienceModal 
+            exp={selectedExp} 
+            onClose={() => setSelectedExp(null)} 
+          />
+        )}
+      </AnimatePresence>
 
       <style>{`
         .experience-laboratory {
@@ -381,13 +424,6 @@ const Experience = () => {
           transform: translateX(8px);
         }
 
-        .log-header.active {
-          background: var(--glass-bg-hover);
-          border-color: var(--accent-primary);
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
-        }
-
         .header-hud {
           display: flex;
           align-items: center;
@@ -466,53 +502,180 @@ const Experience = () => {
         
         .job-role { font-size: 0.95rem; font-weight: 500; }
 
-        .header-chevron-wrap {
+        .header-action {
           position: absolute;
           right: 2rem;
           top: 50%;
           transform: translateY(-50%);
         }
 
-        .chevron-box {
-          width: 36px;
-          height: 36px;
-          background: var(--glass-bg);
-          border: 1px solid var(--glass-border);
-          border-radius: 50%;
+        .view-log-btn {
           display: flex;
           align-items: center;
-          justify-content: center;
-          color: var(--text-secondary);
+          gap: 0.8rem;
+          padding: 0.6rem 1rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid var(--glass-border);
+          border-radius: 8px;
           transition: all 0.3s ease;
         }
 
-        .log-header:hover .chevron-box {
+        .btn-text {
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          letter-spacing: 0.1em;
+          color: var(--text-secondary);
+        }
+
+        .btn-icon {
+          color: var(--accent-primary);
+          opacity: 0.7;
+        }
+
+        .log-header:hover .view-log-btn {
           background: var(--accent-primary);
-          color: var(--btn-primary-text);
           border-color: var(--accent-primary);
         }
 
-        .chevron-box.active {
-          background: var(--accent-primary);
+        .log-header:hover .btn-text,
+        .log-header:hover .btn-icon {
           color: var(--btn-primary-text);
-          border-color: var(--accent-primary);
+          opacity: 1;
         }
 
-        .log-details {
-          background: var(--glass-bg);
-          border: 1px solid var(--glass-border);
-          border-top: none;
-          border-bottom-left-radius: 20px;
-          border-bottom-right-radius: 20px;
+        /* Modal Styles */
+        .modal-fixed-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+        }
+
+        .modal-backdrop {
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.85);
+          backdrop-filter: blur(10px);
+        }
+
+        .modal-container {
+          position: relative;
+          width: 100%;
+          max-width: 900px;
+          max-height: 85vh; /* slightly reduced to ensure it fits well */
+          display: flex;
+          z-index: 10;
+        }
+
+        .modal-glass {
+          flex: 1;
+          background: var(--bg-card);
+          border: 1px solid var(--glass-border-hover);
+          border-radius: 24px;
+          display: flex;
+          flex-direction: column;
           overflow: hidden;
-          backdrop-filter: blur(20px);
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+          min-height: 0; /* Critical for internal scrolling */
         }
 
-        .details-inner {
+        .modal-header {
           padding: 2.5rem;
+          border-bottom: 1px solid var(--glass-border);
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          background: linear-gradient(to bottom, rgba(255,255,255,0.02), transparent);
+        }
+
+        .modal-title-area {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .modal-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          padding: 0.4rem 0.8rem;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 6px;
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          width: fit-content;
+        }
+
+        .badge-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+        .modal-company {
+          font-size: 2rem;
+          font-weight: 800;
+          margin: 0.5rem 0 0.2rem;
+          background: linear-gradient(to right, var(--text-primary), var(--text-secondary));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .modal-role {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          font-size: 1.1rem;
+          color: var(--text-secondary);
+        }
+
+        .modal-close-btn {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid var(--glass-border);
+          color: var(--text-secondary);
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .modal-close-btn:hover {
+          background: rgba(255, 0, 0, 0.1);
+          color: #ff4d4d;
+          border-color: rgba(255, 0, 0, 0.2);
+          transform: rotate(90deg);
+        }
+
+        .modal-body {
+          padding: 2.5rem;
+          overflow-y: auto;
+          flex: 1;
           display: flex;
           flex-direction: column;
           gap: 2.5rem;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+
+        .modal-footer {
+          padding: 2.5rem;
+          border-top: 1px solid var(--glass-border);
+          background: rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-tag {
+          font-family: var(--font-mono);
+          font-size: 0.65rem;
+          color: var(--accent-primary);
+          opacity: 0.5;
+          letter-spacing: 0.2em;
+          margin-bottom: 1.25rem;
         }
 
         .role-summary {
@@ -540,6 +703,7 @@ const Experience = () => {
           display: flex;
           flex-direction: column;
           gap: 2.5rem;
+          margin-top: 1rem;
         }
 
         .achievement-block {
@@ -636,7 +800,9 @@ const Experience = () => {
 
         @media (max-width: 1024px) {
           .header-main { gap: 1rem; }
-          .header-chevron-wrap { position: static; transform: none; margin-top: 1.5rem; display: flex; justify-content: flex-end; }
+          .header-action { position: static; transform: none; margin-top: 1.5rem; display: flex; justify-content: flex-end; }
+          .modal-container { max-width: 100%; height: 100%; max-height: 100vh; }
+          .modal-glass { border-radius: 0; height: 100%; }
         }
 
         @media (max-width: 768px) {
