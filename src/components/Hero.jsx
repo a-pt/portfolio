@@ -549,11 +549,16 @@ const AthiraHero = ({ data }) => {
 
         @media (max-width: 768px) {
           .lab-container {
-            padding: 3rem 1.5rem;
+            padding: 2rem 1.5rem;
+          }
+          .lab-visual {
+            margin-top: 5rem;
+            margin-bottom: 0.5rem;
           }
           .lab-title {
             font-size: 2.2rem;
-            margin-top: 2rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
           }
           .lab-bio {
             font-size: 1rem;
@@ -568,13 +573,14 @@ const AthiraHero = ({ data }) => {
           }
           .lab-btn {
             width: 100%;
+            justify-content: center;
             padding: 1rem 2rem;
             font-size: 0.8rem;
           }
           .lab-frame {
-            max-width: 200px;
+            max-width: 180px;
             border-radius: 24px;
-            padding: 12px;
+            padding: 10px;
           }
           .lab-tags {
             margin-bottom: 2.5rem;
