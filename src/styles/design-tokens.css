@@ -201,6 +201,9 @@ section {
 }
 
 @media (max-width: 768px) {
+    html {
+        font-size: 13px;
+    }
     .section-title {
         font-size: 1.50rem;
         margin-bottom: 2rem;

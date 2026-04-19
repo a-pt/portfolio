@@ -178,12 +178,12 @@ function App() {
           color: var(--text-secondary);
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
           .page-wrapper {
-            padding: 100px 1.5rem 60px;
+            padding: 80px 1.25rem 40px;
           }
           .hero-wrapper .page-wrapper {
-            padding-top: 20px;
+            padding-top: 10px;
           }
         }
       `}</style>

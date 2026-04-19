@@ -806,11 +806,12 @@ const Experience = () => {
         }
 
         @media (max-width: 768px) {
-          .career-log-item { grid-template-columns: 40px 1fr; }
-          .log-header { padding: 1.75rem; }
-          .details-inner { padding: 2rem; }
-          .company-name { font-size: 1.4rem; }
+          .career-log-item { grid-template-columns: 30px 1fr; }
+          .log-header { padding: 1.5rem; }
+          .details-inner { padding: 1.5rem; }
+          .company-name { font-size: 1.2rem; }
           .header-main { flex-direction: column; align-items: flex-start; }
+          .lab-section-title { font-size: 2rem; }
         }
       `}</style>
     </div>

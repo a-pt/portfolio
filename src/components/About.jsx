@@ -269,8 +269,8 @@ const About = ({ data }) => {
         @media (max-width: 768px) {
           .lab-section-header { margin-bottom: 3rem; }
           .dossier-panel { padding: 2rem; border-radius: 24px; }
-          .editorial-text { font-size: 1.1rem; }
-          .achievement-text { font-size: 0.95rem; }
+          .editorial-text { font-size: 1rem; }
+          .achievement-text { font-size: 0.85rem; }
           .recognition-module:hover { transform: translateY(-5px); }
         }
       `}</style>

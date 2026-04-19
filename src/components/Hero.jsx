@@ -549,22 +549,39 @@ const AthiraHero = ({ data }) => {
 
         @media (max-width: 768px) {
           .lab-container {
-            padding: 4rem 1.5rem;
+            padding: 3rem 1.5rem;
           }
           .lab-title {
-            font-size: 3.5rem;
+            font-size: 2.2rem;
+            margin-top: 2rem;
+          }
+          .lab-bio {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
           }
           .lab-actions {
             flex-direction: column;
             width: 100%;
-            max-width: 320px;
+            max-width: 280px;
+            gap: 1rem;
           }
           .lab-btn {
             width: 100%;
-            justify-content: center;
+            padding: 1rem 2rem;
+            font-size: 0.8rem;
           }
           .lab-frame {
-            max-width: 320px;
+            max-width: 200px;
+            border-radius: 24px;
+            padding: 12px;
+          }
+          .lab-tags {
+            margin-bottom: 2.5rem;
+          }
+          .lab-tag {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.75rem;
           }
         }
       `}</style>

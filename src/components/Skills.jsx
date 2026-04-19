@@ -170,7 +170,9 @@ const Skills = ({ data }) => {
         @media (max-width: 768px) {
           .skills-matrix { grid-template-columns: 1fr; gap: 1.5rem; }
           .lab-section-header { margin-bottom: 3rem; }
-          .skill-category-box { padding: 1.5rem; }
+          .skill-category-box { padding: 1.25rem; }
+          .cat-name { font-size: 1rem; }
+          .skill-item { font-size: 0.8rem; padding: 0.4rem 0.6rem; }
         }
       `}</style>
     </div>
