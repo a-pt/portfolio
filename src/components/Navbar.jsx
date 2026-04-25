@@ -33,7 +33,7 @@ const Navbar = () => {
       <div className="nav-container">
         <Link to="/" className="nav-logo">
           <Binary size={24} className="logo-icon" />
-          <span className="logo-text">A_PT</span>
+          <span className="logo-text">a_pt</span>
         </Link>
 
         {/* Desktop Navigation */}

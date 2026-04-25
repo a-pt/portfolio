@@ -178,7 +178,8 @@ const AthiraHero = ({ data }) => {
               <div className="frame-overlay"></div>
               <div className="frame-content">
                 <img src="/athira.jpeg" alt="Athira PT" className="lab-portrait" />
-                <div className="hud-scanner"></div>
+                <div className="frame-reveal"></div>
+                <div className="frame-shine"></div>
               </div>
               {/* Orbital decorations */}
               <div className="orb-decoration orb-top"></div>
@@ -478,22 +479,43 @@ const AthiraHero = ({ data }) => {
           transform: scale(1.05);
         }
 
-        .hud-scanner {
+        .frame-reveal {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 3px;
-          background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
-          box-shadow: 0 0 15px var(--accent-glow);
-          animation: scanEffect 4s linear infinite;
+          inset: 0;
+          background: var(--glass-bg);
+          z-index: 2;
+          transform-origin: bottom;
+          animation: revealImage 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+          animation-delay: 0.5s;
         }
 
-        @keyframes scanEffect {
-          0% { top: 0; opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { top: 100%; opacity: 0; }
+        @keyframes revealImage {
+          0% { transform: scaleY(1); }
+          100% { transform: scaleY(0); }
+        }
+
+        .frame-shine {
+          position: absolute;
+          top: 0;
+          left: -150%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(255, 255, 255, 0.15) 50%,
+            transparent 100%
+          );
+          transform: skewX(-20deg);
+          z-index: 3;
+          animation: shineSweep 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          animation-delay: 1.5s;
+          pointer-events: none;
+        }
+
+        @keyframes shineSweep {
+          0% { left: -150%; }
+          100% { left: 150%; }
         }
 
         .orb-decoration {

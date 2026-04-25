@@ -1,5 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="120" fill="#03050a"/>
-  <text x="236" y="360" font-family="system-ui, sans-serif" font-weight="900" font-size="300" fill="#f8fafc" text-anchor="middle">A</text>
-  <circle cx="410" cy="345" r="38" fill="#38bdf8"/>
+  <defs>
+    <linearGradient id="cyan-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="purple-pink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="120" fill="#030712"/>
+
+  <!-- Inactive Connections -->
+  <line x1="140" y1="140" x2="256" y2="180" stroke="#1f2937" stroke-width="8" stroke-linecap="round" />
+  <line x1="140" y1="140" x2="256" y2="332" stroke="#1f2937" stroke-width="8" stroke-linecap="round" />
+  
+  <line x1="140" y1="256" x2="256" y2="332" stroke="#1f2937" stroke-width="8" stroke-linecap="round" />
+
+  <line x1="140" y1="372" x2="256" y2="180" stroke="#1f2937" stroke-width="8" stroke-linecap="round" />
+  <line x1="140" y1="372" x2="256" y2="332" stroke="#1f2937" stroke-width="8" stroke-linecap="round" />
+
+  <line x1="256" y1="332" x2="372" y2="256" stroke="#1f2937" stroke-width="8" stroke-linecap="round" />
+
+  <!-- Active Connections (Glowing) -->
+  <g filter="url(#glow)">
+    <line x1="140" y1="256" x2="256" y2="180" stroke="url(#cyan-blue)" stroke-width="10" stroke-linecap="round" />
+    <line x1="256" y1="180" x2="372" y2="256" stroke="url(#purple-pink)" stroke-width="12" stroke-linecap="round" />
+  </g>
+
+  <!-- Inactive Nodes -->
+  <circle cx="140" cy="140" r="22" fill="#111827" stroke="#374151" stroke-width="6"/>
+  <circle cx="140" cy="372" r="22" fill="#111827" stroke="#374151" stroke-width="6"/>
+  <circle cx="256" cy="332" r="26" fill="#111827" stroke="#374151" stroke-width="6"/>
+
+  <!-- Active Nodes (Glowing) -->
+  <g filter="url(#glow)">
+    <circle cx="140" cy="256" r="22" fill="#030712" stroke="url(#cyan-blue)" stroke-width="8"/>
+    <circle cx="256" cy="180" r="28" fill="url(#cyan-blue)"/>
+    <circle cx="372" cy="256" r="36" fill="url(#purple-pink)"/>
+  </g>
+
 </svg>
