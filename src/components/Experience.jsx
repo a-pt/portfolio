@@ -514,10 +514,14 @@ const Experience = () => {
           align-items: center;
           gap: 0.8rem;
           padding: 0.6rem 1rem;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid var(--glass-border);
+          background: var(--accent-primary);
+          border: 1px solid var(--accent-primary);
           border-radius: 8px;
           transition: all 0.3s ease;
+        }
+        .view-log-btn .btn-text, .view-log-btn .btn-icon {
+          color: var(--btn-primary-text);
+          opacity: 1;
         }
 
         .btn-text {
