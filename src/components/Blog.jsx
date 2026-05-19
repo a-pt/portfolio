@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Calendar, Clock, ArrowUpRight, BookOpen } from 'lucide-react';
+import { Sparkles, Calendar, Clock, ArrowUpRight, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Blog = ({ data }) => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const postsPerPage = 3;
+  const posts = data?.blogPosts || [];
+  const totalPages = Math.ceil(posts.length / postsPerPage);
+  
+  const currentPosts = posts.slice(currentPage * postsPerPage, (currentPage + 1) * postsPerPage);
+
+  const handleNext = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(prev => prev + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 0) {
+      setCurrentPage(prev => prev - 1);
+    }
+  };
+
   return (
     <div className="blog-laboratory">
       <motion.div
@@ -19,48 +38,66 @@ const Blog = ({ data }) => {
         <h2 className="lab-section-title">Technical Writings</h2>
       </motion.div>
 
-      <div className="blog-matrix">
-        {data?.blogPosts?.map((post, index) => (
+      <div className="carousel-wrapper">
+        {totalPages > 1 && (
+          <div className={`nav-btn-container ${currentPage > 0 ? 'visible' : 'hidden'}`}>
+            <button onClick={handlePrev} className="pagination-btn">
+              <ChevronLeft size={28} />
+            </button>
+          </div>
+        )}
 
-          <motion.div 
-            key={index} 
-            className="blog-node"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: '-50px' }}
-          >
-            <div className="node-hud">
-              <span className="node-id">0{index + 1}</span>
-              <div className="node-line"></div>
-              <BookOpen size={14} className="node-icon" />
-            </div>
+        <div className="blog-matrix">
+          {currentPosts.map((post, index) => (
 
-            <div className="node-content">
-              <div className="node-meta">
-                <div className="meta-item">
-                  <Calendar size={12} />
-                  <span>{post.date}</span>
+            <motion.div 
+              key={post.title} 
+              className="blog-node"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, margin: '-50px' }}
+            >
+              <div className="node-hud">
+                <span className="node-id">0{index + 1 + (currentPage * postsPerPage)}</span>
+                <div className="node-line"></div>
+                <BookOpen size={14} className="node-icon" />
+              </div>
+
+              <div className="node-content">
+                <div className="node-meta">
+                  <div className="meta-item">
+                    <Calendar size={12} />
+                    <span>{post.date}</span>
+                  </div>
+                </div>
+
+                <h3 className="node-title">{post.title}</h3>
+                <p className="node-excerpt">{post.excerpt}</p>
+
+                <div className="node-footer">
+                  <a 
+                    href={post.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="read-more-btn"
+                  >
+                    <span>READ_POST</span>
+                    <ArrowUpRight size={16} />
+                  </a>
                 </div>
               </div>
+            </motion.div>
+          ))}
+        </div>
 
-              <h3 className="node-title">{post.title}</h3>
-              <p className="node-excerpt">{post.excerpt}</p>
-
-              <div className="node-footer">
-                <a 
-                  href={post.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="read-more-btn"
-                >
-                  <span>READ_POST</span>
-                  <ArrowUpRight size={16} />
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+        {totalPages > 1 && (
+          <div className={`nav-btn-container ${currentPage < totalPages - 1 ? 'visible' : 'hidden'}`}>
+            <button onClick={handleNext} className="pagination-btn">
+              <ChevronRight size={28} />
+            </button>
+          </div>
+        )}
       </div>
 
       <style>{`
@@ -188,12 +225,62 @@ const Blog = ({ data }) => {
           border-color: var(--btn-outline-hover-border);
         }
 
+        .carousel-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+          width: 100%;
+        }
+
+        .nav-btn-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 56px;
+          flex-shrink: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .nav-btn-container.hidden {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .pagination-btn {
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
+          color: var(--accent-primary);
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          backdrop-filter: blur(10px);
+        }
+
+        .pagination-btn:hover {
+          background: var(--glass-bg-hover);
+          border-color: var(--accent-primary);
+          transform: scale(1.1);
+          box-shadow: 0 10px 30px -10px var(--accent-glow);
+        }
+
         @media (max-width: 1200px) {
           .blog-matrix { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 800px) {
           .blog-matrix { grid-template-columns: 1fr; gap: 1.5rem; }
+          .carousel-wrapper {
+            flex-direction: column;
+            gap: 2rem;
+          }
+          .nav-btn-container {
+            display: none; /* Hide side buttons on mobile */
+          }
         }
 
         @media (max-width: 768px) {

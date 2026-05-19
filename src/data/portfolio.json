@@ -101,6 +101,13 @@
       "link": "https://medium.com/@athirapt998/kv-cache-in-llms-the-simple-trick-that-makes-chatgpt-feel-fast-8a2e991ea5f6?source=friends_link&sk=999face886eb85f8a1e539cd53987a1d",
       "excerpt": "When an LLM generates text, it does so one token at a time, and to predict each new token it looks at all the previous ones—but here’s the inefficiency: without optimization, the model keeps re-processing the entire previous text at every step.",
       "readTime": "5 min"
+    },
+    {
+      "title": "Build a GenAI-Powered Question-Answer Generator with LangChain, Groq, and FAISS",
+      "date": "May 2026",
+      "link": "https://pub.towardsai.net/build-a-genai-powered-question-answer-generator-with-langchain-groq-and-faiss-7fb13989fec1?source=friends_link&sk=1ff6a82f42976bad078ff09b2148f231",
+      "excerpt": "A comprehensive guide on creating an intelligent question-answer generator system using LangChain, Groq, and FAISS vector databases.",
+      "readTime": "8 min"
     }
   ]
 }
