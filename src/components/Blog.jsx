@@ -273,13 +273,20 @@ const Blog = ({ data }) => {
         }
 
         @media (max-width: 800px) {
-          .blog-matrix { grid-template-columns: 1fr; gap: 1.5rem; }
+          .blog-matrix { 
+            grid-template-columns: 1fr; 
+            gap: 1.5rem; 
+            order: -1;
+            width: 100%;
+          }
           .carousel-wrapper {
-            flex-direction: column;
-            gap: 2rem;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1.5rem;
           }
           .nav-btn-container {
-            display: none; /* Hide side buttons on mobile */
+            display: flex;
           }
         }
 
