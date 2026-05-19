@@ -5,7 +5,7 @@ import { Sparkles, Calendar, Clock, ArrowUpRight, BookOpen, ChevronLeft, Chevron
 const Blog = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const postsPerPage = 3;
-  const posts = data?.blogPosts || [];
+  const posts = data?.blogPosts ? [...data.blogPosts].reverse() : [];
   const totalPages = Math.ceil(posts.length / postsPerPage);
   
   const currentPosts = posts.slice(currentPage * postsPerPage, (currentPage + 1) * postsPerPage);
