@@ -84,21 +84,21 @@
     {
       "title": "A Hands-On guide for Learning Langchain, LCEL, LLMOps the Practical Way",
       "date": "March 2026",
-      "link": "https://pub.towardsai.net/a-hands-on-guide-for-learning-langchain-lcel-llmops-the-practical-way-43f107a8b588",
+      "link": "https://pub.towardsai.net/a-hands-on-guide-for-learning-langchain-lcel-llmops-the-practical-way-43f107a8b588?source=friends_link&sk=f3125c06f7be074155b59fcbb2ca64f5",
       "excerpt": "Large Language Models (LLMs) are revolutionary, but bridging the gap between a single prompt and a reliable, production-ready application is where the real challenge lies.",
       "readTime": "12 min"
     },
     {
       "title": "From Prompting to AI Agents: A practical Generative AI roadmap with Code",
       "date": "March 2026",
-      "link": "https://medium.com/@athirapt998/from-prompting-to-projects-a-journey-through-generative-ai-and-multi-agent-systems-58f3d39e4fc4",
+      "link": "https://medium.com/@athirapt998/from-prompting-to-projects-a-journey-through-generative-ai-and-multi-agent-systems-58f3d39e4fc4?source=friends_link&sk=76aac901809607850d17a87d53c76c35",
       "excerpt": "Exploring the evolution from simple prompting to architecting complex multi-agent generative AI systems, highlighting key technical milestones and the future of autonomous intelligence.",
       "readTime": "10 min"
     },
     {
       "title": "KV Cache in LLMs — The Simple Trick That Makes ChatGPT Feel Fast",
       "date": "April 2026",
-      "link": "https://medium.com/p/8a2e991ea5f6",
+      "link": "https://medium.com/@athirapt998/kv-cache-in-llms-the-simple-trick-that-makes-chatgpt-feel-fast-8a2e991ea5f6?source=friends_link&sk=999face886eb85f8a1e539cd53987a1d",
       "excerpt": "When an LLM generates text, it does so one token at a time, and to predict each new token it looks at all the previous ones—but here’s the inefficiency: without optimization, the model keeps re-processing the entire previous text at every step.",
       "readTime": "5 min"
     }
