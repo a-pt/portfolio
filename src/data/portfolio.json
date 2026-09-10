@@ -108,6 +108,13 @@
       "link": "https://pub.towardsai.net/build-a-genai-powered-question-answer-generator-with-langchain-groq-and-faiss-7fb13989fec1?source=friends_link&sk=1ff6a82f42976bad078ff09b2148f231",
       "excerpt": "A comprehensive guide on creating an intelligent question-answer generator system using LangChain, Groq, and FAISS vector databases.",
       "readTime": "8 min"
+    },
+    {
+      "title": "Understanding PyTorch DistributedDataParallel (DDP) from Scratch: Why Every GPU Trains the Entire Model",
+      "date": "August 2026",
+      "link": "https://pub.towardsai.net/understanding-pytorch-distributeddataparallel-ddp-from-scratch-why-every-gpu-trains-the-entire-2b80f89bed3d?source=friends_link&sk=f7881a077757f417cbc0a3b17e22e6df",
+      "excerpt": "A deep dive into how PyTorch DistributedDataParallel (DDP) scales model training across multiple GPUs, exploring model replication, gradient synchronization with All-Reduce, and why every GPU trains the entire model without a central master.",
+      "readTime": "10 min"
     }
   ]
 }
